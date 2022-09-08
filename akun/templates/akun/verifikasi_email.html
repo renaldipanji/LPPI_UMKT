@@ -1,0 +1,32 @@
+{% extends 'akun/base.html' %}
+{% load static %}  
+
+{% block auth %}
+	<form class="login100-form validate-form fadeInUp" method="POST">
+		{% csrf_token %}
+		<div class="row">
+			<div class="col-12">
+				<img src="{% static 'assets/images/uem-logo.png' %}"  width="33%" class="rounded mx-auto d-block d-md-none" alt="...">
+			</div>
+		</div>
+		<span class="login100-form-title p-b-20 text-uppercase" style="letter-spacing: 2px;">
+			Verifikasi Email
+		</span>
+		<div class="tittle-logo p-b-29 txt2 mb-3 mb-lg-0" style="font-size:16px;">
+			Masukkan <strong>Email</strong> akun anda yang ingin diverifikasi
+		</div>
+		<div class="wrap-input100 validate-input" data-validate = "Masukkan email yang valid contoh: uem@umkt.ac.id">
+			<input class="input100 email" type="email" name="email">
+			<span class="focus-input100"></span>
+			<span class="label-input100">Email</span>
+		</div>
+		<div class="row mt-4">
+			<div class="col-6 pt-3">
+				<a href="{% url 'login' %}" class="mx-auto fw-bold text-decoration-none fs-6" style="font-family: Muli;width:60%;color:#039EE3;" onmouseout="this.style.color='#039EE3'" onmouseover="this.style.color='#0F172A'">Kembali</a>
+			</div>
+			<div class="col-6">
+				<button type="submit"  class="login100-form-btn float-lg-end" style="font-size:14px;">Kirim Verifikasi</button>
+			</div>
+		</div>
+	</form>
+{% endblock %}

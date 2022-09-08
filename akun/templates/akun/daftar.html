@@ -1,0 +1,84 @@
+{% extends 'akun/base.html' %}
+{% load static %}  
+
+{% block auth %}
+<form class="login100-form validate-form {% if not messages %} fadeInUp {% endif %}" method="post" action="{% url 'daftar' %}">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12">
+            <img src="{% static 'akun/assets/images/uem-logo.png' %}" width="33%" class="rounded mx-auto d-block d-md-none" alt="...">
+        </div>
+    </div>
+    <span class="login100-form-title p-b-20" id="daftar100-form-title" style="letter-spacing: 4px;">
+        DAFTAR AKUN 
+    </span>
+    {% include 'pesan.html' %}
+        <div class="wrap-input100 validate-input" data-validate = "Masukkan email yang valid contoh: uem@umkt.ac.id">
+            {{form.is_active}}
+            {{form.email}}
+            <span class="focus-input100"></span>
+            <span class="label-input100">Email</span>
+        </div>
+        
+        <div class="wrap-input100 validate-input" data-validate = "Masukkan nama anda">
+            {{form.username}}
+            <span class="focus-input100"></span>
+            <span class="label-input100">Username</span>
+        </div>
+            {{form.nama}}
+        <div class="wrap-input100 validate-input" data-validate = "Masukkan nomor hp anda">
+            {{form.no_hp}}
+            <span class="focus-input100"></span>
+            <span class="label-input100">Nomor Hp</span>
+        </div>         
+        <div class="row">
+            <div class="col-6">
+                <div class="wrap-input100 validate-input" data-validate="Password wajib diisi">
+                    {{form.password1}}
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Password</span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="wrap-input100 validate-input" data-validate="Konfirmasi Password wajib diisi">
+                    {{form.password2}}
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Konfirmasi Password</span>
+                </div>
+            </div>
+        </div>
+        <div class="validate-input">
+            <label for="exampleFormControlInput1" class="form-label" style="color: #555555;">Institusi</label>
+                {{form.institusi}}
+        </div> 
+            {{form.is_staff}}
+            {{form.is_admin}}
+            {{form.is_user}}
+        <div class="row mt-4">
+            {% if form.errors %}
+                {% for field in form %}
+                        {% for error in field.errors %}
+                            <p class="error_label text-danger"> <span class="fw-bold">{{field.label}} </span>: {{ error|escape }} </p>
+                        {% endfor %}
+                {% endfor %}
+                <script>
+                    Swal.fire(
+                    'Daftar Akun Gagal!',
+                    'Harap cek pesan error yang ada!',
+                    'error'
+                    )
+                </script>
+            {% endif %}
+        </div>
+        <div class="row mt-4">
+            <div class="col-8 txt4">
+                <a href="{% url 'login' %}" class="fs-6 text-decoration-none txt2">Login</a>
+            </div>
+            <div class="col-4">
+                <button type="submit" class="login100-form-btn float-lg-end">Daftar</button>
+            </div>
+        </div>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="{% static 'akun/js/daftar.js' %}" ></script>
+{% endblock %}
