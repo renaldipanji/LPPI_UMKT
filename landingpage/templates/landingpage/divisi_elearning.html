@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    {% load static %}
+  {% load static %}
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>LPPI UMKT</title>
+  <title>E-Learning & Buku Ajar</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -89,12 +89,12 @@
             <ul>
               <li><a href="{% url 'visi_misi' %}">Vision & Mission</a></li>
               <li><a href="#">Org. Structure</a></li>
-              <li><a href="{% url 'workprog' %}">Work Programme</a></li>
+              <li><a href="#">Work Programme</a></li>
               <li><a href="contact.html">Contact</a></li>
               <li class="dropdown"><a href="#"><span>Division</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
-                  <li><a href="#">PPI</a></li>
-                  <li><a href="#">E-learning & Buku Ajar</a></li>
+                  <li><a href="{% url 'divisi_ppi' %}">PPI</a></li>
+                  <li><a href="{% url 'divisi_elearning' %}">E-learning & Buku Ajar</a></li>
                 </ul>
               </li>
             </ul>
@@ -141,10 +141,11 @@
     <div class="container">
 
       <ol>
-        <li><a href="index.html">Home</a></li>
-        <li>About Us</li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">Division</a></li>
+        <li>E-Learning & Buku Ajar</li>
       </ol>
-      <h2>About Us</h2>
+      <h2>E-Learning & Buku Ajar</h2>
 
     </div>
   </section><!-- End Breadcrumbs -->
@@ -154,24 +155,23 @@
     <div class="container">
 
       <div class="row">
-        <div class="col-lg-6">
-          <img src="assets/img/about.jpg" class="img-fluid" alt="">
-        </div>
-        <div class="col-lg-6 pt-4 pt-lg-0 content">
-          <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-          <p class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
+        <div class="col-lg-8 pt-6 pt-lg-0 content">
+          <h4>Overview</h4>
+          <p class="">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
-          <ul>
-            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-            <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-          </ul>
+
+          <p class="">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <br>
+        </div>
+        <div class="col-12 pt-4 pt-lg-0 content">
+          <h4>Members</h4>
           <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum
+            <div class="col-6 pt-4 pt-lg-0 content">
+              <img src='{% static 'landingpage/assets/img/org.png' %}' class="img-fluid"> </img>
+            </div>
           </p>
         </div>
       </div>
