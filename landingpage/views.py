@@ -18,3 +18,15 @@ def event(request):
 
 def translate_art(request):
     return render(request, 'landingpage/translate_art.html')
+
+def sipena(request):
+    return render(request, 'landingpage/sipena.html')
+
+def isbn(request):
+    return render(request, 'landingpage/isbn.html')
+
+def umktpress(request):
+    return render(request, 'landingpage/umktpress.html')
+
+def e_learning(request):
+    return render(request, 'landingpage/e_learning.html')

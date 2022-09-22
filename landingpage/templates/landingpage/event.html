@@ -106,10 +106,11 @@
           </li>
           <li class="dropdown"><a href="portfolio.html"><span>Service</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="about.html">Article Transtlation</a></li>
-              <li><a href="#">Incentive App (SIPENA)</a></li>
-              <li><a href="#">UMKT Press</a></li>
-              <li><a href="#">E-Learning Support</a></li>
+              <li><a href="{% url 'translate_art' %}">Article Transtlation</a></li>
+              <li><a href="{% url 'sipena' %}">Incentive App (SIPENA)</a></li>
+              <li><a href="{% url 'isbn' %}">ISBN Proposal</a></li>
+              <li><a href="{% url 'umktpress' %}">UMKT Press</a></li>
+              <li><a href="{% url 'e_learning' %}">E-Learning Support</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="team.html"><span>Publication</span> <i class="bi bi-chevron-down"></i></a>

@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Translate Article</title>
+  <title>Article Translate</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -108,9 +108,10 @@
           <li class="dropdown"><a href="portfolio.html"><span>Service</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'translate_art' %}">Article Transtlation</a></li>
-              <li><a href="#">Incentive App (SIPENA)</a></li>
-              <li><a href="#">UMKT Press</a></li>
-              <li><a href="#">E-Learning Support</a></li>
+              <li><a href="{% url 'sipena' %}">Incentive App (SIPENA)</a></li>
+              <li><a href="{% url 'isbn' %}">ISBN Proposal</a></li>
+              <li><a href="{% url 'umktpress' %}">UMKT Press</a></li>
+              <li><a href="{% url 'e_learning' %}">E-Learning Support</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="team.html"><span>Publication</span> <i class="bi bi-chevron-down"></i></a>
@@ -154,7 +155,7 @@
     <div class="container">
 
       <div class="row">
-        <div class="col-12 pt-4 pt-lg-0 content">
+        <div class="col-8 pt-4 pt-lg-0 content">
           <h3><b>Service Overview</h3></b>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -164,6 +165,14 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
             magna aliqua. 
           </p>
+          <br>
+          <center><button type="button" class="btn btn-primary btn-sm">Order Now</button></center>
+          <h3><b>Alur Service Overview</h3></b>
+          <div class="row">
+            <div class="col-6" id="">
+              <img src="{% static 'landingpage/assets/img/apel.jpg' %}" class="img-fluid"> </img>
+            </div>
+          </div>
         </div>
       </div>
     </div>
