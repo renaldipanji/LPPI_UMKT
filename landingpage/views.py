@@ -15,3 +15,6 @@ def divisi_elearning(request):
 
 def event(request):
     return render(request, 'landingpage/event.html')
+
+def translate_art(request):
+    return render(request, 'landingpage/translate_art.html')
