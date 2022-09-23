@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  @media (min-width: 768px){
+    body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .content-wrapper, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-footer, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header {
+      margin-left:130px;
+    }
+    strong{
+      margin-left:130px;
+    }
+  }
+</style>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Profil</h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible msgAnim fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Ambil konten disini -->
+  
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="card card-primary card-outline">
+            <div class="card-body box-profile text-center">
+              <div class="text-center">
+                <img class="profile-user-img img-fluid img-circle" width="128" height="auto"
+                     src="{% if request.user.foto_profile %}/media/{{ request.user.foto_profile }}{% else %}https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/user.png{% endif %}"
+                     alt="User profile picture">
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Ganti Foto Profil</button>
+              <h3 class="profile-username text-center mt-2">{{nama}}</h3>
+
+              <p class="text-muted text-center fs-6">{{email}}</p>
+
+              
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="card">
+            <div class="card-header p-2">
+              <ul class="nav nav-pills">
+                <a class="nav-link disabled" data-toggle="pill" href="#settings" role="tab" aria-controls="settings" aria-selected="true">Edit Profil</a>
+              </ul>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <form method="POST" >
+                    {% csrf_token %}
+                    <input type="text" name="keperluan" value="editprofil" hidden>
+                  <div class="form-group">
+                      <label>Nama</label>
+                      {{ form.nama }}
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                      <label>Instansi</label>
+                      {{ form.nama_institusi }} 
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Email</label>
+                      {{ form.email }}
+                      </select>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                      <label>No. HP/WhatsApp</label>
+                      {{ form.no_hp }}
+                      </select>
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary"><span class="fas fa-edit"></span> Edit Profil</button>
+                  </div>
+                </form>
+                <div class="col-md-12 mt-2">
+                  <p class="text-muted text-center fw-bold">Ganti Password</p>
+                  <hr>
+                </div>
+                <form method="POST">
+                  {% csrf_token %}
+                  <input type="text" name="keperluan" value="gantipass" hidden>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Password Lama</label>
+                      <input class="form-control" type="password" name="old_password" placeholder="Password baru">
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Password Baru</label>
+                      <input class="form-control" type="password" required name="new_password" placeholder="Password baru">
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Konfirmasi Password Baru</label>
+                      <input class="form-control" type="password" required name="reconfirm_password" placeholder="Konfirmasi Password baru">
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <div class="col-md-6">
+                    <button type="submit" class="btn btn-secondary"><span class="fas fa-unlock-alt"></span> Ganti Password</button>
+                  </div>
+              </form>
+              </div>
+              <!-- /.row -->
+            </div><!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- Modal Edit Foto Profil-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Foto Profil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="text" hidden name="keperluan" value="editfoto">
+          <div class="mb-3">
+            <label for="formFileSm" class="form-label">Pilih file foto</label>
+            {{formFoto.foto_profile}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 

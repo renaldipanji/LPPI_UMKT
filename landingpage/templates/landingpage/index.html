@@ -1,0 +1,325 @@
+{% extends 'landingpage/base.html' %}
+{% load static %}
+
+{% block konten %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <!-- Slide 1 -->
+          <div class="carousel-item active" style="background-image: url({% static 'landingpage/assets/img/slide/slide-1.jpg' %})">
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Eterna</span></h2>
+                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-item" style="background-image: url({% static 'landingpage/assets/img/slide/slide-2.jpg' %})">
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated fanimate__adeInDown">Lorem <span>Ipsum Dolor</span></h2>
+                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-item" style="background-image: url({% static 'landingpage/assets/img/slide/slide-3.jpg' %})">
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown">Sequi ea <span>Dime Lara</span></h2>
+                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- End Hero -->
+  <main id="main">
+    <!-- ======= News Section ======= -->
+      <div class="slide-container swiper" id="section-news">
+        <div class="title" >
+          <h2>News</h2>
+        </div>
+        <div class="slide-content" id="content-news">
+            <div class="card-wrapper swiper-wrapper">
+                <div class="card swiper-slide shadow">
+                    <div class="image-content">
+                        <span class="overlay" style="background-image: url({% static 'landingpage/card-slider/images/gambar.jpg' %});"></span>
+                    </div>
+                    <div class="card-content">
+                        <p class="date-publish">6 Maret, 2020</p>
+                        <h3 class="name">Workshop Pengembangan Jurnal Penelitian</h3>
+                        <p class="description">Kamis 5 Maret 2020 ppi mengadakan Workshop dengan tema Pengembangan Jurnal penelitian sebagai narasumber Prof.Ali Saukah.</p>
+
+                        <a href="https://lppi.umkt.ac.id/workshop-pengembangan-jurnal-penelitian/" class="button read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="card swiper-slide shadow">
+                    <div class="image-content">
+                        <span class="overlay" style="background-image: url({% static 'landingpage/card-slider/images/gambar2.jpg' %});"></span>
+                    </div>
+
+                    <div class="card-content">
+                      <div class="card-content-text">
+                        <p class="date-publish">8 Juli, 2020</p>
+                        <h3 class="name">Rapat Koordinasi Hibah Buku Ajar Dosen</h3>
+                        <p class="description">Kamis 27 februari 2020 ppi kembali menggelar rapat koordinasi buku ajar,jumlah peserta yang hadir terdiri dari 4 dosen </p>
+                      </div>
+                        <a href="https://lppi.umkt.ac.id/workshop-pengembangan-jurnal-penelitian/" class="button read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="card swiper-slide shadow">
+                    <div class="image-content">
+                        <span class="overlay" style="background-image: url({% static 'landingpage/card-slider/images/gambar3.jpg' %});"></span>
+                    </div>
+
+                    <div class="card-content">
+                        <p class="date-publish">12 Agustus, 2020</p>
+                        <h3 class="name">Workshop Tata Kelola Jurnal dan Pengabdian</h3>
+                        <p class="description">Untuk Meningkatkan Mutu Kualitas tata kelola jurnal Nasional di lingkungan UMKT,PPI kembali megadakan Workshop dengan Prof.Ali Saukah.</p>
+
+                        <a href="https://lppi.umkt.ac.id/workshop-pengembangan-jurnal-penelitian/" class="button read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="card swiper-slide shadow">
+                    <div class="image-content">
+                        <span class="overlay"></span>
+
+                        <div class="card-image">
+                            <img src="{% static 'landingpage/card-slider/images/profile2.jpg' %}" alt="" class="card-img">
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <h3 class="name">Renaldi Panji</h3>
+                        <p class="description">The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                        <button class="button">View More</button>
+                    </div>
+                </div>
+                <div class="card swiper-slide shadow">
+                    <div class="image-content">
+                        <span class="overlay"></span>
+
+                        <div class="card-image">
+                            <img src="{% static 'landingpage/card-slider/images/profile3.jpg' %}" alt="" class="card-img">
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <h3 class="name">Renaldi Panji</h3>
+                        <p class="description">The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                        <button class="button">View More</button>
+                    </div>
+                </div>
+                <div class="card swiper-slide shadow">
+                    <div class="image-content">
+                        <span class="overlay"></span>
+
+                        <div class="card-image">
+                            <img src="{% static 'landingpage/card-slider/images/profile4.jpg' %}" alt="" class="card-img">
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <h3 class="name">Renaldi Panji</h3>
+                        <p class="description">The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                        <button class="button">View More</button>
+                    </div>
+                </div>
+                <div class="card swiper-slide shadow">
+                    <div class="image-content">
+                        <span class="overlay"></span>
+
+                        <div class="card-image">
+                            <img src="{% static 'landingpage/card-slider/images/profile5.jpg' %}" alt="" class="card-img">
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <h3 class="name">Renaldi Panji</h3>
+                        <p class="description">The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                        <button class="button">View More</button>
+                    </div>
+                </div>
+                <div class="card swiper-slide shadow">
+                    <div class="image-content">
+                        <span class="overlay"></span>
+
+                        <div class="card-image">
+                            <img src="{% static 'landingpage/card-slider/images/profile6.jpg' %}" alt="" class="card-img">
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <h3 class="name">Renaldi Panji</h3>
+                        <p class="description">The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                        <button class="button">View More</button>
+                    </div>
+                </div>
+                <div class="card swiper-slide shadow">
+                    <div class="image-content">
+                        <span class="overlay"></span>
+
+                        <div class="card-image">
+                            <img src="{% static 'landingpage/card-slider/images/profile7.jpg' %}" alt="" class="card-img">
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <h3 class="name">Renaldi Panji</h3>
+                        <p class="description">The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                        <button class="button">View More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-button-next swiper-navBtn"></div>
+        <div class="swiper-button-prev swiper-navBtn"></div>
+    </div>
+    <!-- ======= End News Section ======= -->
+
+    <!-- ======= Featured Section ======= -->
+    <section id="featured" class="featured section-blue">
+      
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="icon-box">
+              <i class="bi bi-card-checklist"></i>
+              <h3><a href="">Lorem Ipsum</a></h3>
+              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="icon-box">
+              <i class="bi bi-bar-chart"></i>
+              <h3><a href="">Dolor Sitema</a></h3>
+              <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="icon-box">
+              <i class="bi bi-binoculars"></i>
+              <h3><a href="">Sed ut perspiciatis</a></h3>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+            </div>
+          </div> 
+        </div>
+
+      </div>
+    </section><!-- End Featured Section -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="title" >
+        <h2>Number of</h2>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <div class="icon-box">
+              <canvas id="myChart"></canvas>
+            </div>
+            <script>
+              const labels = [
+              '2018',
+              '2019',
+              '2020',
+              '2021',
+              '2022',
+              '2023',
+            ];
+            const data = {
+              labels: labels,
+              datasets: [{
+                label: 'Scopus Publication',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45],
+              }]
+            };
+            const config = {
+              type: 'line',
+              data: data,
+              options: {
+                  plugins: {
+                    title: {
+                        display: true,
+                        text: 'Scopus publications in years',
+                        font: {
+                          size: 20
+                      }
+                    }
+                }
+              }
+            };
+            const myChart = new Chart(
+              document.getElementById('myChart'),
+              config
+            );
+            </script>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <div class="icon-box">
+              <canvas id="sinta"></canvas>
+            </div>
+            <script>
+              var xValues = ["S1", "S2", "S3", "S4", "S5"];
+              var yValues = [55, 49, 44, 24, 15];
+              var barColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#1e7145"
+              ];
+              new Chart("sinta", {
+                type: "pie",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                  }]
+                },
+                options: {
+                  plugins: {
+                      title: {
+                          display: true,
+                          text: 'Number of Journal by SINTA Score',
+                          font: {
+                            size: 20,
+                        }
+                      }
+                  } 
+                }
+              });
+            </script>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+  </main>
+{% endblock konten %}

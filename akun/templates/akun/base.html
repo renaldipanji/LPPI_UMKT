@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+	<title>Center of Scientific Publication - Publication | Research | Inovation</title>
+	{% comment %} <title>{{ tittle }}</title> {% endcomment %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'images/favicon/em-logo.png' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"> 
+<!--===============================================================================================-->
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'akun/css/util.css' %}" >
+	<link rel="stylesheet" type="text/css" href="{% static 'akun/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'akun/css/login/style.css' %}" >
+<!--===============================================================================================-->
+  <!-- Sweet Alert 2 -->
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/sweet-alert2/sweetalert2.min.css' %}">
+	<script src="{% static 'plugins/sweet-alert2/sweetalert2.all.min.js' %}"></script>
+	<script src="{% static 'js/function.js' %}"></script>
+  <!-- Sweet Alert 2 -->
+</head>
+<body style="background-color: #666666;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+			{% block auth %}
+			
+			{% endblock  %}
+				<div class="login100-more" style="background-image: linear-gradient(rgba(0, 0, 0, 0.627),rgba(0, 0, 0, 0.5)) ,url('{% static 'akun/assets/images/layanan.jpg' %}');">
+					<img src="{% static 'akun/assets/images/uem-logo.png' %}" width="20%" class="d-none d-lg-block float-end m-4">
+						<p class="position-absolute txt-h text-uppercase d-none d-lg-block" style="font-size:1vw; bottom: 12%; left: 4%;letter-spacing: 1px;" >Sistem Informasi Pelayanan</p>
+						<p class="position-absolute txt-h text-uppercase d-none d-lg-block" style="font-size:2vw; bottom: 7%; left: 4%; letter-spacing: 1px;" >Center of Scientific Publication</p>
+						<p class="position-absolute txt-h text-uppercase d-none d-lg-block" style="font-size:1vw; bottom: 5%; left: 4%; letter-spacing: 1.5px;" >Universitas Muhammadiyah Kalimantan Timur</p>
+				</div>
+				{% block login %}
+				
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+	
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}" ></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}" ></script>
+<!--===============================================================================================-->
+	<script src="{% static 'akun/js/main.js' %}" ></script>
+<!--===============================================================================================-->
+</body>
+</html>
