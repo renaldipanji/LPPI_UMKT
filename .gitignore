@@ -6,3 +6,4 @@ __pycache__/
 media/uploads/profil/*
 # Environment
 env/
+LPPI_UMKT/__pycache__
