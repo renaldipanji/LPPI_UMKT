@@ -5,4 +5,5 @@ from .views import *
 
 urlpatterns = [
     path('visi-misi/', visi_misi),
+    path('', index),
 ]
