@@ -5,7 +5,7 @@ def about(request):
     return render(request,'landingpage/about.html')
 
 def visi_misi(request):
-    return render(request,'landingpage/visi_misi.html')
+    return render(request,'landingpage/template.html')
 def index(request):
     return render(request,'landingpage/index.html')
 

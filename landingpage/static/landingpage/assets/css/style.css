@@ -558,8 +558,6 @@ h6 {
   }
 }
 
-
-
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
@@ -737,6 +735,31 @@ section {
 .about .content p:last-child {
   margin-bottom: 0;
 }
+
+/*--------------------------------------------------------------
+# Recent Post
+--------------------------------------------------------------*/
+.recent-post{
+  margin-left: 60px;
+  width: 70%;
+}
+.title-recent-post{
+  background-color: #1D3557;
+  padding: 10px 0px;
+  text-align: center;
+  color: #fff;
+}
+.title-recent-post h3{
+  font-weight: 700;
+}
+.body-recent-post{
+  background-color: #585F7B;
+}
+.link-recent-post{
+  padding: 12px 10px;
+  color: #fff;
+}
+
 /*------------------------
 # Responsive
 -------------------------*/
@@ -2140,6 +2163,17 @@ section {
 --------------------*/
 
 /*--------------------
+# Recent Post
+--------------------*/
+.recent-post{
+  margin-left: 40px;
+  width: 70%;
+}
+/*--------------------
+# Recent Post
+--------------------*/
+
+/*--------------------
 # Section News
 --------------------*/
     #section-news {
@@ -2244,6 +2278,23 @@ section {
 # Width 768px
 -------------------------------------*/
 @media (max-width: 768px) {
+
+/*--------------------
+# Breadcrumbs
+--------------------*/
+.breadcrumbs {
+  padding: 50px 0px 50px 0;
+}
+.breadcrumbs h2{
+  font-size: 42px;
+}
+.breadcrumbs ol{
+  font-size: 18px;
+}
+/*--------------------
+# Breadcrumbs
+--------------------*/
+
 /*--------------------
 # Slider Hero
 --------------------*/
@@ -2309,12 +2360,37 @@ section {
 /*--------------------
 # Sections News
 --------------------*/
+
+/*--------------------
+# Recent Post
+--------------------*/
+.recent-post{
+  display: none;
+}
+/*--------------------
+# Recent Post
+--------------------*/
   }
 
 /*-------------------------------------
 # Width 601px
 -------------------------------------*/
 @media (max-width: 601px) {
+  /*--------------------
+  # Breadcrumbs
+  --------------------*/
+  .breadcrumbs {
+    padding: 30px 0px 30px 0;
+  }
+  .breadcrumbs h2{
+    font-size: 32px;
+  }
+  .breadcrumbs ol{
+    font-size: 14px;
+  }
+  /*--------------------
+  # Breadcrumbs
+  --------------------*/  
   /*--------------------
   # Slider Hero
   --------------------*/
@@ -2327,8 +2403,7 @@ section {
   #hero p {
     font-size: 16px;
     width: 90%;
-  } 
- 
+  }  
   /*--------------------
   # Slider Hero
   --------------------*/
@@ -2346,6 +2421,27 @@ section {
   # Sections News
   --------------------*/
     }
+
+/*-------------------------------------
+# Width 360px and 640px
+-------------------------------------*/
+@media (max-width: 360px){
+  /*--------------------
+  # Breadcrumbs
+  --------------------*/
+  .breadcrumbs {
+    padding: 20px 0px 20px 0;
+  }
+  .breadcrumbs h2{
+    font-size: 20px;
+  }
+  .breadcrumbs ol{
+    font-size: 10px;
+  }
+  /*--------------------
+  # Breadcrumbs
+  --------------------*/ 
+}
 
 /*-------------------------------------
 # Width 360px and 640px
