@@ -9,4 +9,5 @@ urlpatterns = [
     path('visi-misi/', visi_misi, name='visi_misi'),
     path('org_struktur/', org_struktur, name='org_struktur'),
     path('devisi/', devisi, name='devisi'),
+    path('contact/', contact, name='contact'),
 ]

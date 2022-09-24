@@ -14,3 +14,6 @@ def org_struktur(request):
 
 def devisi(request):
     return render(request,'landingpage/devisi.html')
+
+def contact(request):
+    return render(request, 'landingpage/contact.html')

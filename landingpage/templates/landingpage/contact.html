@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    {% load static %}
+  {% load static %}
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -11,11 +11,9 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{% static 'landingpage/assets/img/logo_lppi.png' %} " rel="icon">
-  <link href="{% static 'landingpage/assets/img/apple-touch-icon.png' %} " rel="apple-touch-icon">
+  <link href="assets/img/logo_lppi.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Chart JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Fontawesome v6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -23,20 +21,20 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
         
         <!-- Swiper CSS -->
-        <link rel="stylesheet" href="{% static 'landingpage/card-slider/css/swiper-bundle.min.css' %}">
+        <link rel="stylesheet" href="{% static 'landingpage/card-slider/css/swiper-bundle.min.css' %} ">
         <!-- CSS -->
         <link rel="stylesheet" href="{% static 'landingpage/card-slider/css/style.css' %} ">
 
   <!-- Vendor CSS Files -->
   <link href="{% static 'landingpage/assets/vendor/animate.css/animate.min.css' %} " rel="stylesheet">
-  <link href="{% static 'landingpage/assets/vendor/bootstrap/css/bootstrap.min.css' %} " rel="stylesheet">
-  <link href="{% static 'landingpage/assets/vendor/bootstrap-icons/bootstrap-icons.css' %} " rel="stylesheet">
-  <link href="{% static 'landingpage/assets/vendor/boxicons/css/boxicons.min.css' %} " rel="stylesheet">
+  <link href="{% static 'landingpage/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'landingpage/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'landingpage/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
   <link href="{% static 'landingpage/assets/vendor/glightbox/css/glightbox.min.css' %} " rel="stylesheet">
   <link href="{% static 'landingpage/assets/vendor/swiper/swiper-bundle.min.css' %} " rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="{% static 'landingpage/assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'landingpage/assets/css/style.css' %} " rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Eterna - v4.8.1
@@ -56,9 +54,18 @@
   <!-- ======= Top Bar ======= -->
   <section id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
+      <!-- <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div> -->
       <div class="row">
         <div class="col-12" id="">
-          <img src='{% static 'landingpage/assets/img/logo.png' %}' class="img-fluid"> </img>
         </div>
       </div>
     </div>
@@ -73,18 +80,18 @@
         Uncomment below if you prefer to use an image logo
         <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
       </div> -->
-      
+
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="active" href="index.html">Home</a></li>
           <li class="dropdown"><a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'visi_misi' %}">Vision & Mission</a></li>
-              <li><a href="{% url 'org_struktur' %}">Org. Structure</a></li>
+              <li><a href="#">Org. Structure</a></li>
               <li><a href="#">Work Programme</a></li>
               <li><a href="{% url 'contact' %}">Contact</a></li>
-              <li class="dropdown"><a href="{% url 'devisi' %}"><span>Division</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
+              <li class="dropdown"><a href="#"><span>Division</span> <i class="bi bi-chevron-down"></i></a>
+                <ul> 
                   <li><a href="#">PPI</a></li>
                   <li><a href="#">E-learning & Buku Ajar</a></li>
                 </ul>
@@ -127,12 +134,52 @@
     </div>
   </header><!-- End Header -->
 
-{% block konten %}
+  <!-- ======= Hero Section ======= -->
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
 
-{% endblock konten %}
-  <!-- End #main -->
+      <ol>
+        <li><a href="index.html">Home</a></li>
+        <li>About Us</li>
+      </ol>
+
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-12 pt-4 pt-lg-0 content">
+          <h1><i class="fa-solid fa-phone icon_sosmed" style="font-size:40px;color:#ccc;"></i> 085828550137</h1><br>
+          <h2><i class="fa-solid fa-envelope" style="font-size:40px;color:#ccc;"></i></h2><br>
+          <h3><i class="fa-brands fa-instagram" style="font-size:45px;color:#ccc;"></i></h3><br>
+          <br>
+          <b><h3>Address</b></h3>
+          <div class="twelve columns" style="margin-top: 10px;"> 
+          <iframe width="100%" height="250" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD9xfpA_g8cnBJBKXCkMEGs1UUz8LtGy04&amp;q=place_id:ChIJEVgVznFG8S0RkETwetuHRDk" allowfullscreen=""> </iframe></div>
+  </section><!-- End About Section -->
   <!-- ======= Footer ======= -->
   <footer id="footer">
+
+    <!-- <div class="footer-newsletter">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+          </div>
+          <div class="col-lg-6">
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -177,6 +224,7 @@
               <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
             </div>
           </div>
+
         </div>
       </div>
     </div>
