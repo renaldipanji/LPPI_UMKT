@@ -17,3 +17,13 @@ def devisi(request):
 
 def contact(request):
     return render(request, 'landingpage/contact.html')
+    return render(request,'landingpage/visi_misi.html')
+
+def workprog(request):
+    return render(request,'landingpage/workprog.html')
+
+def divisi_ppi(request):
+    return render(request,'landingpage/divisi_ppi.html')
+
+def divisi_elearning(request):
+    return render(request, 'landingpage/divisi_elearning.html')
