@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>LPPI UMKT</title>
+  <title>Journals</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -66,6 +66,7 @@
       </div> -->
       <div class="row">
         <div class="col-12" id="">
+          <img src='{% static 'landingpage/assets/img/logo.png' %}' class="img-fluid"> </img>
         </div>
       </div>
     </div>
@@ -89,9 +90,9 @@
               <li><a href="{% url 'visi_misi' %}">Vision & Mission</a></li>
               <li><a href="#">Org. Structure</a></li>
               <li><a href="#">Work Programme</a></li>
-              <li><a href="{% url 'contact' %}">Contact</a></li>
+              <li><a href="contact.html">Contact</a></li>
               <li class="dropdown"><a href="#"><span>Division</span> <i class="bi bi-chevron-down"></i></a>
-                <ul> 
+                <ul>
                   <li><a href="#">PPI</a></li>
                   <li><a href="#">E-learning & Buku Ajar</a></li>
                 </ul>
@@ -114,7 +115,7 @@
           </li>
           <li class="dropdown"><a href="team.html"><span>Publication</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="about.html">Journals</a></li>
+              <li><a href="{% url 'journal' %}">Journals</a></li>
               <li><a href="#">Text Books</a></li>
               <li><a href="#">Newspaper Articles</a></li>
             </ul>
@@ -134,33 +135,91 @@
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <!-- ======= Breadcrumbs ======= -->
+<!-- ======= Breadcrumbs ======= -->
   <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
 
       <ol>
-        <li><a href="index.html">Home</a></li>
-        <li>About Us</li>
+        <li><a href="about.html">Publication</a></li>
+        <li>Journals</li>
       </ol>
-
+      <h2>Journals Publication Data</h2>
     </div>
-  </section><!-- End Breadcrumbs -->
+  </section>
+<!-- End Breadcrumbs -->
 
-  <!-- ======= About Section ======= -->
-  <section id="about" class="about">
-    <div class="container">
+<section id="publikasi" class="publikasi">
+  <div class="container">
+    <div class="row">
 
-      <div class="row">
-        <div class="col-12 pt-4 pt-lg-0 content">
-          <h1><i class="fa-solid fa-phone icon_sosmed" style="font-size:40px;color:#ccc;"></i> 085828550137</h1><br>
-          <h2><i class="fa-solid fa-envelope" style="font-size:40px;color:#ccc;"></i></h2><br>
-          <h3><i class="fa-brands fa-instagram" style="font-size:45px;color:#ccc;"></i></h3><br>
-          <br>
-          <b><h3>Address</b></h3>
-          <div class="twelve columns" style="margin-top: 10px;"> 
-          <iframe width="100%" height="250" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD9xfpA_g8cnBJBKXCkMEGs1UUz8LtGy04&amp;q=place_id:ChIJEVgVznFG8S0RkETwetuHRDk" allowfullscreen=""> </iframe></div>
-  </section><!-- End About Section -->
+<!-- ======= Button ======= -->
+      <div class="col-3">
+        <button type="button" class="btn btn-primary">Export</button>
+      </div>
+    
+<!-- Form Select-->
+      <div class="col-4">
+        <div class="input-group mb-3">
+            <select class="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+              <option selected>Sort By Fakultas</option>
+              <option value="1">Fakultas Saintek</option>
+              <option value="2">Fakultas Farmasi</option>
+              <option value="3">Fakultas Psikologi</option>
+            </select>
+        </div>
+      </div>
+<!-- Search Button -->
+    <div class="col-4">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" aria-label="Text input search">
+        <button class="btn btn-outline-secondary" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></button>
+      </div>
+    </div>
+<!-- Table -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Judul Artikel</th>
+          <th scope="col">Tahun</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Annas Budi Setyawan</td>
+          <td>Pembuktian Ekstrak Daun Kejibeling</td>
+          <td>2018</td>
+          <td> - </td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Annas Budi Setyawan</td>
+          <td>Pembuktian Ekstrak Daun Kejibeling</td>
+          <td>2018</td>
+          <td> - </td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Annas Budi Setyawan</td>
+          <td>Pembuktian Ekstrak Daun Kejibeling</td>
+          <td>2018</td>
+          <td> - </td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>Annas Budi Setyawan</td>
+          <td>Pembuktian Ekstrak Daun Kejibeling</td>
+          <td>2018</td>
+          <td> - </td>
+      </tbody>
+    </table>
+  </div>
+</section>
+
   <!-- ======= Footer ======= -->
   <footer id="footer">
 

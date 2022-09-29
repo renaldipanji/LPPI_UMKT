@@ -7,5 +7,11 @@ def visi_misi(request):
 def about(request):
     return render(request, 'landingpage/about.html')
 
-def contact(request):
-    return render(request, 'landingpage/contact.html')
+def journal(request):
+    return render(request, 'landingpage/journal.html')
+
+def newspaper(request):
+    return render(request, 'landingpage/newspaper.html')
+
+def textbook(request):
+    return render(request, 'landingpage/textbook.html')

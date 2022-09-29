@@ -6,5 +6,7 @@ from .views import *
 urlpatterns = [
     path('visi-misi/', visi_misi, name='visi_misi'),
     path('about/', about, name='about'),
-    path('contact/', contact, name='contact'),
+    path('journal/', journal, name='journal'),
+    path('textbook/', textbook, name='textbook'),
+    path('newspaper/', newspaper, name='newspaper'),
 ]
