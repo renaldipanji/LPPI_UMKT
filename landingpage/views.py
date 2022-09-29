@@ -6,6 +6,7 @@ def about(request):
 
 def visi_misi(request):
     return render(request,'landingpage/template.html')
+    
 def index(request):
     return render(request,'landingpage/index.html')
 
@@ -17,7 +18,6 @@ def devisi(request):
 
 def contact(request):
     return render(request, 'landingpage/contact.html')
-    return render(request,'landingpage/visi_misi.html')
 
 def workprog(request):
     return render(request,'landingpage/workprog.html')
