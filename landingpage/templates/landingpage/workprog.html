@@ -1,6 +1,5 @@
 {% extends 'landingpage/base.html' %}
 {% load static %}
-
 {% block konten %}
   <!-- ======= Breadcrumbs ======= -->
   <section id="breadcrumbs" class="breadcrumbs">
@@ -12,14 +11,12 @@
       <h2>WORK PROGRAMME</h2>
     </div>
   </section><!-- End Breadcrumbs -->
-
   <!-- ======= About Section ======= -->
   <section id="about" class="about">
     <div class="container">
-
       <div class="row">
         <div class="col-xxl-9 col-lg-8 col-sm-12">
-          <img src="{% static 'landingpage/assets/img/program-kerja-lppm.jpg' %}" class="img-fluid" alt="">
+          <img src="{% static 'landingpage/assets/img/program-kerja-lppm.jpg' %}" class="img-fluid rounded" alt="">
         </div>
         {% include 'landingpage/recent_post.html' %}
       </div>

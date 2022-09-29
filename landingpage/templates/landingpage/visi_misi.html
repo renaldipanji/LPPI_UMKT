@@ -1,0 +1,37 @@
+{% extends 'landingpage/base.html' %}
+{% load static %}
+
+{% block konten %}
+  <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>Vision & Mission</li>
+        </ol>
+        <h2>Vision & Mission</h2>
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-xxl-9 col-lg-8 col-sm-12 content">
+            <div class="row">
+              <div class="col-12">
+                <h4 class="title-content">Vision :</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </div>
+              <div class="col-12 pt-5">
+                <h4 class="title-content">Mission :</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </div>
+            </div>
+          </div>
+          {% include 'landingpage/recent_post.html' %}
+        </div>
+      </div>
+  </section><!-- End About Section -->
+{% endblock konten %}
