@@ -9,4 +9,5 @@ urlpatterns = [
     path('journal/', journal, name='journal'),
     path('textbook/', textbook, name='textbook'),
     path('newspaper/', newspaper, name='newspaper'),
+    path('downloads/', downloads, name='downloads'),
 ]

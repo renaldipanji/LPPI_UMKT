@@ -15,3 +15,7 @@ def newspaper(request):
 
 def textbook(request):
     return render(request, 'landingpage/textbook.html')
+
+def downloads(request):
+    return render(request, 'landingpage/downloads.html')
+    
