@@ -27,3 +27,9 @@ def divisi_ppi(request):
 
 def divisi_elearning(request):
     return render(request, 'landingpage/divisi_elearning.html')
+
+def news(request):
+    return render(request, 'landingpage/news.html')
+
+def event(request):
+    return render(request, 'landingpage/event.html')
