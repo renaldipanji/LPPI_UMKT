@@ -2265,3 +2265,13 @@ section {
   font-size: 13px;
   color: #fff;
 }
+
+/*--------------------------------------------------------------
+# Service
+--------------------------------------------------------------*/
+
+.btn.btn-primary {
+  color: #274A7B;
+  background: #A8DADC;
+  font-weight: bold;
+}
