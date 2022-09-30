@@ -2269,3 +2269,30 @@ section {
   font-size: 13px;
   color: #fff;
 }
+
+/*--------------------------------------------------------------
+# Download
+--------------------------------------------------------------*/
+.btn.btn-outline-secondary{
+  background-color: #274A7B;
+}
+
+.bi.bi-search{
+  color: #FEFDFE;
+}
+
+
+.card-title{
+  color: #274A7B;
+  font-weight: bold;
+}
+
+.card-body{
+  background-color: #F1FAEE;
+}
+
+.btn.btn-primary{
+  background-color: #A8DADC;
+  color: #274A7B;
+  font-weight: bold;
+}
