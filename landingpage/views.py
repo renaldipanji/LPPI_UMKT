@@ -33,3 +33,15 @@ def news(request):
 
 def event(request):
     return render(request, 'landingpage/event.html')
+def journal(request):
+    return render(request, 'landingpage/journal.html')
+
+def newspaper(request):
+    return render(request, 'landingpage/newspaper.html')
+
+def textbook(request):
+    return render(request, 'landingpage/textbook.html')
+
+def downloads(request):
+    return render(request, 'landingpage/downloads.html')
+    

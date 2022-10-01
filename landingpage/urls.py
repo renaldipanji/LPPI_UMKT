@@ -15,4 +15,8 @@ urlpatterns = [
     path('divisi_elearning/', divisi_elearning, name='divisi_elearning'),
     path('news/', news, name='news'),
     path('event/', event, name='event'),
+    path('journal/', journal, name='journal'),
+    path('textbook/', textbook, name='textbook'),
+    path('newspaper/', newspaper, name='newspaper'),
+    path('downloads/', downloads, name='downloads'),
 ]
