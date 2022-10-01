@@ -76,7 +76,7 @@
       
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="index.html">Home</a></li>
+          <li><a class="active" href="{% url 'home' %}">Home</a></li>
           <li class="dropdown"><a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'visi_misi' %}">Vision & Mission</a></li>
@@ -91,10 +91,10 @@
               </li>
             </ul>
           </li>
-          <li class="dropdown"><a href="services.html"><span>Information</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href=""><span>Information</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="blog.html">News</a></li>
-              <li><a href="#">Event</a></li>
+              <li><a href="{% url 'news' %}">News</a></li>
+              <li><a href="{% url 'event' %}">Event</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="portfolio.html"><span>Service</span> <i class="bi bi-chevron-down"></i></a>

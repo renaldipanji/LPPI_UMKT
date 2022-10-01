@@ -23,7 +23,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -2122,8 +2122,6 @@ section {
 # Contact
 --------------------------------------------------------------*/
 
-
-
 /*--------------------------------------------------------------
 # Responsive Website
 --------------------------------------------------------------*/
@@ -2184,7 +2182,6 @@ section {
 /*--------------------
 # Recent Post
 --------------------*/
-
 /*--------------------
 # Section News
 --------------------*/
@@ -2213,14 +2210,127 @@ section {
 # Section News
 --------------------*/
 /*--------------------
-# Contact
+# Page News
 --------------------*/
-.frame-addres{
-  height: 500px;
+.title-news{
+  font-family: 'Montserrat', sans-serif;
+  color: #273D61;
+  font-weight: 900;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.news-recent-post{
+  padding: 40px 0px 40px 60px;
+}
+.author-box{
+  margin-top: 5px;
+  margin-left: -50px;
+}
+.img-author-recent-post{
+  max-height: 60px;
+  border-radius: 60px;
+}
+.content-news-recent-post{
+  margin: 5px 0px;
+}
+.title-news-recent-post{
+  margin-top: 10px;
+  font-size: 32px;
+  text-align: justify;
+  font-weight: 800;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.author-text{
+  font-size: 16px;
+}
+.date-news-recent-post{
+  font-size: 16px;
+  display: inline-flex;
+  margin-bottom: 5px;
 }
 /*--------------------
-# Contact
+# News Category
 --------------------*/
+.news-category-tablet{
+  display: none;
+}
+.section-news-category{
+  margin: 50px 120px;
+}
+.category-box{
+  background-color: #DEDEDE;
+  font-family: 'Montserrat', sans-serif;
+  padding: 8px;
+  text-align: center;
+  border-radius: 10px;
+  margin: 0px 20px;
+}
+.category-box button{
+  background:none;
+  border: none;
+  color: none;
+}
+.category-box button:hover{
+  background-color: #A8DADC;
+}
+.category-box:hover{
+  background-color: #A8DADC;
+}
+.card{
+  color: #274A7B;
+}
+.card-img-top{
+  border-radius: 25px 25px 0px 0px;
+}
+.card-body{
+  padding: 15px 0px;
+}
+.card-text{
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card-title{
+  font-size: 22px;
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card-title a{
+  color:#274A7B;
+}
+.card-title a:hover{
+  color:#E63946;
+}
+.card-img-top{
+  width: 100%;
+  height: 13vw;
+  object-fit: cover;
+}
+/*--------------------
+# News Category
+--------------------*/
+/*--------------------
+# Page News
+--------------------*/
+
+/*-------------------------
+# Page Divisi
+-------------------------*/
+.content p{
+  text-align: justify;
+}
+/*-------------------------
+# Page Divisi
+-------------------------*/
   }
 /*-------------------------------------
 # Width 1366px
@@ -2238,7 +2348,6 @@ section {
 /*--------------------
 # Navbar
 --------------------*/
-  
 /*--------------------
 # Slider Hero
 --------------------*/
@@ -2262,13 +2371,9 @@ section {
 /*--------------------
 # Slider Hero
 --------------------*/
-    
 /*--------------------
 # Sections News
 --------------------*/
-    /* #section-news{
-      margin-top: 20px;
-    } */
     .slide-container{
       max-width: 1400px;
     }
@@ -2293,23 +2398,55 @@ section {
 /*--------------------
 # Sections News
 --------------------*/
-
 /*--------------------
-# Contact
+# Page Contact
 --------------------*/
 .frame-addres{
   height: 500px;
 }
 /*--------------------
-# Contact
+# Page Contact
 --------------------*/
+/*-------------------------------------
+# Page News
+-------------------------------------*/
+.news-recent-post{
+  padding: 10px 0px 10px 60px;
+}
+.author-box{
+  margin-left: -30px;
+}
+.title-news-recent-post{
+  margin-top: 5px;
+  font-size: 28px;
+}
+/*--------------------
+# News Category
+--------------------*/
+.section-news-category{
+  margin: 40px 90px;
+}
+.category-box{
+  margin: 0px 20px;
+}
+.date-news-card{
+  font-size: 14px;
+}
+.card-img-top{
+  height: 17vw;
+}
+/*--------------------
+# News Category
+--------------------*/
+/*-------------------------------------
+# Page News
+-------------------------------------*/
   }
 
 /*-------------------------------------
 # Width 768px
 -------------------------------------*/
 @media (max-width: 768px) {
-
 /*--------------------
 # Breadcrumbs
 --------------------*/
@@ -2325,7 +2462,6 @@ section {
 /*--------------------
 # Breadcrumbs
 --------------------*/
-
 /*--------------------
 # Slider Hero
 --------------------*/
@@ -2391,7 +2527,6 @@ section {
 /*--------------------
 # Sections News
 --------------------*/
-
 /*--------------------
 # Recent Post
 --------------------*/
@@ -2401,9 +2536,8 @@ section {
 /*--------------------
 # Recent Post
 --------------------*/
-
 /*--------------------
-# Contact
+# Page Contact
 --------------------*/
 .contact-description{
   margin-bottom: 30px;
@@ -2413,7 +2547,38 @@ section {
   height: 400px;
 }
 /*--------------------
-# Contact
+# Page Contact
+--------------------*/
+/*--------------------
+# Page News
+--------------------*/
+.news-category-tablet{
+  display: block;
+}
+.news-recent-post{
+  padding: 20px;
+}
+.author-box{
+  margin-top: 5px;
+  margin-left: -40px;
+}
+.description-news-recent-post{
+  font-size: 16px;
+}
+.date-news-recent-post{
+  font-size: 14px;
+}
+.section-news-category{
+  margin: 30px 10px;
+}
+.card{
+  margin-bottom: 30px;
+}
+.card-img-top{
+  height: 28vw;
+}
+/*--------------------
+# Page News
 --------------------*/
 }
 /*-------------------------------------
@@ -2451,7 +2616,6 @@ section {
   /*--------------------
   # Slider Hero
   --------------------*/
-
   /*--------------------
   # Sections News
   --------------------*/
@@ -2463,6 +2627,34 @@ section {
       }
   /*--------------------
   # Sections News
+  --------------------*/
+  /*--------------------
+  # Page News
+  --------------------*/
+  .news-recent-post{
+    padding: 15px 0px;
+  }
+  .author-box{
+    margin-top: 5px;
+    margin-left: -105px;
+  }
+  /*--------------------
+  # News Category
+  --------------------*/
+  .category-box{
+    margin: 0px -5px;
+  }
+  .section-news-category{
+    font-size: 13px;
+  }
+  .card-img-top{
+    height: 48vw;
+  }
+  /*--------------------
+  # News Category
+  --------------------*/
+  /*--------------------
+  # Page News
   --------------------*/
     }
 
@@ -2497,6 +2689,61 @@ section {
   }
   /*--------------------
   # Contact
+  --------------------*/
+  /*--------------------
+  # Page News
+  --------------------*/
+  .author-box{
+    margin-top: 5px;
+    margin-left: -50px;
+    font-size: 12px;
+  }
+  .author-text{
+    font-size: 12px;
+  }
+  .title-news-recent-post{
+    font-size: 17px;
+  }
+  .description-news-recent-post{
+    font-size: 14px;
+  }
+  .img-author-recent-post{
+    max-height: 50px;
+    border-radius: 50px;
+  }
+  .date-news-recent-post{
+    font-size: 12px;
+  }
+  .title-news{
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+    /*--------------------
+  # News Category
+  --------------------*/
+  .category-box{
+    margin: 0px -5px;
+    padding: 5px;
+  }
+  .section-news-category{
+    font-size: 10px;
+    margin: 20px -10px;
+  }
+  .date-news-card{
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .card-title{
+    font-size: 18px;
+  }
+  .card-text{
+    font-size: 14px;
+  }
+  /*--------------------
+  # News Category
+  --------------------*/
+  /*--------------------
+  # Page News
   --------------------*/
 }
 
@@ -2545,3 +2792,38 @@ section {
   font-family: 'Montserrat', sans-serif;
   color: #273D61;
 }
+/*--------------------
+# Page News
+--------------------*/
+
+/*--------------------
+# Recent Post News
+--------------------*/
+.content-recent-post{
+  margin-bottom: 120px;
+}
+.img-recent-post{
+  max-height: 465px ;
+  display: inline-flex;
+}
+.author-recent-post p{
+  display: inline-flex;
+}
+.author-recent-post p span{
+  display: block;
+}
+.author-name{
+  font-weight: 800;
+}
+.description-news-recent-post{
+  text-align: justify;
+}
+.content-news-recent-post{
+  color: #274A7B;
+}
+/*--------------------
+# Recent Post News
+--------------------*/
+/*--------------------
+# Page News
+--------------------*/
