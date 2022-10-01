@@ -2281,10 +2281,9 @@ section {
 }
 
 .btn.btn-outline-secondary {
-  background-color: #A8DADC;
+  background-color: #274A7B;
 }
 
 .bi.bi-search {
-  color: #274A7B;
-  font-weight: bold;
+  color: #A8DADC;
 }
