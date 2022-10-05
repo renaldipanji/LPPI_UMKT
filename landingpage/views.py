@@ -33,6 +33,7 @@ def news(request):
 
 def event(request):
     return render(request, 'landingpage/event.html')
+    
 def journal(request):
     return render(request, 'landingpage/journal.html')
 
