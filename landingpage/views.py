@@ -45,4 +45,10 @@ def textbook(request):
 
 def downloads(request):
     return render(request, 'landingpage/downloads.html')
+
+def journal_research_umkt(request):
+    return render(request, 'landingpage/jurnal_penelitian_umkt.html')
+
+def journal_social_umkt(request):
+    return render(request, 'landingpage/jurnal_pengabdian_umkt.html')
     

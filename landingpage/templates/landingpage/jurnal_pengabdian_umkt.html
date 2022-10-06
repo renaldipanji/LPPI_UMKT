@@ -1,0 +1,100 @@
+{% extends 'landingpage/base.html' %}
+{% load static %}
+
+{% block konten %}
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li>E-Journals UMKT</li>
+        <li>Journal Of Social Serving</li>
+      </ol>
+      <h2>Journal Of Social Serving</h2>
+    </div>
+  </section><!-- End Breadcrumbs -->
+  <section id="downloads" class="downloads">
+    <div class="container-fluid px-5">
+      <div class="row">
+        <!-- Search Button -->
+        {% comment %} <div class="col-12 mb-4 px-0">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Text input search">
+            <button class="btn btn-outline-secondary" type="button">
+              <i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </div> {% endcomment %}
+        </div>
+        <div class="row">
+          <!-- Card -->
+          <div class="col-12 mb-5">
+            <div class="row">
+              <div class="col-3 box-cover-journal">
+                <img class="cover-journal rounded" src="{% static 'landingpage/assets/img/journal-cover/cover-pesut.png' %}">
+              </div>
+              <div class="col-9 box-content-journal py-2">
+                <div class="row">
+                  <div class="col-12 title-jurnal mb-1">
+                    <a href="#"> Jurnal Pesut : Pengabdian untuk Kesejahteraan Umat </a>
+                  </div>
+                  <div class="col-12 issn-jurnal">
+                    E-ISSN: 2684-7647
+                  </div>
+                  <div class="col-12 publication-range-jurnal">
+                    Publication: Twice a year (Mei and November)
+                  </div>
+                  <div class="col-12 index-jurnal mb-3">
+                    Index: Google schoolar, OneSearch, Garuda
+                  </div>
+                  <div class="col-12 description-jurnal mb-3">
+                    Jurnal Pesut diterbitkan pertama kali pada tahun 2019. Jurnal Pesut adalah Jurnal yang mempublikasikan hasil pengabdian kepada masyarakat dalam rangka peningkatan kesejahteraan umat, berpartisipasi dalam pembangunan, dan pemberdayaan masyarakat. Bidang-bidang yang terkait adalah Pengabdian dalam Pendidikan, Sosial Humaniora, Teknologi dan Kesehatan.
+                  </div>
+                  <div class="col-12 other-jurnal">
+                    <a href="https://journals.umkt.ac.id/index.php/pesut" class="btn btn-secondary rounded btn-view-journal mr-3">View Journal</a>
+                    <a href="https://journals.umkt.ac.id/index.php/pesut/issue/" class="btn btn-secondary rounded btn-current-journal mr-3">Current Issue</a>
+                    <a href="http://journals.umkt.ac.id/index.php/pesut/about/submissions" class="btn btn-secondary rounded btn-current-journal mr-3">Online Submission</a>
+                    <a href="https://drive.google.com/file/d/1JwTcMmURnIzEKC9ZNNHOEa58VkoJsTxx/view" class="btn btn-secondary rounded btn-current-journal mr-3">Download Template</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3 box-cover-journal">
+                <img class="cover-journal rounded" src="{% static 'landingpage/assets/img/journal-cover/cover-actiya.png' %}">
+              </div>
+              <div class="col-9 box-content-journal py-2">
+                <div class="row">
+                  <div class="col-12 title-jurnal mb-1">
+                    <a href="#">Acitya: Journal of Teaching and Education </a>
+                  </div>
+                  <div class="col-12 issn-jurnal">
+                    E-ISSN: 2655-9722
+                  </div>
+                  <div class="col-12 publication-range-jurnal">
+                    Publication: Twice a year (January and July)
+                  </div>
+                  <div class="col-12 index-jurnal mb-3">
+                    Index:  SINTA 4, Google Scholar, DOAJ, Garuda, Neliti, PKP Index, Crossref, Publons, Scilit, ICI World of journals, ResearchBib, OneSearch, BASE, Scientific Indexing Services, ISJD, WorldCat, Moraref, Dimensions.
+                  </div>
+                  <div class="col-12 description-jurnal mb-3">
+                    ACITYA Journal of Teaching & Education provides scientific articles of teaching and education that can be publications of scientific articles, book reviews, original research reports, and reviews in education. This journal consists of three sections. The paper must be submitted according to the section areas. The sections include English Language Teaching, English Literature, Linguistics, & English for Specific Purpose, Curriculum Development, Teacher Education, ICT & Learning Media, Physical Education, Classroom Action Research, & Educational Studies.
+                  </div>
+                  <div class="col-12 other-jurnal">
+                    <a href="https://journals.umkt.ac.id/index.php/acitya" class="btn btn-secondary rounded btn-view-journal mr-3">View Journal</a>
+                    <a href="https://journals.umkt.ac.id/index.php/acitya/issue/" class="btn btn-secondary rounded btn-current-journal mr-3">Current Issue</a>
+                    <a href="http://journals.umkt.ac.id/index.php/acitya/logreg" class="btn btn-secondary rounded btn-current-journal mr-3">Online Submission</a>
+                    <a href="https://drive.google.com/open?id=1Av2vI09-xKe43F3yS0sHgjlMFQlCPDKu" class="btn btn-secondary rounded btn-current-journal mr-3">Download Template</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+    </div>
+  </section>
+  <!-- End Card -->
+  {% endblock konten %}

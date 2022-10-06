@@ -19,4 +19,6 @@ urlpatterns = [
     path('textbook/', textbook, name='textbook'),
     path('newspaper/', newspaper, name='newspaper'),
     path('downloads/', downloads, name='downloads'),
+    path('journal-research-umkt/', journal_research_umkt, name='journal_research_umkt'),
+    path('journal-social-umkt/', journal_social_umkt, name='journal_social_umkt'),
 ]

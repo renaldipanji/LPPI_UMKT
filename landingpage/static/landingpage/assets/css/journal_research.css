@@ -1,0 +1,32 @@
+@media (max-width: 1920px){
+    .cover-journal{
+        max-height: 300px;
+    }
+    .title-jurnal a{
+        font-size: 24px;
+        font-weight: 700;
+        color: #1D3557;
+    }
+    .title-jurnal a:hover{
+        color: #E63946;
+    }
+    .box-content-journal{
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: #1D3557;
+    }
+    .description-jurnal{
+        text-align: justify;
+        font-weight: 500;
+    }
+    .other-jurnal a{
+        font-size: 12px;
+        padding: 4px 8px;
+        font-weight: 600;
+        margin-right: 10px;
+    }
+    .box-content-journal{
+        margin-left: -60px;
+    }
+}
