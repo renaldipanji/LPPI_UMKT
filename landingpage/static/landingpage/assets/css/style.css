@@ -523,6 +523,7 @@ h6 {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
   margin: 20px 0px;
+  font-weight: 600;
 }
 
 .title h2::after{
@@ -2147,7 +2148,7 @@ section {
     #hero h2{
       margin-bottom: 30px;
       font-size: 120px;
-      font-weight: 900;
+      font-weight: 700;
     }
     #hero p{
       font-size: 24px;
@@ -2197,6 +2198,7 @@ section {
     }
     .card-content h3 {
       font-size: 20px;
+      font-weight: 700;
     }
     .read-more{
       position: absolute;

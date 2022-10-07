@@ -1,6 +1,13 @@
+@media (min-width: 1921px){
+    .cover-journal{
+        max-height: 300px;
+        margin-left:100px
+    }
+}
 @media (max-width: 1920px){
     .cover-journal{
         max-height: 300px;
+        margin-left:100px
     }
     .title-jurnal a{
         font-size: 24px;
@@ -15,6 +22,7 @@
         font-size: 14px;
         font-weight: 600;
         color: #1D3557;
+        margin-left: -100px;
     }
     .description-jurnal{
         text-align: justify;
@@ -26,7 +34,73 @@
         font-weight: 600;
         margin-right: 10px;
     }
+}
+
+@media (max-width: 1366px){
     .box-content-journal{
-        margin-left: -60px;
+        margin-left: -70px;
     }
+    .cover-journal{
+        margin-left:0px
+    }
+}
+@media (max-width: 1200px){
+    .box-content-journal{
+        margin-left: 0px;
+    }
+}
+
+@media (max-width: 768px){
+    .cover-journal{
+        max-height: 200px;
+    }
+    .title-jurnal a{
+        font-size: 18px;
+    }
+    .box-content-journal{
+        font-size: 8px;
+    }
+    .other-jurnal a{
+        font-size: 8px;
+        padding: 2px 4px;
+    }
+}
+@media (max-width: 601px){
+    .cover-journal{
+        max-height: 150px;
+    }
+    .title-jurnal a{
+        font-size: 14px;
+    }
+    .box-content-journal{
+        font-size: 6px;
+    }
+    .other-jurnal a{
+        font-size: 6px;
+        padding: 1px 6px;
+    }
+    .box-content-journal{
+        padding: 0px;
+        margin-top: -0.4rem;
+    }
+}
+@media (max-width: 360px){
+    .cover-journal{
+        max-height: 80px;
+    }
+    .title-jurnal a{
+        font-size: 10px;
+    }
+    .box-content-journal{
+        font-size: 4px;
+        margin-left: -10px;
+    }
+    .other-jurnal a{
+        font-size: 4px;
+        padding: 1px 3px;
+    }
+    /* .box-content-journal{
+        padding: 0px;
+        margin-top: -0.4rem;
+    } */
 }
