@@ -1,0 +1,36 @@
+{% extends 'landingpage/base.html' %}
+{% load static %}
+{% block konten %}
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li>UMKT PRESS</li>
+      </ol>
+      <h2>UMKT PRESS</h2>
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-9 col-lg-8 col-sm-12 content">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="title-content">Service Overview :</h4>
+              <p>Sesuai dengan Visi PPI yaitu menyelenggarakan dan mengembangkan buku ajar sebagai penunjang proses belajar mengajar, PPI Universitas muhammadiyah kalimantan timur berencana membuat penerbitan buku yang disebut dengan UMKT Press, mengembangkan fasilitas percetakan dan penerbitan buku dalam bentuk cetak ada beberapa hasil dari buku ajar dosen di UMKT yang perlu di cetak kedalam buku maka dari itu PPI akan membuka percetakan dan penerbitan buku. syarat dalam penerbitan adalah pendaftaran ISBN, ISBN (International Standard Book Number) Angka yang berada di bagian belakang buku dan berupa barcode yang berfungsi identifikasi unik pada setiap buku yang diterbitkan.</p>
+              <a href="#" class="btn btn-primary rounded btn-order d-table mx-auto">Order Now</a>
+            </div>
+            <div class="col-12 pt-5">
+              <h4 class="title-content">Flow Service</h4>
+              <img src="{% static 'landingpage/assets/img/layanan/alur-layanan.jpg' %}" class="img-fluid mx-auto d-block" alt="...">
+            </div>
+          </div>
+        </div>
+        {% include 'landingpage/recent_post.html' %}
+      </div>
+    </div>
+  </section><!-- End About Section -->
+  {% endblock konten %}

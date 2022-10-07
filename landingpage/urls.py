@@ -21,4 +21,9 @@ urlpatterns = [
     path('downloads/', downloads, name='downloads'),
     path('journal-research-umkt/', journal_research_umkt, name='journal_research_umkt'),
     path('journal-social-umkt/', journal_social_umkt, name='journal_social_umkt'),
+    path('translate_art/', translate_art, name='translate_art'),
+    path('sipena/', sipena, name='sipena'),
+    path('umktpress/', umktpress, name='umktpress'),
+    path('e_learning/', e_learning, name='e_learning'),
 ]
+

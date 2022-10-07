@@ -1,0 +1,36 @@
+{% extends 'landingpage/base.html' %}
+{% load static %}
+{% block konten %}
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li>Incentive App (SIPENA)</li>
+      </ol>
+      <h2>Incentive App (SIPENA)</h2>
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-9 col-lg-8 col-sm-12 content">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="title-content">Service Overview :</h4>
+              <p><b>SIPENA</b> (Aplikasi Pengajuan Insentif Akademik) merupakan sebuah aplikasi yang nantinya dirancang untuk memudahkan dalam pekerjaan di bidang publikasi ilmiah yang ada di UMKT,Khususnya di PPI. Sistem Aplikasi dirancang untuk menyesuaikan kebutuhan yang ada di PPI yaitu memberikan informasi terkait input data publikasi dosen,Insentif Akademik (Jurnal Ilmiah, Artikel Koran, Penerbitan Buku Ajar, Open Learning), Ajuan Biaya Publikasi di Jurnal Scopus, International Conference, Jasa Translate, Pencairan insentif Pengelola Jurnal Elektronik, Program Hibah Buku Ajar, dan Kegiatan Workshop. itulah beberapa poin yang nantinya akan ada didalam sistem aplikasi SIPENA. diharapkan nantinya bisa mempermudah dalam menyelesaikan pekerjaan yang ada di PPI.</p>
+              <a href="#" class="btn btn-primary rounded btn-order d-table mx-auto">Order Now</a>
+            </div>
+            <div class="col-12 pt-5">
+              <h4 class="title-content">Flow Service</h4>
+              <img src="{% static 'landingpage/assets/img/layanan/alur-layanan.jpg' %}" class="img-fluid mx-auto d-block" alt="...">
+            </div>
+          </div>
+        </div>
+        {% include 'landingpage/recent_post.html' %}
+      </div>
+    </div>
+  </section><!-- End About Section -->
+  {% endblock konten %}

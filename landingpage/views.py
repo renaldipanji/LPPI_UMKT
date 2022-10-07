@@ -51,4 +51,15 @@ def journal_research_umkt(request):
 
 def journal_social_umkt(request):
     return render(request, 'landingpage/jurnal_pengabdian_umkt.html')
-    
+
+def translate_art(request):
+    return render(request, 'landingpage/translate_art.html')
+
+def sipena(request):
+    return render(request, 'landingpage/sipena.html')
+
+def umktpress(request):
+    return render(request, 'landingpage/umktpress.html')
+
+def e_learning(request):
+    return render(request, 'landingpage/e_learning.html')

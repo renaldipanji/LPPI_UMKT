@@ -1,0 +1,36 @@
+{% extends 'landingpage/base.html' %}
+{% load static %}
+{% block konten %}
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li>Article Translation</li>
+      </ol>
+      <h2>Article Translation</h2>
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-9 col-lg-8 col-sm-12 content">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="title-content">Service Overview :</h4>
+              <p><b>Penerjemahan Artikel</b> merupakan salah satu layanan yang disediakan oleh LPPI UMKT yang dapat digunakan oleh seluruh Dosen Universitas Muhammadiyah Kalimantan Timur.<br><br><b>LPPI UMKT </b>khususnya di divisi PPI menerima jasa penerjemahan berbagai macam artikel mulai dari jurnal hingga buku. Bahasa yang disupport mulai dari Bahasa Indonesia ke bahasa-bahasa lain atau sebaliknya. Jika anda berminat untuk menggunakan layanan ini bisa klik tombol di bawah ini.</p>
+              <a href="#" class="btn btn-primary rounded btn-order d-table mx-auto">Order Now</a>
+            </div>
+            <div class="col-12 pt-5">
+              <h4 class="title-content">Flow Service</h4>
+              <img src="{% static 'landingpage/assets/img/layanan/alur-layanan.jpg' %}" class="img-fluid mx-auto d-block" alt="...">
+            </div>
+          </div>
+        </div>
+        {% include 'landingpage/recent_post.html' %}
+      </div>
+    </div>
+  </section><!-- End About Section -->
+  {% endblock konten %}
