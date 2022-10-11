@@ -2218,7 +2218,7 @@ section {
 .title-news{
   font-family: 'Montserrat', sans-serif;
   color: #273D61;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 48px;
   text-align: center;
   margin-bottom: 20px;
@@ -2241,7 +2241,7 @@ section {
   margin-top: 10px;
   font-size: 32px;
   text-align: justify;
-  font-weight: 800;
+  font-weight: 600;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -2276,6 +2276,7 @@ section {
   background:none;
   border: none;
   color: none;
+  font-weight: 600;
 }
 .category-box button:hover{
   background-color: #A8DADC;
@@ -2309,6 +2310,7 @@ section {
 }
 .card-title a{
   color:#274A7B;
+  font-weight: 600;
 }
 .card-title a:hover{
   color:#E63946;

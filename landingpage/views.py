@@ -31,6 +31,9 @@ def divisi_elearning(request):
 def news(request):
     return render(request, 'landingpage/news.html')
 
+def news_single(request):
+    return render(request, 'landingpage/news_single.html')
+
 def event(request):
     return render(request, 'landingpage/event.html')
     

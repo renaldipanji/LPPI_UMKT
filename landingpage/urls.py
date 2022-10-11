@@ -14,6 +14,7 @@ urlpatterns = [
     path('divisi_ppi/', divisi_ppi, name='divisi_ppi'),
     path('divisi_elearning/', divisi_elearning, name='divisi_elearning'),
     path('news/', news, name='news'),
+    path('single-news/', news_single, name='news_single'),
     path('event/', event, name='event'),
     path('journal/', journal, name='journal'),
     path('textbook/', textbook, name='textbook'),
