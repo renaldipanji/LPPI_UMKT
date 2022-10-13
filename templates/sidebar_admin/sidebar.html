@@ -34,7 +34,6 @@
         </form>
       </div>
     </li>
-
             
     <!-- Notifications Dropdown Menu -->
     <!-- <li class="nav-item dropdown">
@@ -86,7 +85,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="{% if request.user.foto1 %}/media/{{ request.user.foto1 }}{% else %}https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/128x128/user.png{% endif %}" class="img-circle elevation-2">
+        <img src="{% if request.user.foto_profile %}/media/{{ request.user.foto_profile }}{% else %}https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/128x128/user.png{% endif %}" class="img-circle elevation-2">
       </div>
       <div class="info">
         <a href="" class="d-block text-decoration-none">{{request.user.username}}</a>
@@ -108,36 +107,165 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-            with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="" class="nav-link">
+          <a href="{% url 'profil' %}" class="nav-link">
             <i class="fas fa-user-alt nav-icon" ></i>
             <p class="fw-bold">Profil Saya</p>
           </a>
         </li>        
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-concierge-bell"></i>
-            <p>Layanan<i class="right fas fa-angle-left"></i></p>
+            <i class="nav-icon fas fa-chart-line"></i>
+            <p>Dashboard<i class="right fas fa-angle-left"></i></p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Pelatihan</p>
+                <p>Contact</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Editing</p>
+                <p>PPI</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Klinik Komputer</p>
+                <p>E-Learning</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-search"></i>
+            <p>About<i class="right fas fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Vision & Mission</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Org. Structure</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Work Programme</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Contact</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>PPI</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>E-Learning</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-info-circle"></i>
+            <p>
+              Information
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>News</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Event</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-concierge-bell"></i>
+            <p>
+              Service
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Journals</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>SIPENA</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>UMKT Press</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>E-learning Support</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-newspaper"></i>
+            <p>
+              Publication
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Journals</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Text Books</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Newspaper Articles</p>
               </a>
             </li>
           </ul>
@@ -146,7 +274,7 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-book"></i>
             <p>
-              Booking
+              E-Journals UMKT
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -154,19 +282,27 @@
             <li class="nav-item">
               <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Studio</p>
+                <p>Research</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Ruang Pelatihan</p>
+                <p>Social Serving</p>
               </a>
             </li>
           </ul>
         </li>
         <li class="nav-item">
-          <a href="" class="nav-link" style="color:#ff4c42;">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-download"></i>
+            <p>
+              Download
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'logout' %}" class="nav-link" style="color:#ff4c42;">
             <i class="fas fa-power-off nav-icon" ></i>
             <p class="fw-bold">Keluar</p>
           </a>

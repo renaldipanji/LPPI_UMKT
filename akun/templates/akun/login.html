@@ -33,14 +33,6 @@
 							Buat akun baru
 						</a>
 					</div>
-					{% comment %} {% if messages %}
-						{% for message in messages %}
-						<div class="alert alert-{{message.tags}} alert-dismissible msgAnim fade show" role="alert">
-							{{ message }}
-							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-						</div>
-						{% endfor %}
-					{% endif %} {% endcomment %}
 					{% include 'pesan.html' %}
 					<div class="wrap-input100 validate-input" data-validate = "Masukkan email yang valid contoh: uem@umkt.ac.id">
 						{{form.username}}
@@ -56,9 +48,9 @@
 
 					<!-- <div class="container-login100-form-btn"> -->
 					<div class="row mt-4">
-						{% comment %} <div class="col-8 txt4">
+						 <div class="col-8 txt4">
 							<a href="{% url 'lupaPassword' %}" class="fs-6 text-decoration-none txt2">Lupa Password ?</a>
-						</div> {% endcomment %}
+						</div>
 
 						<div class="col-4">
 							<button class="login100-form-btn float-lg-end">Masuk</button>

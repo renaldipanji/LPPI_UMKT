@@ -85,7 +85,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="{% if request.user.foto1 %}/media/{{ request.user.foto1 }}{% else %}https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/128x128/user.png{% endif %}" class="img-circle elevation-2">
+        <img src="{% if request.user.foto_profile %}/media/{{ request.user.foto_profile }}{% else %}https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/128x128/user.png{% endif %}" class="img-circle elevation-2">
       </div>
       <div class="info">
         <a href="" class="d-block text-decoration-none">{{request.user.username}}</a>
@@ -110,7 +110,7 @@
         <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="" class="nav-link">
+          <a href="{% url 'profil' %}" class="nav-link">
             <i class="fas fa-user-alt nav-icon" ></i>
             <p class="fw-bold">Profil Saya</p>
           </a>

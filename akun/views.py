@@ -70,7 +70,6 @@ def lupaPassword(request):
     try:
         if request.method == 'POST':
             email = request.POST.get('email')
-
             if not User.objects.filter(email = email).first():
                 messages.error(request, 'Email tidak ditemukan.')
                 return redirect('lupaPassword')
@@ -83,7 +82,7 @@ def lupaPassword(request):
             domain = request.get_host()
             ssl = request.is_secure()
             send_forget_password_mail(user_obj.email, token, domain, ssl)
-            # return redirect('konfirmasi_reset_pass')
+            return redirect('konfirmasi_reset_pass')
     
     except Exception as e:
         print (e)    
