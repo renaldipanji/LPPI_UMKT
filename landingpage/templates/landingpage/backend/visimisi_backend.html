@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content-header">
+  <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6">
+              <h6 class="m-0">Content</h6>
+              <h1 class="m-0">Visi & Misi</h1>
+          </div>
+      </div>
+  </div>
+  <!-- Ambil konten disini -->
+  <div class="col-12 col-sm-12">
+      <div class="card card-primary card-tabs">
+        <div class="card-header p-0 pt-1">
+          <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
+            </li>
+
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content" id="custom-tabs-one-tabContent">
+            <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+              <div class="card-body table-responsive p-0">
+                  <form method="POST" enctype="multipart/form-data">
+                      <div class="col-12">
+                        <div class="form-floating mb-5 mt-1">
+                          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                          <label for="floatingTextarea2">Visi</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                          <label for="floatingTextarea2">Misi</label>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 mt-2">
+                    <div class="form-group">
+                      <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Update</button>
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                </form> 
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+    </div> 
+    <!-- Ini ujung konten -->
+
+
+
+  
+
+
+{% endblock content %} 
