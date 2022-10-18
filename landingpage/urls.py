@@ -32,6 +32,7 @@ urlpatterns = [
     #>>>>>>>>>>>>>>>>>>>>>>Backend Views <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     path('orgstruktur-backend/', orgstruktur_backend, name='orgstruktur_backend'),
+    path('divisippi-backend/', divisippi_backend, name='divisippi_backend'),
 
 ]
 
