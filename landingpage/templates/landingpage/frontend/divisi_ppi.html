@@ -1,0 +1,35 @@
+{% extends 'landingpage/base.html' %}
+{% load static %}
+{% block konten %}
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">Division</a></li>
+        <li>PPI</li>
+      </ol>
+      <h2>Pengembangan Publikasi Ilmiah</h2>
+    </div>
+  </section><!-- End Breadcrumbs -->
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 pt-6 pt-lg-0 content">
+          <h4 class="title-content">Overview</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <br>
+          <h4 class="title-content">Members</h4>
+          <p>
+            <div class="col-12 pt-4 pt-lg-0 content">
+              <img src='{% static 'landingpage/assets/img/members-ppi.jpg' %}' class="img-fluid"> </img>
+            </div>
+          </p>
+        </div>
+        {% include 'landingpage/recent_post.html' %}
+      </div>
+    </div>
+  </section><!-- End About Section -->
+  {% endblock konten %}

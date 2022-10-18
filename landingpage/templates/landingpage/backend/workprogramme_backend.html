@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h6 class="m-0">Content</h6>
+                <h1 class="m-0">Work Programme</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Ambil konten disini -->
+    <div class="col-12 col-sm-12">
+        <div class="card card-primary card-tabs">
+          <div class="card-header p-0 pt-1">
+            <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-body">
+            <div class="tab-content" id="custom-tabs-one-tabContent">
+              <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                <div class="card-body table-responsive p-0">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="col-12">
+                          <img src="/media/{{data.file_workprogramme}}" class="img-fluid" alt="...">
+                        </div>
+                        <hr>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Upload File</label>
+                                {% csrf_token %}
+                                {{form.file_workprogramme}}                             
+                                {% comment %} <input type="text" name="username" class="form-control" placeholder="Nama File" maxlength="150" autofocus="" required="" id="id_username"> {% endcomment %}
+                                <p class="fs-6 text-danger">Disarankan ukuran gambar 1024 px X 768 px</p>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                      <div class="form-group">
+                        <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Update</button>
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                  </form> 
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- /.card -->
+        </div>
+      </div> 
+      <!-- Ini ujung konten -->
+  
+  
+      
+      <div class="modal fade" id="modal-hapus" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Konfirmasi Hapus</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <label class="control-label">Apakah Anda ingin meghapus pesanan:</label>
+              <div>
+                <h6>Nama</h6>
+                <p class="text-danger" id="nama_pemesan_hps"></p>
+                <hr>
+                <h6>No. HP/WhatsApp</h6>
+                <p class="text-danger" id="no_hp_hps"></p>
+                <hr>
+                <h6>Instansi</h6>
+                <p class="text-danger" id="instansi_hps"></p>
+                <hr>
+                <h6>Keterangan</h6>
+                <p class="text-danger" id="keterangan_hps"></p>
+                <hr>
+                <h6>Status</h6>
+                <div id="status"></div>
+              </div>
+            </div> 
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-success" id="btn_hapus"><span class="fas fa-check"></span> Ya</button>
+              <button type="button" data-bs-dismiss="modal" class="btn btn-danger"><span class="fas fa-times"></span> Tidak</button>
+            </div>
+          </div>
+          <!-- /.modal-content-->
+        </div>
+        <!-- /.modal-dialog-->
+      </div>
+  
+    
+      <div class="modal fade" id="modal-lihat" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Informasi</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" id="form_edit" enctype="multipart/form-data">
+                <div id="content_form_edit" class="mb-4">
+                  {% csrf_token %}
+                  {{form.kategori}}
+                  <div class="form-group">
+                    <label class="control-label">Nama</label>
+                    {{form.nama_pemesan}}
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">No. HP/WhatsApp</label>
+                    {{form.no_hp}}
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Instansi</label>
+                    {{form.instansi}}
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Pelatihan: (Dari)</label>
+                    <div class="input-group">
+                      {{ form.created_at }}
+                      <span class="input-group-text" id="inputGroupPrepend2"><i class="fas fa-calendar-alt"></i></span>
+                    </div>
+                    </div>
+                  <div class="form-group">
+                    <label>Tanggal Pelatihan: (Sampai)</label>
+                    <div class="input-group">
+                      {{ form.updated_at }}
+                      <span class="input-group-text" id="inputGroupPrepend2"><i class="fas fa-calendar-alt"></i></span>
+                    </div>
+                    </div>
+                    <label class="control-label mt-2">Lihat Kelengkapan Berkas</label>
+                  <div class="form-group">
+                    <button type="button" class="btn btn-secondary btn-sm" id="btn_lihat_file1" data-bs-toggle="modal" data-bs-target="#modal_file1">
+                      Lihat Surat Pernyataan
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="btn_lihat_foto1" data-bs-toggle="modal" data-bs-target="#modal_foto1">
+                      Lihat Scan Ktp
+                    </button>
+                  </div>  
+                  <div class="form-group">
+                    <label>Upload Scan Ktp</label>
+                    <div class="custom-file" id="update_upload_ktp">
+                      {{form.foto1}}
+                      <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
+                    </div>
+                      <small class="form-text text-muted ">Ukuran Maksimal 1 MB</small>
+                    <label>Upload Surat Pernyataan</label>
+                    <div class="custom-file" id="update_upload_surat">
+                      {{form.file1}}
+                      <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
+                    </div>
+                      <small class="form-text text-muted ">Ukuran Maksimal 1 MB</small>
+                  </div>  
+                  <div class="form-group">
+                    <label class="control-label">Keterangan</label>
+                    {{form.keperluan}}
+                  </div>
+                  <div class="form-group">
+                    {{form.keterangan}}
+                  </div>
+                  <div class="form-group">
+                  <label class="control-label">Status</label>
+                    {{form.status}}
+                  </div>
+                  <div class="form-group">
+                  <label class="control-label">Penanggung Jawab</label>
+                    {{form.pic_id}}
+                  </div>
+                </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-bs-dismiss="modal">Tutup</button>
+              <div>
+              <button type="submit" id="submit_edit" class="btn btn-success"><span class="fas fa-check"></span> Simpan</button>
+            </div>
+          </div>
+          </form>
+            <!-- /.modal-content-->
+          </div>
+          <!-- /.modal-dialog-->
+        </div>
+        <!-- /.modal (belum diverifikasi) -->
+      </div>
+    </div>
+  
+      <!-- Modal Scan Ktp-->
+      <div class="modal fade" id="modal_foto1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Scan Ktp</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <img src="" id="url_foto1" class="img-fluid" alt="...">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Scan Ktp-->
+      
+      <!-- Modal Surat Pernyataan-->
+      <div class="modal fade" id="modal_file1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Surat Pernyataan</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <img src="" id="url_file1" class="img-fluid" alt="...">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Surat Pernyataan-->
+</div>
+
+{% endblock content %}
