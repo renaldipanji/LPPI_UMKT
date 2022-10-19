@@ -80,3 +80,12 @@ def contact_backend (request):
    #     #'data': data,
    # }
    return render(request, 'landingpage/backend/contact_backend.html')
+
+def umkt_press_backend (request):
+    #data = divisippi.objects.get(id='1')
+   # divisippi_form = DivisippiForm(request.FILES, request.POST or None)
+   # context = {
+   #     'form': divisippi_form,
+   #     #'data': data,
+   # }
+   return render(request, 'landingpage/backend/umkt_press_backend.html')

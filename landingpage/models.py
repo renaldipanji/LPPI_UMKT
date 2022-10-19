@@ -8,3 +8,13 @@ class contact(models.Model):
    email    = models.CharField(max_length=40, null=True)
    ig       = models.CharField(max_length=40, null=True)
    alamat   = models.TextField(blank=True)
+
+def filepath_umkt_press(request, filename):
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('uploads/data_umktpress/', filename)
+
+class umkt_press(models.Model):
+    overview        = models.TextField(blank=True)
+    member_image    = models.FileField(upload_to = filepath_umkt_press, null=True, blank=True)
