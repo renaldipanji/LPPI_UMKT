@@ -33,3 +33,13 @@ class Journals(models.Model):
     Tahun    = models.CharField(max_length=4, null=True)
     Link    = models.CharField(max_length=100, null=True)
   
+class TextBooks(models.Model):
+    Program_Studi = models.CharField(max_length=50, null=True)
+    Nama = models.CharField(max_length=50, null=True)
+    Judul_Buku = models.CharField(max_length=100, null=True)
+    Tahap_Luaran_10 = models.BooleanField(default=False)
+    Tahap_Luaran_40 = models.BooleanField(default=False)
+    Tahap_Luaran_80 = models.BooleanField(default=False)
+    Reviewer = models.CharField(max_length=100, null=True)
+    Tahun = models.CharField(max_length=100, null=True)
+    Link    = models.CharField(max_length=100, null=True)
