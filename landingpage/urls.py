@@ -29,10 +29,11 @@ urlpatterns = [
     path('umktpress/', umktpress, name='umktpress'),
     path('e_learning/', e_learning, name='e_learning'),
 
-    #>>>>>>>>>>>>>>>>>>>>>>Backend Views <<<<<<<<<<<<<<<<<<<<<<<<<<<
+    #>>>>>>>>>>>>>>>>>>>>>>Backend Url <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     path('orgstruktur-backend/', orgstruktur_backend, name='orgstruktur_backend'),
     path('divisippi-backend/', divisippi_backend, name='divisippi_backend'),
+    path('divisielearning-backend/', divisielearning_backend, name='divisielearning_backend'),
 
 ]
 

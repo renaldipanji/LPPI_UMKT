@@ -29,3 +29,13 @@ def filepath_divisi_ppi(request, filename):
 class divisippi(models.Model):
     member_image = models.FileField(upload_to = filepath_divisi_ppi, null=True, blank=True)
     overview = models.TextField(blank=True)
+
+def filepath_divisi_elearning(request, filename):
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('uploads/data_divisielearning/', filename)
+
+class divisielearning(models.Model):
+    member_image = models.FileField(upload_to = filepath_divisi_elearning, null=True, blank=True)
+    overview = models.TextField(blank=True)
