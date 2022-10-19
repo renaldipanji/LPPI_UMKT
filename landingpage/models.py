@@ -59,3 +59,9 @@ def filepath_journal_research(request, filename):
 class journalresearch(models.Model):
     member_image = models.FileField(upload_to = filepath_journal_research, null=True, blank=True)
     overview = models.TextField(blank=True)
+
+class newspaper(models.Model):
+    Nama = models.CharField(max_length=50, null=True)
+    Judul_Artikel = models.CharField(max_length=100, null=True)
+    Tahun    = models.CharField(max_length=4, null=True)
+    Link    = models.CharField(max_length=100, null=True)
