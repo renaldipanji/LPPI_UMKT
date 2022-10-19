@@ -107,3 +107,12 @@ def articletranslation_backend (request):
     #     #'data': data,
     # }
     return render(request, 'landingpage/backend/articletranslation_backend.html')
+
+def sipena_backend (request):
+    #data = divisippi.objects.get(id='1')
+    # divisippi_form = DivisippiForm(request.FILES, request.POST or None)
+    # context = {
+    #     'form': divisippi_form,
+    #     #'data': data,
+    # }
+    return render(request, 'landingpage/backend/sipena_backend.html')

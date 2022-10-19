@@ -33,8 +33,8 @@ urlpatterns = [
 
     path('orgstruktur-backend/', orgstruktur_backend, name='orgstruktur_backend'),
     path('divisippi-backend/', divisippi_backend, name='divisippi_backend'),
-    path('articletranslation-backend/', articletranslation_backend, name='articletranslation_backend' )
-
+    path('articletranslation-backend/', articletranslation_backend, name='articletranslation_backend' ),
+    path('sipena-backend/', sipena_backend, name='sipena_backend'),
 ]
 
 if settings.DEBUG:
