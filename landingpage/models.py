@@ -18,3 +18,13 @@ def filepath_umkt_press(request, filename):
 class umkt_press(models.Model):
     overview        = models.TextField(blank=True)
     member_image    = models.FileField(upload_to = filepath_umkt_press, null=True, blank=True)
+    
+def filepath_elearning_support(request, filename):
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('uploads/data_elearningsupport/', filename)
+
+class elearning_support(models.Model):
+    overview        = models.TextField(blank=True)
+    member_image    = models.FileField(upload_to = filepath_elearning_support, null=True, blank=True)

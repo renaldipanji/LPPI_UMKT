@@ -32,6 +32,7 @@ urlpatterns = [
 #>>>>>>>>>>>>>>>>>>>> BACKEND URL <<<<<<<<<<<<<<<<<#
     path('contact-backend/', contact_backend, name='contact_backend'),
     path('umkt_press-backend/', umkt_press_backend, name='umkt_press_backend'),
+    path('elearning_support-backend/', elearning_support_backend, name='elearning_support_backend'),
 ]
 
 
