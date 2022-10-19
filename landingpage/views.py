@@ -106,3 +106,15 @@ def visimisi_backend (request):
     #     #'data' : data,
     # }
     return render(request, 'landingpage/backend/visimisi_backend.html')
+
+def journals_backend (request):
+    #data = Visimisi.objects.get(id='1')
+    # visi_form = VisimisiForm(request.FILES, request.POST or None)
+    # if request.method == "POST":
+    #         result_request = dict(request.POST)
+    #         print(result_request)
+    # context = {
+    #     'form' : visimisi_form,
+    #     #'data' : data,
+    # }
+    return render(request, 'landingpage/backend/journals_backend.html')

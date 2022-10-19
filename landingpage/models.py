@@ -26,3 +26,10 @@ def filepath_visimisi(request, filename):
 class Visimisi(models.Model):
     visi = models.TextField(blank =True)
     misi = models.TextField(blank =True)
+
+class Journals(models.Model):
+    Nama = models.CharField(max_length=50, null=True)
+    Judul_Artikel = models.CharField(max_length=100, null=True)
+    Tahun    = models.CharField(max_length=4, null=True)
+    Link    = models.CharField(max_length=100, null=True)
+  
