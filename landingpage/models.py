@@ -18,3 +18,12 @@ def filepath_journal_serving(request, filename):
 class journal_serving(models.Model):
    member_image = models.FileField(upload_to = filepath_journal_serving, null=True, blank=True)
    overview = models.TextField(blank=True)
+   
+def filepath_event(request, filename):
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('uploads/data_event/', filename)
+ 
+class event(models.Model):
+   member_image = models.FileField(upload_to = filepath_event, null=True, blank=True)
