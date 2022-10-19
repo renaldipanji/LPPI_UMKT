@@ -49,3 +49,13 @@ def filepath_sipena(request, filename):
 class sipena(models.Model):
     member_image = models.FileField(upload_to = filepath_sipena, null=True, blank=True)
     overview = models.TextField(blank=True)
+
+def filepath_journal_research(request, filename):
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('uploads/data_journalresearch/', filename)
+
+class journalresearch(models.Model):
+    member_image = models.FileField(upload_to = filepath_journal_research, null=True, blank=True)
+    overview = models.TextField(blank=True)

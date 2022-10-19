@@ -35,6 +35,7 @@ urlpatterns = [
     path('divisippi-backend/', divisippi_backend, name='divisippi_backend'),
     path('articletranslation-backend/', articletranslation_backend, name='articletranslation_backend' ),
     path('sipena-backend/', sipena_backend, name='sipena_backend'),
+    path('journalresearch-backend/', journalresearch_backend, name='journalresearch_backend' )
 ]
 
 if settings.DEBUG:
