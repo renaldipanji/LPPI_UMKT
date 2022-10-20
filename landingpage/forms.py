@@ -27,3 +27,17 @@ class WorkprogrammeForm(forms.ModelForm):
 #                 }
 #             )
 #         }
+
+class Journals(forms.ModelForm):
+    class Meta :
+        model = Journals
+        fields = ('file_workprogramme',)
+        widgets = {
+            'file_workprogramme' : forms.FileInput(
+                attrs={
+                    'class':'form-control form-control-sm',
+                    'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
+                    'oninput': 'setCustomValidity("")'
+                }
+            )
+        }
