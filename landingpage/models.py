@@ -8,5 +8,5 @@ def filepath(request, filename):
     filename = "%s%s" % (timeNow, old_filename)
     return os.path.join('uploads/data_workprogramme/', filename)
 
-class Workprogramme(models.Model):
+class WorkProgrammeModel(models.Model):
     file_workprogramme = models.FileField(upload_to = filepath, null=True, blank=True)

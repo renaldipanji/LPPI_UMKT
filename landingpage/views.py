@@ -71,22 +71,22 @@ def e_learning(request):
 
 #>>>>>>>>>>>>BACKEND<<<<<<<<<<<<<
 def workprogramme_backend (request):
-    data = Workprogramme.objects.get(id='1')
-    workprogramme_form = WorkprogrammeForm(request.FILES, request.POST or None,instance = data)
+    data = WorkProgrammeModel.objects.get(id='1')
+    workprogramme_form = WorkprogrammeForm(request.POST, request.FILES or None,instance = data)
     if request.method == "POST":
             result_request = dict(request.POST)
             print(result_request)
             # ambil data cek image
-            # cek_file = 'file_workprogramme' in result_request
-            # if cek_file == False:
-            #     if data :
-            #         if os.path.isfile(data.file_workprogramme.path) == True:
-            #             os.remove(data.file_workprogramme.path)
-            # if workprogramme_form.is_valid():
-            #     workprogramme_form.save()
-            #     formFoto = WorkprogrammeForm(instance = data)
-            #     # messages.success(request, 'Data Work Programme Berhasil di Update')
-            #     return redirect('workprogramme_backend')
+            cek_file = 'workprogramme_form' in result_request
+            if cek_file == False:
+                if data :
+                    if os.path.isfile(data.file_workprogramme.path) == True:
+                        os.remove(data.file_workprogramme.path)
+            if workprogramme_form.is_valid():
+                workprogramme_form.save()
+                workprogramme_form = WorkprogrammeForm(instance = data)
+                 # messages.success(request, 'Data Work Programme Berhasil di Update')
+                return redirect('workprogramme_backend')
             # else:
             #     print(workprogramme_form.errors)
     context = {
