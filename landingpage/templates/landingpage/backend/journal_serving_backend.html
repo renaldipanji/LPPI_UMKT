@@ -31,44 +31,54 @@
                            <div class="form-floating mb-3 mt-1">
                              <div class="mb-3">
                                <label for="exampleFormControlInput1" class="form-label"> Judul Jurnal</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                               {{form.judul_jurnal}}
+                               {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
                              </div>
                              <div class="mb-3">
                                <label for="exampleFormControlInput1" class="form-label">ISSN</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                               {{form.issn}}
+                               {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
                              </div>
                              <div class="mb-3">
                                <label for="exampleFormControlInput1" class="form-label">Publication</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                               {{form.publication}}
+                               {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
                              </div>
                             
                              <div class="mb-3">
                                <label for="exampleFormControlTextarea1" class="form-label">Index</label>
-                               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                               {{form.index}}
+                               {% comment %} <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> {% endcomment %}
                              </div>
                              <div class="mb-3">
                                <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                               {{form.deskripsi}}
+                               {% comment %} <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> {% endcomment %}
                              </div>
                              <div class="mb-3 mt-2">
-                               <label for="formFile" class="form-label mb-3">Cover Journals</label>
-                               <input class="form-control" type="file" id="formFile">
+                              <label for="exampleFormControlInput1" class="form-label">Cover Jurnal</label>
+                              {{form.cover_jurnal}} 
+                              {% comment %} <label for="formFile" class="form-label mb-3">Cover Journals</label> {% endcomment %}
                              </div>
                              <div class="mb-3">
                                <label for="exampleFormControlInput1" class="form-label">Link View Jurnal</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                               {{form.link_view_jurnal}}
+                               {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
                              </div>
                              <div class="mb-3">
                                <label for="exampleFormControlInput1" class="form-label">Link Current Issue</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                               {{form.link_current_issue}}
+                               {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
                              </div>
                              <div class="mb-3">
                                <label for="exampleFormControlInput1" class="form-label">Link Online Submission</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                               {{form.link_online_submission}}
+                               {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
                              </div>
                              <div class="mb-3">
                                <label for="exampleFormControlInput1" class="form-label">Link Download Template</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                               {{form.link_download_template}}
+                               {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
                              </div>
                             
                          </div>

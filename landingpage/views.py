@@ -83,9 +83,9 @@ def contact_backend (request):
 
 def journal_serving_backend (request):
     #data = divisippi.objects.get(id='1')
-   # divisippi_form = DivisippiForm(request.FILES, request.POST or None)
-   # context = {
-   #     'form': divisippi_form,
-   #     #'data': data,
-   # }
-   return render(request, 'landingpage/backend/journal_serving_backend.html')
+    journalserving_form = JournalServingForm(request.POST, request.FILES  or None)
+    context = {
+         'form': journalserving_form,
+         #'data': data,
+     }
+    return render(request, 'landingpage/backend/journal_serving_backend.html', context)
