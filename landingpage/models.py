@@ -11,6 +11,6 @@ def filepath(request, filename):
     filename = "%s%s" % (timeNow, old_filename)
     return os.path.join('uploads/data_orgstruktur/', filename)
 
-class orgstruktur(models.Model):
-    file_orgstruktur = models.FileField(upload_to = filepath, null=True, blank=True)
+class OrgstrukturModel(models.Model):
+    orgstruktur_image = models.FileField(upload_to = filepath, null=True, blank=True)
 

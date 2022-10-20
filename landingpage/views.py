@@ -72,18 +72,22 @@ def e_learning(request):
     #>>>>>>>>>>>>>>>> Backend Views <<<<<<<<<<<<<<<<<<<<<
 
 def orgstruktur_backend (request):
-    data = orgstruktur.objects.get(id='1')
-    orgstruktur_form = OrgstrukturForm(request.FILES, request.POST or None)
-    #if request.method == "POST":
-        # #result_request = dict(request.POST)
-        # print(result_request)
-        # #ambil data cek image
-        # cek_file = 'file_orgstruktur' in result_request
-        # if cek_file == False:
-        #     if data :
-        #         if os.path.isfile(data.file_orgstruktur.path) == True:
-        #             os.remove(data.file_orgstruktur.path)
-        # if orgstruktur_form.is
+    data = OrgstrukturModel.objects.get(id='2')
+    orgstruktur_form = OrgstrukturForm(request.POST, request.FILES  or None, instance=data)
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        print(result_request)
+        #ambil data cek image
+        cek_image = 'orgstruktur_form' in result_request
+        if cek_image == False:
+            if data.orgstruktur_image:
+                if os.path.isfile(data.orgstruktur_image.path) == True:
+                    os.remove(data.orgstruktur_image.path)
+        if orgstruktur_form.is_valid():
+            orgstruktur_form.save()
+            orgstruktur_form = OrgstrukturForm(instance = data)
+            # messages.success(request, 'Foto Berhasil di Edit')
+            return redirect('orgstruktur_backend')
     context = {
         'form': orgstruktur_form,
         'data': data,

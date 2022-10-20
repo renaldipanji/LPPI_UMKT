@@ -1,16 +1,16 @@
 from dataclasses import fields
 from django import forms
-from .models import orgstruktur
+from .models import *
 from django.forms import widgets
 
 class OrgstrukturForm(forms.ModelForm):
     
     class Meta:
-        model = orgstruktur
-        fields = ('file_orgstruktur',)
+        model = OrgstrukturModel
+        fields = ('orgstruktur_image',)
         widgets = {
-            'file_orgstruktur': forms.FileInput(
-                attrs={
+            'orgstruktur_image': forms.FileInput(
+                attrs= {
                     'class': 'form-control form-control',
                     'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
                     'oninput': 'setCustomValidity("")'
