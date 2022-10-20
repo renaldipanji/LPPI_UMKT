@@ -18,17 +18,24 @@ class WorkProgrammeForm(forms.ModelForm):
             )
         }
 
-# class VisimisiForm(forms.ModelForm):
-#     class Meta :
-#         model = VisiMisiModel
-#         fields = ('visi','misi',)
-#         widgets = {
-#             'visi' : forms.Text(
-#                 attrs={
-#                     'class':'form-control',
-#                 }
-#             )
-#         }
+class VisiMisiForm(forms.ModelForm):
+    class Meta :
+        model = VisiMisiModel
+        fields = ('visi','misi',)
+        widgets = {
+            'visi' : forms.Textarea(
+                attrs={
+                    'class':'form-control form-control-sm',
+                    'placeholder' : 'Visi',
+                }
+            ),
+            'misi' : forms.Textarea(
+                attrs={
+                    'class':'form-control form-control-sm',
+                    'placeholder' : 'Misi',
+                }
+            ),
+        }
 
 class JournalsForm(forms.ModelForm):
     class Meta :
