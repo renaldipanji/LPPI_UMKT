@@ -33,6 +33,7 @@ urlpatterns = [
     path('workprogramme-backend/', workprogramme_backend, name='workprogramme_backend'),
     path('visimisi-backend/', visimisi_backend, name='visimisi_backend'),
     path('journals-backend/', journals_backend, name='journals_backend'),
+    path('textbooks-backend/', textbooks_backend, name='textbooks_backend'),
 ]
 
 if settings.DEBUG:
