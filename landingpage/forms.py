@@ -1,7 +1,6 @@
 from dataclasses import fields
 from django import forms
-from .models import orgstruktur
-from .models import divisippi
+from .models import *
 from django.forms import widgets
 
 class OrgstrukturForm(forms.ModelForm):
@@ -19,17 +18,23 @@ class OrgstrukturForm(forms.ModelForm):
             )
         }
 
-# class DivisippiForm(forms.ModelForm):
+class ArticletranslationForm(forms.ModelForm):
+    class Meta:
+        model = articletranslation
+        fields = ('overview_articletranslation','flowservice_articletranslation')
+        widgets = {
+            'overview_articletranslation' : forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Overview',
 
-#     class Meta:
-#         model = divisippi
-#         fields = ('file_divisippi',)
-#         widgets = {
-#             'file_divisippi': forms.FileInput(
-#                 attrs={
-#                     'class': 'form-control form-control',
-#                     'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
-#                     'oninput': 'setCustomValidity("")'
-#                 }
-#             )
-#         }
+                }
+            ),
+            'flowservice_articletranslation' : forms.FileInput(
+                attrs={
+                    'class': 'form-control form-control',
+                    'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
+                    'oninput': 'setCustomValidity("")',
+                }
+            ),
+        }

@@ -29,12 +29,15 @@
                         <form method="POST" enctype="multipart/form-data">
                           <div class="col-12">
                             <div class="form-floating mb-3 mt-1">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                              <div class="mb-3">
                                 <label for="floatingTextarea2">Overview</label>
+                                {% comment %} <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea> {% endcomment %}
+                                {{form.overview_articletranslation}}
                               </div>
                               <div class="mb-3 mt-2">
-                                <label for="formFile" class="form-label mb-3">Default file input example</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <label for="formFile" class="form-label mb-3">Flow Service</label>
+                                {% comment %} <input class="form-control" type="file" id="formFile"> {% endcomment %}
+                                {{form.flowservice_articletranslation}}
                               </div>
                               
                           </div>

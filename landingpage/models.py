@@ -37,5 +37,5 @@ def filepath_article_translation(request, filename):
     return os.path.join('uploads/data_articletranslation/', filename)
 
 class articletranslation(models.Model):
-    member_image = models.FileField(upload_to = filepath_article_translation, null=True, blank=True)
-    overview = models.TextField(blank=True)
+    flowservice_articletranslation = models.FileField(upload_to = filepath_article_translation, null=True, blank=True)
+    overview_articletranslation = models.TextField(blank=True)
