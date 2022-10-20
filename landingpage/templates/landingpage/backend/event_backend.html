@@ -24,18 +24,20 @@
          <div class="card-body">
            <div class="tab-content" id="custom-tabs-one-tabContent">
              <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-               <div class="card-body table-responsive p-0">
+               <div class="card-body table-responsive p-1">
                    <div id="content_form_tambah" class="row">
                        <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
                          <div class="col-12">
+                          <img src="/media/{{data.event_image}}"  class="img-thumbnail" alt="...">
+                            <hr>
                            <div class="form-floating mb-3 mt-1">                         
                              <div class="mb-3 mt-2">
                                <label for="formFile" class="form-label mb-3">Jadwal Kegiatan</label>
-                               <input class="form-control" type="file" id="formFile">
-                             </div>
-                                                        
+                               {{form.event_image}}
+                               {% comment %} <input class="form-control" type="file" id="formFile"> {% endcomment %}
+                             </div>                          
                          </div>
-                      
                    </div>
                    <div class="col-md-6 mt-2">
                      <div class="form-group">

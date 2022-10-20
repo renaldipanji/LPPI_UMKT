@@ -91,10 +91,24 @@ def journal_serving_backend (request):
    return render(request, 'landingpage/backend/journal_serving_backend.html')
 
 def event_backend (request):
-    #data = divisippi.objects.get(id='1')
-   # divisippi_form = DivisippiForm(request.FILES, request.POST or None)
-   # context = {
-   #     'form': divisippi_form,
-   #     #'data': data,
-   # }
-   return render(request, 'landingpage/backend/event_backend.html')
+    data = EventModel.objects.get(id='1')
+    event_form = EventForm(request.POST, request.FILES or None, instance=data)
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        print(result_request)
+        #ambil data cek image
+        cek_image = 'event_form' in result_request
+        if cek_image == False:
+            if data.event_image:
+                if os.path.isfile(data.event_image.path) == True:
+                    os.remove(data.event_image.path)
+        if event_form.is_valid():
+            event_form.save()
+            event_form = EventForm(instance = data)
+            # messages.success(request, 'Foto Berhasil di Edit')
+            return redirect('event_backend')
+    context = {
+        'form': event_form,
+        'data': data,
+    }
+    return render(request, 'landingpage/backend/event_backend.html', context)
