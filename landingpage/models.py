@@ -25,5 +25,5 @@ def filepath_event(request, filename):
     filename = "%s%s" % (timeNow, old_filename)
     return os.path.join('uploads/data_event/', filename)
  
-class EventModel(models.Model):
+class EventMo(models.Model):
    event_image = models.FileField(upload_to = filepath_event, null=True, blank=True)
