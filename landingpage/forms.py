@@ -30,19 +30,37 @@ class WorkProgrammeForm(forms.ModelForm):
 #             )
 #         }
 
-class Journals(forms.ModelForm):
+class JournalsForm(forms.ModelForm):
     class Meta :
-        model = Journals
-        fields = ('file_workprogramme',)
+        model = JournalsModel
+        fields = ('nama','judul_artikel','tahun','link')
         widgets = {
-            'file_workprogramme' : forms.FileInput(
+            'nama' : forms.TextInput(
                 attrs={
                     'class':'form-control form-control-sm',
-                    'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
-                    'oninput': 'setCustomValidity("")'
+                    'placeholder' : 'Nama',
                 }
-            )
+            ),
+            'judul_artikel' : forms.TextInput(
+                attrs={
+                    'class':'form-control form-control-sm',
+                    'placeholder' : 'Judul Artikel',
+                }
+            ),
+            'tahun' : forms.TextInput(
+                attrs={
+                    'class':'form-control form-control-sm',
+                    'placeholder' : 'Tahun',
+                }
+            ),
+            'link' : forms.TextInput(
+                attrs={
+                    'class':'form-control form-control-sm',
+                    'placeholder' : 'Link',
+                }
+            ),
         }
+        
 class TextBookForm(forms.ModelForm):
     class Meta:
         model = TextBooksModel
