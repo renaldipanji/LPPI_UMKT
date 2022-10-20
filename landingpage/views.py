@@ -73,13 +73,27 @@ def e_learning(request):
 #>>>>>>>>>>>>>>>>>> Backend Views <<<<<<<<<<<<<<#
 
 def contact_backend (request):
-    #data = divisippi.objects.get(id='1')
-   # divisippi_form = DivisippiForm(request.FILES, request.POST or None)
-   # context = {
-   #     'form': divisippi_form,
-   #     #'data': data,
-   # }
-   return render(request, 'landingpage/backend/contact_backend.html')
+    data = ContactModel.objects.get(id='1')
+    contact_form = ContactForm(request.POST or None, instance=data)
+    # if request.method == 'POST':
+    #     result_request = dict(request.POST)
+    #     print(result_request)
+    #     #ambil data cek image
+    #     cek_image = 'event_form' in result_request
+    #     if cek_image == False:
+    #         if data.event_image:
+    #             if os.path.isfile(data.event_image.path) == True:
+    #                 os.remove(data.event_image.path)
+    #     if event_form.is_valid():
+    #         event_form.save()
+    #         event_form = EventForm(instance = data)
+    #         # messages.success(request, 'Foto Berhasil di Edit')
+    #         return redirect('event_backend')
+    context = {
+        'form': contact_form,
+        'data': data,
+    } 
+    return render(request, 'landingpage/backend/contact_backend.html', context)
 
 def journal_serving_backend (request):
     #data = divisippi.objects.get(id='1')

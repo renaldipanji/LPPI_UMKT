@@ -26,22 +26,27 @@
                <div class="card-body table-responsive p-0">
                    <div id="content_form_tambah" class="row">
                        <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
                          <div class="col-12">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">No Handpone</label>
-                                <input type="no_hp" class="form-control" id="exampleFormControlInput1" placeholder="08xxxx">
+                                {{form.no_hp}}
+                                {% comment %} <input type="no_hp" class="form-control" id="exampleFormControlInput1" placeholder="08xxxx"> {% endcomment %}
                               </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                {{form.email}}
+                                {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"> {% endcomment %}
                               </div>
                               <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Instagram</label>
-                                <input type="no_hp" class="form-control" id="exampleFormControlInput1" placeholder="umkaltim">
+                                {{form.ig}}
+                                {% comment %} <input type="ig" class="form-control" id="exampleFormControlInput1" placeholder="umkaltim"> {% endcomment %}
                               </div>
                               <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Alamat</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                {{form.alamat}}
+                                {% comment %} <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> {% endcomment %}
                               </div>
                             
                          </div>

@@ -3,7 +3,7 @@ import datetime
 import os
 
  
-class contact(models.Model):
+class ContactModel(models.Model):
    no_hp    = models.CharField(max_length=40, null=True)
    email    = models.CharField(max_length=40, null=True)
    ig       = models.CharField(max_length=40, null=True)
@@ -15,7 +15,7 @@ def filepath_journal_serving(request, filename):
     filename = "%s%s" % (timeNow, old_filename)
     return os.path.join('uploads/data_journalserving/', filename)
  
-class journal_serving(models.Model):
+class Journal_ServingModel(models.Model):
    member_image = models.FileField(upload_to = filepath_journal_serving, null=True, blank=True)
    overview = models.TextField(blank=True)
    
@@ -25,5 +25,5 @@ def filepath_event(request, filename):
     filename = "%s%s" % (timeNow, old_filename)
     return os.path.join('uploads/data_event/', filename)
  
-class EventMo(models.Model):
+class EventModel(models.Model):
    event_image = models.FileField(upload_to = filepath_event, null=True, blank=True)
