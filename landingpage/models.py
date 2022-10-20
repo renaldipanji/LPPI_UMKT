@@ -27,5 +27,5 @@ def filepath_divisi_ppi(request, filename):
     return os.path.join('uploads/data_divisippi/', filename)
 
 class divisippi(models.Model):
-    member_image = models.FileField(upload_to = filepath_divisi_ppi, null=True, blank=True)
-    overview = models.TextField(blank=True)
+    flowservice_divisippi = models.FileField(upload_to = filepath_divisi_ppi, null=True, blank=True)
+    overview_divisippi = models.TextField(blank=True)

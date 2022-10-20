@@ -92,9 +92,9 @@ def orgstruktur_backend (request):
 
 def divisippi_backend (request):
     #data = divisippi.objects.get(id='1')
-    # divisippi_form = DivisippiForm(request.FILES, request.POST or None)
-    # context = {
-    #     'form': divisippi_form,
+    divisippi_form = DivisippiForm(request.POST, request.FILES or None)
+    context = {
+        'form': divisippi_form,
     #     #'data': data,
-    # }
-    return render(request, 'landingpage/backend/divisippi_backend.html')
+    }
+    return render(request, 'landingpage/backend/divisippi_backend.html', context)

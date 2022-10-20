@@ -29,12 +29,15 @@
                         <form method="POST" enctype="multipart/form-data">
                           <div class="col-12">
                             <div class="form-floating mb-3 mt-1">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                              <div class="mb-3">
                                 <label for="floatingTextarea2">Overview</label>
+                                {% comment %} <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea> {% endcomment %}
+                                {{form.overview_divisippi}}
                               </div>
                               <div class="mb-3 mt-2">
-                                <label for="formFile" class="form-label mb-3">Default file input example</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <label for="formFile" class="form-label mb-3">Flow Service</label>
+                                {% comment %} <input class="form-control" type="file" id="formFile"> {% endcomment %}
+                                {{form.flowservice_divisippi}}
                               </div>
                               
                           </div>
@@ -42,7 +45,7 @@
                     </div>
                     <div class="col-md-6 mt-2">
                       <div class="form-group">
-                        <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span>Update</button>
+                        <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Update </button>
                       </div>
                       <!-- /.col -->
                     </div>
