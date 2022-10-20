@@ -14,7 +14,7 @@ def filepath(request, filename):
     filename = "%s%s" % (timeNow, old_filename)
     return os.path.join('uploads/data_workprogramme/', filename)
 
-class Workprogramme(models.Model):
+class WorkProgrammeModel(models.Model):
     file_workprogramme = models.FileField(upload_to = filepath_workprogramme, null=True, blank=True)
 
 def filepath_visimisi(request, filename):
@@ -23,23 +23,23 @@ def filepath_visimisi(request, filename):
     filename = "%s%s" % (timeNow, old_filename)
     return os.path.join('uploads/data_visimisi/', filename)
 
-class Visimisi(models.Model):
+class VisiMisiModel(models.Model):
     visi = models.TextField(blank =True)
     misi = models.TextField(blank =True)
 
-class Journals(models.Model):
-    Nama = models.CharField(max_length=50, null=True)
-    Judul_Artikel = models.CharField(max_length=100, null=True)
-    Tahun    = models.CharField(max_length=4, null=True)
-    Link    = models.CharField(max_length=100, null=True)
+class JournalsModel(models.Model):
+    nama = models.CharField(max_length=50, null=True)
+    judul_artikel = models.CharField(max_length=100, null=True)
+    tahun = models.CharField(max_length=4, null=True)
+    link = models.CharField(max_length=100, null=True)
   
-class TextBooks(models.Model):
-    Program_Studi = models.CharField(max_length=50, null=True)
-    Nama = models.CharField(max_length=50, null=True)
-    Judul_Buku = models.CharField(max_length=100, null=True)
-    Tahap_Luaran_10 = models.BooleanField(default=False)
-    Tahap_Luaran_40 = models.BooleanField(default=False)
-    Tahap_Luaran_80 = models.BooleanField(default=False)
-    Reviewer = models.CharField(max_length=100, null=True)
-    Tahun = models.CharField(max_length=100, null=True)
-    Link    = models.CharField(max_length=100, null=True)
+class TextBooksModel(models.Model):
+    program_studi = models.CharField(max_length=50, null=True)
+    nama = models.CharField(max_length=50, null=True)
+    judul_buku = models.CharField(max_length=100, null=True)
+    tahap_luaran_10 = models.BooleanField(default=False)
+    tahap_luaran_40 = models.BooleanField(default=False)
+    tahap_luaran_80 = models.BooleanField(default=False)
+    reviewer = models.CharField(max_length=100, null=True)
+    tahun = models.CharField(max_length=100, null=True)
+    link = models.CharField(max_length=100, null=True)

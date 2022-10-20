@@ -25,52 +25,43 @@
     <div class="card-body">
         <div class="tab-content" id="custom-tabs-one-tabContent">
           <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-            <div class="card-body table-responsive p-0">
+            <div class="card-body table-responsive p-1">
                 <form method="POST" enctype="multipart/form-data">
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Program Studi</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    {{form.program_studi}}
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    {{form.nama}}
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Judul Buku</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    {{form.judul_buku}}
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Tahap Luaran 10%</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="1">False</option>
-                        <option value="2">True</option>
-                      </select>
+                    {{form.tahap_luaran_10}}
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Tahap Luaran 40%</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="1">False</option>
-                        <option value="2">True</option>
-                      </select>
+                    {{form.tahap_luaran_40}}
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Tahap Luaran 80%</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="1">False</option>
-                        <option value="2">True</option>
-                      </select>
+                    {{form.tahap_luaran_80}}
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Reviewer (Internal 1 & Eksternal 2)</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    {{form.reviewer}}
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Tahun</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    {{form.tahun}}
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Link</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    {{form.link}}
                   </div>
                   <div class="col-md-6 mt-2">
                     <div class="form-group">
