@@ -37,5 +37,5 @@ def filepath_divisi_elearning(request, filename):
     return os.path.join('uploads/data_divisielearning/', filename)
 
 class divisielearning(models.Model):
-    member_image = models.FileField(upload_to = filepath_divisi_elearning, null=True, blank=True)
-    overview = models.TextField(blank=True)
+    flowservice_divisielearning = models.FileField(upload_to = filepath_divisi_elearning, null=True, blank=True)
+    overview_divisielearning = models.TextField(blank=True)

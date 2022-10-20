@@ -101,10 +101,10 @@ def divisippi_backend (request):
 
 def divisielearning_backend (request):
     #data = divisippi.objects.get(id='1')
-    # divisippi_form = DivisippiForm(request.FILES, request.POST or None)
-    # context = {
-    #     'form': divisippi_form,
-    #     #'data': data,
-    # }
-    return render(request, 'landingpage/backend/divisielearning_backend.html')
+    divisielearning_form = DivisielearningForm(request.FILES, request.POST or None)
+    context = {
+        'form': divisielearning_form,
+    #    #'data': data,
+     }
+    return render(request, 'landingpage/backend/divisielearning_backend.html', context)
 
