@@ -15,6 +15,6 @@ def filepath_umkt_press(request, filename):
     filename = "%s%s" % (timeNow, old_filename)
     return os.path.join('uploads/data_umktpress/', filename)
 
-class umkt_press(models.Model):
-    overview        = models.TextField(blank=True)
-    member_image    = models.FileField(upload_to = filepath_umkt_press, null=True, blank=True)
+class UmktPress(models.Model):
+    umktpress_overview  = models.TextField(blank=True)
+    umktpress_flowservice = models.FileField(upload_to = filepath_umkt_press, null=True, blank=True)
