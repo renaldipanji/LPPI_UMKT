@@ -47,5 +47,5 @@ def filepath_sipena(request, filename):
     return os.path.join('uploads/data_sipena/', filename)
 
 class sipena(models.Model):
-    member_image = models.FileField(upload_to = filepath_sipena, null=True, blank=True)
-    overview = models.TextField(blank=True)
+    flowservice_sipena = models.FileField(upload_to = filepath_sipena, null=True, blank=True)
+    overview_sipena = models.TextField(blank=True)
