@@ -61,7 +61,7 @@ class journalresearch(models.Model):
     overview = models.TextField(blank=True)
 
 class newspaper(models.Model):
-    Nama = models.CharField(max_length=50, null=True)
-    Judul_Artikel = models.CharField(max_length=100, null=True)
-    Tahun    = models.CharField(max_length=4, null=True)
-    Link    = models.CharField(max_length=100, null=True)
+    nama_dosen = models.CharField(max_length=50, null=True)
+    judul_artikel = models.CharField(max_length=100, null=True)
+    tahun    = models.CharField(max_length=4, null=True)
+    link    = models.CharField(max_length=100, null=True)

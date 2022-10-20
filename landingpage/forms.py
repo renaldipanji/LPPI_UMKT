@@ -1,7 +1,6 @@
 from dataclasses import fields
 from django import forms
-from .models import orgstruktur
-from .models import divisippi
+from .models import *
 from django.forms import widgets
 
 class OrgstrukturForm(forms.ModelForm):
@@ -33,3 +32,34 @@ class OrgstrukturForm(forms.ModelForm):
 #                 }
 #             )
 #         }
+
+class NewspaperForm(forms.ModelForm):
+    class Meta:
+        model = newspaper
+        fields = ('nama_dosen','judul_artikel','tahun','link',)
+        widgets = {
+            'nama_dosen' : forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder': 'Nama Dosen',
+                }
+            ),
+            'judul_artikel': forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder': 'Judul Artikel',
+                }
+            ),
+            'tahun': forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder': 'Tahun',
+                }
+            ),
+            'link': forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder': 'Link',
+                }
+            )
+        }

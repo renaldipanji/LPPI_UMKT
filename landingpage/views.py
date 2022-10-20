@@ -128,9 +128,9 @@ def journalresearch_backend (request):
 
 def newspaper_backend (request):
     #data = divisippi.objects.get(id='1')
-    # divisippi_form = DivisippiForm(request.FILES, request.POST or None)
-    # context = {
-    #     'form': divisippi_form,
-    #     #'data': data,
-    # }
-    return render(request, 'landingpage/backend/newspaper_backend.html')
+    newspaper_form = NewspaperForm(request.POST or None)
+    context = {
+        'form': newspaper_form,
+        #'data': data,
+    }
+    return render(request, 'landingpage/backend/newspaper_backend.html', context)
