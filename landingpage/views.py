@@ -25,7 +25,11 @@ def workprog(request):
     return render(request,'landingpage/frontend/workprog.html')
 
 def divisi_ppi(request):
-    return render(request,'landingpage/frontend/divisi_ppi.html')
+    data = divisippi.objects.get(id='1')
+    context ={
+        'data':data,
+    }
+    return render(request,'landingpage/frontend/divisi_ppi.html', context)
 
 def divisi_elearning(request):
     return render(request, 'landingpage/frontend/divisi_elearning.html')
@@ -91,8 +95,12 @@ def orgstruktur_backend (request):
     return render(request, 'landingpage/backend/orgstruktur_backend.html', context)
 
 def divisippi_backend (request):
-    #data = divisippi.objects.get(id='1')
-    divisippi_form = DivisippiForm(request.POST, request.FILES or None)
+    data = divisippi.objects.get(id='1')
+    divisippi_form = DivisippiForm(request.FILES, request.POST or None, instance=data)
+
+    if request.method == 'POST':
+        divisippi_form.save()
+
     context = {
         'form': divisippi_form,
     #     #'data': data,

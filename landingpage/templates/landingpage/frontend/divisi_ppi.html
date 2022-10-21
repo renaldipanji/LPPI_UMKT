@@ -18,13 +18,12 @@
       <div class="row">
         <div class="col-lg-8 pt-6 pt-lg-0 content">
           <h4 class="title-content">Overview</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p>{{data.overview_divisippi | linebreaks}}</p>
           <br>
           <h4 class="title-content">Members</h4>
           <p>
             <div class="col-12 pt-4 pt-lg-0 content">
-              <img src='{% static 'landingpage/assets/img/members-ppi.jpg' %}' class="img-fluid"> </img>
+              <img src="/media/{{data.flowservice_divisippi}}" class="img-fluid"> </img>
             </div>
           </p>
         </div>
