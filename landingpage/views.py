@@ -103,23 +103,23 @@ def orgstruktur_backend (request):
     return render(request, 'landingpage/backend/orgstruktur_backend.html', context)
 
 def divisippi_backend (request):
-    data = divisippi.objects.get(id='1')
-    divisippi_form = DivisippiForm(request.POST, request.FILES or None, instance=data)
+    divisippi_update = divisippi.objects.get(id='1')
+    data = {
+        'flowservice_divisippi' : divisippi_update.flowservice_divisippi,
+        'overview_divisippi' : divisippi_update.overview_divisippi,
+    }
+    divisippi_form = DivisippiForm(request.POST or None, request.FILES or None, initial=data, instance=data)
 
     if request.method == 'POST':
         result_request = dict(request.POST)
-        # print('cek.............................................mantao....',result_request)
         #ambil data cek image
         cek_image = 'flowservice_divisippi' in result_request
-        # print('cek.............................................',cek_image)
         if cek_image == False:
-            # pass
             if data.flowservice_divisippi:
                 if os.path.isfile(data.flowservice_divisippi.path) == True:
                     os.remove(data.flowservice_divisippi.path)
         if divisippi_form.is_valid():
             divisippi_form.save()
-            divisippi_form = DivisippiForm(instance = data)
             # messages.success(request, 'Foto Berhasil di Edit')
             return redirect('divisippi_backend')
         else:
@@ -127,6 +127,6 @@ def divisippi_backend (request):
 
     context = {
         'form': divisippi_form,
-        'data': data,
+        'data': divisippi_update,
     }
     return render(request, 'landingpage/backend/divisippi_backend.html', context)

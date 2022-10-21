@@ -26,7 +26,7 @@
               <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                 <div class="card-body table-responsive p-1">
                   <h4 class="title-content my-1">Overview</h4>
-                  <p>{{data.overview_divisippi | linebreaks}}</p>
+                  <div id="overview_divisippi">{{data.overview_divisippi | linebreaks}}</div>
                   <h4 class="title-content">Members</h4>
                   <p>
                     <div class="col-12 pt-4 pt-lg-0 content">
@@ -35,6 +35,10 @@
                   </p>
                   <hr>
 
+                  <script>
+                    var over = $('#overview_divisippi').text();
+                    $('#id_overview_divisippi').val(over)
+                  </script>
 
                     <div id="content_form_tambah" class="row">
                         <form method="POST" enctype="multipart/form-data">
