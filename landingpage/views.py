@@ -22,7 +22,11 @@ def contact(request):
     return render(request, 'landingpage/frontend/contact.html')
 
 def workprog(request):
-    return render(request,'landingpage/frontend/workprog.html')
+    data = WorkProgrammeModel.objects.get(id='1')
+    context = {
+        'data': data,
+    }
+    return render(request,'landingpage/frontend/workprog.html', context)
 
 def divisi_ppi(request):
     return render(request,'landingpage/frontend/divisi_ppi.html')
