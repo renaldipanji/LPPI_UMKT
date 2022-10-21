@@ -82,7 +82,7 @@ def orgstruktur_backend (request):
         result_request = dict(request.POST)
         print(result_request)
         #ambil data cek image
-        cek_image = 'orgstruktur_form' in result_request
+        cek_image = 'orgstruktur_image' in result_request
         if cek_image == False:
             if data.orgstruktur_image:
                 if os.path.isfile(data.orgstruktur_image.path) == True:
