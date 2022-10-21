@@ -9,6 +9,9 @@ def about(request):
 
 def visi_misi(request):
     return render(request,'landingpage/visi_misi.html')
+
+def contact(request):
+    return render(request,'landingpage/contact.html')
     
 def index(request):
     return render(request,'landingpage/index.html')
@@ -19,8 +22,6 @@ def org_struktur(request):
 def devisi(request):
     return render(request,'landingpage/devisi.html')
 
-def contact(request):
-    return render(request, 'landingpage/contact.html')
 
 def workprog(request):
     return render(request,'landingpage/workprog.html')
@@ -71,29 +72,25 @@ def e_learning(request):
     return render(request, 'landingpage/e_learning.html')
 
 #>>>>>>>>>>>>>>>>>> Backend Views <<<<<<<<<<<<<<#
-
 def contact_backend (request):
-    data = ContactModel.objects.get(id='1')
-    contact_form = ContactForm(request.POST or None, instance=data)
-    # if request.method == 'POST':
-    #     result_request = dict(request.POST)
-    #     print(result_request)
-    #     #ambil data cek image
-    #     cek_image = 'event_form' in result_request
-    #     if cek_image == False:
-    #         if data.event_image:
-    #             if os.path.isfile(data.event_image.path) == True:
-    #                 os.remove(data.event_image.path)
-    #     if event_form.is_valid():
-    #         event_form.save()
-    #         event_form = EventForm(instance = data)
-    #         # messages.success(request, 'Foto Berhasil di Edit')
-    #         return redirect('event_backend')
+    contact_update = ContactModel.objects.get(id='1')
+    data = {
+        'no_hp' : contact_update.no_hp,
+        'email' : contact_update.email,
+        'ig'    : contact_update.ig,
+        'alamat': contact_update.alamat,
+    }
+    contact_form = ContactForm(request.POST or None, request.FILES or None, initial=data, instance=contact_update)
+    
+    if request.method == 'POST' :
+        if contact_form.is_valid():
+            contact_from.save()
+            
     context = {
-        'form': contact_form,
-        'data': data,
-    } 
-    return render(request, 'landingpage/backend/contact_backend.html', context)
+        'data':contact_update,
+        'form':contact_form,
+    }
+    return render(request,'landingpage/backend/contact_backend.html', context)
 
 def journal_serving_backend (request):
     #data = divisippi.objects.get(id='1')
