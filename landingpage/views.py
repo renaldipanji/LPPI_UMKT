@@ -7,7 +7,11 @@ def about(request):
     return render(request,'landingpage/frontend/about.html')
 
 def visi_misi(request):
-    return render(request,'landingpage/frontend/visi_misi.html')
+    data = VisiMisiModel.objects.get(id='1')
+    context ={
+        'data':data,
+    }
+    return render(request,'landingpage/frontend/visi_misi.html', context)
     
 def index(request):
     return render(request,'landingpage/frontend/index.html')
@@ -96,13 +100,17 @@ def workprogramme_backend (request):
     return render(request, 'landingpage/backend/workprogramme_backend.html', context)
 
 def visimisi_backend (request):
-    data = VisiMisiModel.objects.get(id='1')
-    visimisi_form = VisiMisiForm(request.POST or None, instance=data)
+    visimisi_update = VisiMisiModel.objects.get(id='1')
+    data = {
+        'visi' : visimisi_update.visi,
+        'misi' : visimisi_update.misi,
+    }
+    visimisi_form = VisiMisiForm(request.POST or None, initial=data, instance=visimisi_update)
     if request.method == "POST":
             visimisi_form.save()
     context = {
         'form' : visimisi_form,
-        'data' : data,
+        'data' : visimisi_update,
     }
     return render(request, 'landingpage/backend/visimisi_backend.html', context)
 
