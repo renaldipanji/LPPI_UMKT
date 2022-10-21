@@ -13,7 +13,11 @@ def index(request):
     return render(request,'landingpage/frontend/index.html')
 
 def org_struktur(request):
-    return render(request,'landingpage/frontend/org_struktur.html')
+    data = OrgstrukturModel.objects.get(id='2')
+    context ={
+        'data': data,
+    }
+    return render(request,'landingpage/frontend/org_struktur.html', context)
 
 def devisi(request):
     return render(request,'landingpage/frontend/devisi.html')
