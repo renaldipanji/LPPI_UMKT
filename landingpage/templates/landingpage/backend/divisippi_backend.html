@@ -24,7 +24,18 @@
           <div class="card-body">
             <div class="tab-content" id="custom-tabs-one-tabContent">
               <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                <div class="card-body table-responsive p-0">
+                <div class="card-body table-responsive p-1">
+                  <h4 class="title-content my-1">Overview</h4>
+                  <p>{{data.overview_divisippi | linebreaks}}</p>
+                  <h4 class="title-content">Members</h4>
+                  <p>
+                    <div class="col-12 pt-4 pt-lg-0 content">
+                      <img src="/media/{{data.flowservice_divisippi}}" class="img-fluid" style="max-width:600px"> </img>
+                    </div>
+                  </p>
+                  <hr>
+
+
                     <div id="content_form_tambah" class="row">
                         <form method="POST" enctype="multipart/form-data">
                           {% csrf_token %}

@@ -25,6 +25,8 @@ def filepath_divisi_ppi(request, filename):
     timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
     filename = "%s%s" % (timeNow, old_filename)
     return os.path.join('uploads/data_divisippi/', filename)
+class OrgstrukturModel(models.Model):
+    orgstruktur_image = models.FileField(upload_to = filepath, null=True, blank=True)
 
 class divisippi(models.Model):
     flowservice_divisippi = models.FileField(upload_to = filepath_divisi_ppi, null=True, blank=True)

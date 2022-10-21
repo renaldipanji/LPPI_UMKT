@@ -13,7 +13,11 @@ def index(request):
     return render(request,'landingpage/frontend/index.html')
 
 def org_struktur(request):
-    return render(request,'landingpage/frontend/org_struktur.html')
+    data = OrgstrukturModel.objects.get(id='2')
+    context ={
+        'data': data,
+    }
+    return render(request,'landingpage/frontend/org_struktur.html', context)
 
 def devisi(request):
     return render(request,'landingpage/frontend/devisi.html')
@@ -76,18 +80,22 @@ def e_learning(request):
     #>>>>>>>>>>>>>>>> Backend Views <<<<<<<<<<<<<<<<<<<<<
 
 def orgstruktur_backend (request):
-    data = orgstruktur.objects.get(id='1')
-    orgstruktur_form = OrgstrukturForm(request.FILES, request.POST or None)
-    #if request.method == "POST":
-        # #result_request = dict(request.POST)
-        # print(result_request)
-        # #ambil data cek image
-        # cek_file = 'file_orgstruktur' in result_request
-        # if cek_file == False:
-        #     if data :
-        #         if os.path.isfile(data.file_orgstruktur.path) == True:
-        #             os.remove(data.file_orgstruktur.path)
-        # if orgstruktur_form.is
+    data = OrgstrukturModel.objects.get(id='2')
+    orgstruktur_form = OrgstrukturForm(request.POST, request.FILES  or None, instance=data)
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        print(result_request)
+        #ambil data cek image
+        cek_image = 'orgstruktur_form' in result_request
+        if cek_image == False:
+            if data.orgstruktur_image:
+                if os.path.isfile(data.orgstruktur_image.path) == True:
+                    os.remove(data.orgstruktur_image.path)
+        if orgstruktur_form.is_valid():
+            orgstruktur_form.save()
+            orgstruktur_form = OrgstrukturForm(instance = data)
+            # messages.success(request, 'Foto Berhasil di Edit')
+            return redirect('orgstruktur_backend')
     context = {
         'form': orgstruktur_form,
         'data': data,
@@ -96,13 +104,29 @@ def orgstruktur_backend (request):
 
 def divisippi_backend (request):
     data = divisippi.objects.get(id='1')
-    divisippi_form = DivisippiForm(request.FILES, request.POST or None, instance=data)
+    divisippi_form = DivisippiForm(request.POST, request.FILES or None, instance=data)
 
     if request.method == 'POST':
-        divisippi_form.save()
+        result_request = dict(request.POST)
+        # print('cek.............................................mantao....',result_request)
+        #ambil data cek image
+        cek_image = 'flowservice_divisippi' in result_request
+        # print('cek.............................................',cek_image)
+        if cek_image == False:
+            # pass
+            if data.flowservice_divisippi:
+                if os.path.isfile(data.flowservice_divisippi.path) == True:
+                    os.remove(data.flowservice_divisippi.path)
+        if divisippi_form.is_valid():
+            divisippi_form.save()
+            divisippi_form = DivisippiForm(instance = data)
+            # messages.success(request, 'Foto Berhasil di Edit')
+            return redirect('divisippi_backend')
+        else:
+            print(divisippi_form.errors)
 
     context = {
         'form': divisippi_form,
-    #     #'data': data,
+        'data': data,
     }
     return render(request, 'landingpage/backend/divisippi_backend.html', context)
