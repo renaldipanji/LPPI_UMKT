@@ -65,7 +65,11 @@ def sipena(request):
     return render(request, 'landingpage/sipena.html')
 
 def umktpress(request):
-    return render(request, 'landingpage/umktpress.html')
+    data = UmktPress.objects.get(id='1')
+    context = {
+        'data'  : data,
+    }
+    return render(request, 'landingpage/umktpress.html', context)
 
 def e_learning(request):
     return render(request, 'landingpage/e_learning.html')
