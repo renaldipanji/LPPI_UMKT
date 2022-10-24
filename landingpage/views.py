@@ -84,7 +84,7 @@ def contact_backend (request):
     
     if request.method == 'POST' :
         if contact_form.is_valid():
-            contact_from.save()
+            contact_form.save()
             
     context = {
         'data':contact_update,
