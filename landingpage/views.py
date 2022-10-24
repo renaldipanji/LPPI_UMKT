@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .forms import *
 from .models import *
 from django.shortcuts import render, redirect, get_object_or_404
@@ -108,25 +107,42 @@ def visimisi_backend (request):
     return render(request, 'landingpage/backend/visimisi_backend.html')
 
 def journals_backend (request):
-    #data = Visimisi.objects.get(id='1')
-    journals_form = JournalsForm(request.FILES, request.POST or None)
-    # if request.method == "POST":
-    #         result_request = dict(request.POST)
-    #         print(result_request)
+    data = JournalsModel.objects.all()
+    journals_form = JournalsForm(request.POST or None) 
+    
+    if request.method == "POST" and journals_form.is_valid():
+        journals_form.save()
+        redirect('journals_backend')
+    else :
+        print(journals_form.errors)
+
     context = {
         'form' : journals_form,
-    #     #'data' : data,
+        'Data' : data,
     }
     return render(request, 'landingpage/backend/journals_backend.html', context)
 
 def textbooks_backend (request):
-    #data = Visimisi.objects.get(id='1')
-    textbooks_form = TextBookForm(request.POST, request.FILES or None)
-    # if request.method == "POST":
-    #         result_request = dict(request.POST)
-    #         print(result_request)
+    data = TextBooksModel.objects.all()
+    textbooks_form = TextBookForm(request.POST or None)
+
+    if request.method == "POST" and textbooks_form.is_valid():
+        textbooks_form.save()
+        redirect('textbooks_backend')
+    else :
+        print(textbooks_form.errors)
+
     context = {
         'form' : textbooks_form,
-        #'data' : data,
+        'Data' : data,
     }
     return render(request, 'landingpage/backend/textbooks_backend.html', context)
+
+def journals_backend_delete(request, id):
+    JournalsModel.objects.filter(id=id).delete()
+    redirect('journals_backend')
+
+def textbooks_backend_delete(request, id):
+    TextBooksModel.objects.filter(id=id).delete()
+    redirect('textbooks_backend')
+
