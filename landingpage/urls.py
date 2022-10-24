@@ -32,6 +32,7 @@ urlpatterns = [
 #>>>>>>>>>>>>>>>>>>>> BACKEND URL <<<<<<<<<<<<<<<<<#
     path('contact-backend/', contact_backend, name='contact_backend'),
     path('journal_serving-backend/', journal_serving_backend, name='journal_serving_backend'),
+    path('journal_serving-backend/delete/<str:id>/', journal_serving_backend_delete, name='journal_serving_backend_delete'),
 ]
 
 

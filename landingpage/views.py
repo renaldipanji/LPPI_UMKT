@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .forms import *
 from .models import *
 from django.shortcuts import render, redirect, get_object_or_404
@@ -82,10 +81,24 @@ def contact_backend (request):
    return render(request, 'landingpage/backend/contact_backend.html')
 
 def journal_serving_backend (request):
-    #data = divisippi.objects.get(id='1')
-    journalserving_form = JournalServingForm(request.POST, request.FILES  or None)
+    data = JournalServingModel.objects.all()
+    journalserving_form = JournalServingForm(request.POST or None, request.FILES or None)
+    
+    if request.method == "POST" and journalserving_form.is_valid():
+        journalserving_form.save()
+        redirect('journal_serving_backend')
+    else :
+        print(journalserving_form.errors)
     context = {
          'form': journalserving_form,
-         #'data': data,
+         'Data': data,
      }
     return render(request, 'landingpage/backend/journal_serving_backend.html', context)
+
+def journal_serving_backend_delete(request, id):
+    data = get_object_or_404(JournalServingModel,id=id)
+    
+    if os.path.isfile(data.cover_jurnal.path) == True:
+        os.remove(data.cover_jurnal.path)
+    JournalServingModel.objects.filter(id=id).delete()
+    redirect('journal_serving_backend' )
