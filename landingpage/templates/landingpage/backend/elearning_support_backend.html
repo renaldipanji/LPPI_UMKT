@@ -27,6 +27,7 @@
                <div class="card-body table-responsive p-0">
                    <div id="content_form_tambah" class="row">
                        <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
                          <div class="col-12">
                            <div class="mb-3 mt-1">
                                <label for="formFile" class="form-label mb-3">Overview</label>
