@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .forms import *
 from .models import *
 from django.shortcuts import render, redirect, get_object_or_404
@@ -126,11 +125,22 @@ def journalresearch_backend (request):
     # }
     return render(request, 'landingpage/backend/journalresearch_backend.html')
 
-def newspaper_backend (request):
-    #data = divisippi.objects.get(id='1')
+def newspaper_backend(request):
+    data = NewspaperModel.objects.all()
     newspaper_form = NewspaperForm(request.POST or None)
+
+    if request.method == "POST" and newspaper_form.is_valid():
+        newspaper_form.save()
+        redirect('newspaper_backend')
+    else:
+        print(newspaper_form.errors)
+
     context = {
         'form': newspaper_form,
-        #'data': data,
+        'Data': data,
     }
     return render(request, 'landingpage/backend/newspaper_backend.html', context)
+
+def newspaper_backend_delete(request, id):
+    NewspaperModel.objects.filter(id=id).delete()
+    redirect('newspaper_backend')

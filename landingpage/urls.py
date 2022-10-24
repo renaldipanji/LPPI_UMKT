@@ -29,7 +29,7 @@ urlpatterns = [
     path('umktpress/', umktpress, name='umktpress'),
     path('e_learning/', e_learning, name='e_learning'),
 
-    #>>>>>>>>>>>>>>>>>>>>>>Backend Views <<<<<<<<<<<<<<<<<<<<<<<<<<<
+    #>>>>>>>>>>>>>>>>>>>>>>Backend Urls <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     path('orgstruktur-backend/', orgstruktur_backend, name='orgstruktur_backend'),
     path('divisippi-backend/', divisippi_backend, name='divisippi_backend'),
@@ -37,6 +37,7 @@ urlpatterns = [
     path('sipena-backend/', sipena_backend, name='sipena_backend'),
     path('journalresearch-backend/', journalresearch_backend, name='journalresearch_backend' ),
     path('newspaper-backend/', newspaper_backend, name='newspaper_backend'),
+    path('newspaper-backend/delete/<str:id>/', newspaper_backend_delete, name='newspaper_backend_delete'),
 ]
 
 if settings.DEBUG:

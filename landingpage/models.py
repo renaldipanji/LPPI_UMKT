@@ -60,8 +60,11 @@ class journalresearch(models.Model):
     member_image = models.FileField(upload_to = filepath_journal_research, null=True, blank=True)
     overview = models.TextField(blank=True)
 
-class newspaper(models.Model):
+class NewspaperModel(models.Model):
+    nidn = models.CharField(max_length=20, null=True)
     nama_dosen = models.CharField(max_length=50, null=True)
+    program_studi = models.CharField(max_length=50, null=True)
+    fakultas = models.CharField(max_length=50, null=True)
     judul_artikel = models.CharField(max_length=100, null=True)
     tahun    = models.CharField(max_length=4, null=True)
     link    = models.CharField(max_length=100, null=True)

@@ -35,13 +35,31 @@ class OrgstrukturForm(forms.ModelForm):
 
 class NewspaperForm(forms.ModelForm):
     class Meta:
-        model = newspaper
-        fields = ('nama_dosen','judul_artikel','tahun','link',)
+        model = NewspaperModel
+        fields = ('nidn','nama_dosen','program_studi','fakultas','judul_artikel','tahun','link',)
         widgets = {
+            'nidn' : forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder': 'NIDN',
+                }
+            ),
             'nama_dosen' : forms.TextInput(
                 attrs={
                     'class' : 'form-control',
                     'placeholder': 'Nama Dosen',
+                }
+            ),
+            'program_studi' : forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder': 'Program Studi',
+                }
+            ),
+            'fakultas' : forms.TextInput(
+                attrs={
+                    'class' : 'form-control',
+                    'placeholder': 'Fakultas',
                 }
             ),
             'judul_artikel': forms.TextInput(
