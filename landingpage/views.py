@@ -86,9 +86,20 @@ def contact_backend (request):
    return render(request, 'landingpage/backend/contact_backend.html')
 
 def umkt_press_backend (request):
-    umktpress_form = UmktPressForm(request.POST, request.FILES  or None)
-    context = {
-       'form': umktpress_form,
-        #'data': data,
+    umkt_press_update = UmktPress.objects.get(id='1')
+    data = {
+        'umktpress_overview' : umkt_press_update.umktpress_overview,
+        'umktpress_flowservice' : umkt_press_update.umktpress_flowservice,
+
     }
-    return render(request, 'landingpage/backend/umkt_press_backend.html', context)
+    umkt_press_form = UmktPressForm(request.POST or None, request.FILES or None, initial=data, instance=umkt_press_update)
+    
+    if request.method == 'POST' :
+        if umkt_press_form.is_valid():
+            umkt_press_form.save()
+            
+    context = {
+        'data':umkt_press_update,
+        'form':umkt_press_form,
+    }
+    return render(request,'landingpage/backend/umkt_press_backend.html', context)
