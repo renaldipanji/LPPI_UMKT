@@ -26,5 +26,5 @@ def filepath_elearning_support(request, filename):
     return os.path.join('uploads/data_elearningsupport/', filename)
 
 class ElearningSupport(models.Model):
-    elearningsupport_flowservice    = models.FileField(upload_to = filepath_elearning_support, null=True, blank=True)
     elearningsupport_overview       = models.TextField(blank=True)
+    elearningsupport_flowservice    = models.FileField(upload_to = filepath_elearning_support, null=True, blank=True)

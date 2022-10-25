@@ -91,10 +91,19 @@ def umkt_press_backend (request):
    return render(request, 'landingpage/backend/umkt_press_backend.html')
 
 def elearning_support_backend (request):
-    #data = divisippi.objects.get(id='1')
-    elearningsupport_form = ElearningsupportForm(request.POST, request.FILES  or None)
+    elearning_support_update = ElearningSupport.objects.get(id='1')
+    data = {
+        'elearningsupport_flowservice' : elearning_support_update.elearningsupport_flowservice,
+        'elearningsupport_overview' : elearning_support_update.elearningsupport_overview,
+    }
+    elearning_support_form = ElearningsupportForm(request.POST or None, request.FILES or None, initial=data, instance=elearning_support_update)
+    
+    if request.method == 'POST' :
+        if elearning_support_form.is_valid():
+            elearning_support_form.save()
+            
     context = {
-         'form': elearningsupport_form,
-         #'data': data,
-     }
+        'data':elearning_support_update,
+        'form':elearning_support_form,
+    }
     return render(request, 'landingpage/backend/elearning_support_backend.html', context)
