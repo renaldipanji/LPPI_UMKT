@@ -34,10 +34,10 @@ urlpatterns = [
     path('visimisi-backend/', visimisi_backend, name='visimisi_backend'),
     path('journals-backend/', journals_backend, name='journals_backend'),
     path('textbooks-backend/', textbooks_backend, name='textbooks_backend'),
-    path('journals-backend/delete/<str:id>/', journals_backend_delete,
-    name='journals_backend_delete'),
-    path('textbooks-backend/delete/<str:id>/', textbooks_backend_delete,
-    name='textbooks_backend_delete'),
+    path('journals-backend/delete/<str:id>/', journals_backend_delete, name='journals_backend_delete'),
+    path('journals-backend/update/<str:id>/', journals_backend_update, name='journals_backend_update'),
+    path('textbooks-backend/delete/<str:id>/', textbooks_backend_delete, name='textbooks_backend_delete'),
+    path('textbooks-backend/update/<str:id>/', textbooks_backend_update, name='textbooks_backend_update'),
 
 ]
 

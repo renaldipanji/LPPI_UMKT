@@ -29,46 +29,6 @@
         <div class="tab-content" id="custom-tabs-one-tabContent">
           <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
             <div class="card-body table-responsive p-0">
-                <form method="POST" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">NIDN</label>
-                    {{form.nidn}}
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nama Dosen</label>
-                    {{form.nama_dosen}}
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Program Studi</label>
-                    {{form.program_studi}}
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Fakultas</label>
-                    {{form.fakultas}}
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Judul Artikel</label>
-                    {{form.judul_artikel}}
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Tahun</label>
-                    {{form.tahun}}
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Link</label>
-                    {{form.link}}
-                  </div>
-                  <div class="col-md-6 mt-2">
-                    <div class="form-group">
-                      <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Tambah</button>
-                    </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
-            <div class="card-body table-responsive p-0">
               <table class="table table-head-fixed text-nowrap dataTable no-footer" id="table_default" role="grid" aria-describedby="table_default_info">
                   <thead>
                     <tr role="row">
@@ -95,14 +55,9 @@
                     <td>{{data.tahun}}</td>
                     <td>{{data.link}}</td>
                     <td>
-                      <button type="button" class="btn btn-info btn-sm btn-modal-lihat" data-id="1" 
-                      data-bs-toggle="modal" data-bs-target="#modal-lihat">
-                        <span class="fas fa-eye"></span> Lihat File
-                      </button>
-                      <button type="button" class="btn btn-warning btn-sm btn-modal-reset-pass" data-id="1" 
-                      data-bs-toggle="modal" data-bs-target="#modal-reset-password">
-                        <span class="fa-solid fa-pen-to-square"></span> Edit
-                      </button>
+                      <a class="btn btn-primary btn-sm" href="{% url 'journals_backend_update' data.id %}">
+                        <span class="fas fa-edit"></span> Edit
+                      </a>
                       <a href="{% url 'journals_backend_delete' data.id %}" class="btn btn-danger btn-sm btn-modal-hapus">
                         <span class="fas fa-trash"></span> Hapus
                       </a>
@@ -113,7 +68,67 @@
                 </table>
             </div>
           </div>
+          <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+            <div class="card-body table-responsive p-0">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">NIDN</label>
+                  {{form.nidn}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Nama Dosen</label>
+                  {{form.nama_dosen}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Program Studi</label>
+                  {{form.program_studi}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Fakultas</label>
+                  {{form.fakultas}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Judul Artikel</label>
+                  {{form.judul_artikel}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Tahun</label>
+                  {{form.tahun}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Link</label>
+                  {{form.link}}
+                </div>
+                <div class="col-md-6 mt-2">
+                  <div class="form-group">
+                    <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Tambah</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+          </div>
         </div>
       </div>
+
+<!-- Modal Edit -->
+<div class="modal fade" id="modal_edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Update Data</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal Edit -->
 
 {% endblock content %} 

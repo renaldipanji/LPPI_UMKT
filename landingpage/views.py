@@ -108,8 +108,7 @@ def visimisi_backend (request):
 
 def journals_backend (request):
     data = JournalsModel.objects.all()
-    journals_form = JournalsForm(request.POST or None) 
-    
+    journals_form = JournalsForm(request.POST or None)
     if request.method == "POST" and journals_form.is_valid():
         journals_form.save()
         redirect('journals_backend')
@@ -122,10 +121,39 @@ def journals_backend (request):
     }
     return render(request, 'landingpage/backend/journals_backend.html', context)
 
+def journals_backend_delete(request, id):
+    JournalsModel.objects.filter(id=id).delete()
+    return redirect('journals_backend')
+
+def journals_backend_update (request, id):
+    journals_edit = JournalsModel.objects.get(id=id)
+
+    data_edit = {
+        'nidn' : journals_edit.nidn,
+        'nama_dosen' : journals_edit.nama_dosen,
+        'program_studi' : journals_edit.program_studi,
+        'fakultas' : journals_edit.fakultas,
+        'judul_artikel' : journals_edit.judul_artikel,
+        'tahun' : journals_edit.tahun,
+        'link' : journals_edit.link,
+    }
+    journals_form_edit = JournalsForm(request.POST or None, initial=data_edit, instance=journals_edit) 
+
+    if request.method == "POST" and journals_form_edit.is_valid():
+        journals_form_edit.save()
+        return redirect('journals_backend')
+    else :
+        print(journals_form_edit.errors)
+
+    context = {
+        'form' : journals_form_edit,
+    }
+
+    return render(request, 'landingpage/backend/journals_backend_update.html', context)
+
 def textbooks_backend (request):
     data = TextBooksModel.objects.all()
     textbooks_form = TextBookForm(request.POST or None)
-
     if request.method == "POST" and textbooks_form.is_valid():
         textbooks_form.save()
         redirect('textbooks_backend')
@@ -138,11 +166,39 @@ def textbooks_backend (request):
     }
     return render(request, 'landingpage/backend/textbooks_backend.html', context)
 
-def journals_backend_delete(request, id):
-    JournalsModel.objects.filter(id=id).delete()
-    redirect('journals_backend')
-
 def textbooks_backend_delete(request, id):
     TextBooksModel.objects.filter(id=id).delete()
-    redirect('textbooks_backend')
+    return redirect('textbooks_backend')
+
+def textbooks_backend_update (request, id):
+    textbooks_edit = TextBooksModel.objects.get(id=id)
+
+    data_edit = {
+        'nidn' : textbooks_edit.nidn,
+        'nama_dosen' : textbooks_edit.nama_dosen,
+        'program_studi' : textbooks_edit.program_studi,
+        'fakultas' : textbooks_edit.fakultas,
+        'judul_buku' : textbooks_edit.judul_buku,
+        'tahap_luaran_10' : textbooks_edit.tahap_luaran_10,
+        'tahap_luaran_40' : textbooks_edit.tahap_luaran_40,
+        'tahap_luaran_80' : textbooks_edit.tahap_luaran_80,
+        'reviewer' : textbooks_edit.reviewer,
+        'tahun' : textbooks_edit.tahun,
+        'link' : textbooks_edit.link,
+    }
+    textbooks_form_edit = TextBookForm(request.POST or None, initial=data_edit, instance=textbooks_edit) 
+
+    if request.method == "POST" and textbooks_form_edit.is_valid():
+        textbooks_form_edit.save()
+        return redirect('textbooks_backend')
+    else :
+        print(textbooks_form_edit.errors)
+
+    context = {
+        'form' : textbooks_form_edit,
+    }
+    return render(request, 'landingpage/backend/textbooks_backend_update.html', context)
+
+
+
 
