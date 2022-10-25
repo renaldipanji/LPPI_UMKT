@@ -101,4 +101,32 @@ def journal_serving_backend_delete(request, id):
     if os.path.isfile(data.cover_jurnal.path) == True:
         os.remove(data.cover_jurnal.path)
     JournalServingModel.objects.filter(id=id).delete()
-    redirect('journal_serving_backend' )
+    return redirect('journal_serving_backend' )
+
+def journal_serving_backend_update(request, id):
+    journal_serving_edit = JournalServingModel.objects.get(id=id)
+
+    data_edit = {
+        'judul_jurnal' : journal_serving_edit.judul_jurnal,
+        'issn' : journal_serving_edit.issn,
+        'publication' : journal_serving_edit.publication,
+        'index' :journal_serving_edit.index,
+        'deskripsi' : journal_serving_edit.deskripsi,
+        'cover_jurnal' : journal_serving_edit.cover_jurnal,
+        'link_view_jurnal' : journal_serving_edit.link_view_jurnal,
+        'link_current_issue' : journal_serving_edit.link_current_issue,
+        'link_online_submission' : journal_serving_edit.link_online_submission,
+        'link_download_template' : journal_serving_edit.link_download_template,
+    }
+    journal_serving_form_edit = JournalServingForm(request.POST or None,request.FILES or None, initial=data_edit , instance=journal_serving_edit)
+    
+    if request.method == "POST" and journal_serving_form_edit.is_valid():
+        journal_serving_form_edit.save()
+        return redirect('journal_serving_backend')
+    else:
+        print(journal_serving_form_edit.errors)
+
+    context = {
+        'form': journal_serving_form_edit,
+    }
+    return render(request, 'landingpage/backend/journal_serving_backend_update.html', context)
