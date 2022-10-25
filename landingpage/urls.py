@@ -38,6 +38,7 @@ urlpatterns = [
     path('journalresearch-backend/', journalresearch_backend, name='journalresearch_backend' ),
     path('newspaper-backend/', newspaper_backend, name='newspaper_backend'),
     path('newspaper-backend/delete/<str:id>/', newspaper_backend_delete, name='newspaper_backend_delete'),
+    path('newspaper-backend/update/<str:id>/', newspaper_backend_update, name='newspaper_backend_update'),
 ]
 
 if settings.DEBUG:

@@ -55,9 +55,9 @@
                     <td>{{data.tahun}}</td>
                     <td>{{data.link}}</td>
                     <td>    
-                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_edit">
+                      <a class="btn btn-primary btn-sm" href="{% url 'newspaper_backend_update' data.id %}">
                         <span class="fas fa-edit"></span> Edit
-                      </button>                      
+                      </a>                      
                       <a href="{% url 'newspaper_backend_delete' data.id %}" class="btn btn-danger btn-sm btn-modal-hapus" >
                         <span class="fas fa-trash"></span> Hapus
                       </a>

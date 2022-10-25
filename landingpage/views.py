@@ -127,19 +127,7 @@ def journalresearch_backend (request):
 
 def newspaper_backend(request):
     data = NewspaperModel.objects.all()
-    newspaper_edit = NewspaperModel.objects.get(id='1')
-
-    data_edit = {
-        'nidn' : newspaper_edit.nidn,
-        'nama_dosen' : newspaper_edit.nama_dosen,
-        'program_studi' : newspaper_edit.program_studi,
-        'fakultas' : newspaper_edit.fakultas,
-        'judul_artikel' : newspaper_edit.judul_artikel,
-        'tahun' : newspaper_edit.tahun,
-        'link' : newspaper_edit.link,
-    }
     newspaper_form = NewspaperForm(request.POST or None)
-    newspaper_form_edit = NewspaperForm(request.POST or None, instance=data_edit)
     if request.method == "POST" and newspaper_form.is_valid():
         newspaper_form.save()
         redirect('newspaper_backend')
@@ -155,3 +143,29 @@ def newspaper_backend(request):
 def newspaper_backend_delete(request, id):
     NewspaperModel.objects.filter(id=id).delete()
     return redirect('newspaper_backend')
+
+def newspaper_backend_update(request,id):
+    newspaper_edit = NewspaperModel.objects.get(id=id)
+
+    data_edit = {
+        'nidn' : newspaper_edit.nidn,
+        'nama_dosen' : newspaper_edit.nama_dosen,
+        'program_studi' : newspaper_edit.program_studi,
+        'fakultas' : newspaper_edit.fakultas,
+        'judul_artikel' : newspaper_edit.judul_artikel,
+        'tahun' : newspaper_edit.tahun,
+        'link' : newspaper_edit.link,
+    }
+    newspaper_form_edit = NewspaperForm(request.POST or None, initial=data_edit , instance=newspaper_edit)
+
+    if request.method == "POST" and newspaper_form_edit.is_valid():
+        newspaper_form_edit.save()
+        return redirect('newspaper_backend')
+    else:
+        print(newspaper_form_edit.errors)
+
+    context = {
+        'form': newspaper_form_edit,
+    }
+
+    return render(request, 'landingpage/backend/newspaper_backend_update.html', context)
