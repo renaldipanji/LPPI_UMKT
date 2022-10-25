@@ -108,16 +108,16 @@ def divisippi_backend (request):
         'flowservice_divisippi' : divisippi_update.flowservice_divisippi,
         'overview_divisippi' : divisippi_update.overview_divisippi,
     }
-    divisippi_form = DivisippiForm(request.POST or None, request.FILES or None, initial=data, instance=data)
+    divisippi_form = DivisippiForm(request.POST or None, request.FILES or None, initial=data, instance=divisippi_update)
 
     if request.method == 'POST':
         result_request = dict(request.POST)
         #ambil data cek image
         cek_image = 'flowservice_divisippi' in result_request
         if cek_image == False:
-            if data.flowservice_divisippi:
-                if os.path.isfile(data.flowservice_divisippi.path) == True:
-                    os.remove(data.flowservice_divisippi.path)
+            if divisippi_update.flowservice_divisippi:
+                if os.path.isfile(divisippi_update.flowservice_divisippi.path) == True:
+                    os.remove(divisippi_update.flowservice_divisippi.path)
         if divisippi_form.is_valid():
             divisippi_form.save()
             # messages.success(request, 'Foto Berhasil di Edit')
