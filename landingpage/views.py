@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .forms import *
 from .models import *
 from django.shortcuts import render, redirect, get_object_or_404
@@ -118,10 +117,52 @@ def sipena_backend (request):
     return render(request, 'landingpage/backend/sipena_backend.html')
 
 def journalresearch_backend (request):
-    #data = divisippi.objects.get(id='1')
+    data = journalresearch.objects.all()
     journalresearch_form = JournalresearchForm(request.POST, request.FILES  or None)
+    
+    if request.method == "POST" and journalresearch_form.is_valid():
+        journalresearch_form.save()
+        redirect('journalresearch_backend')
+    else :
+        print(journalresearch_form.errors)
     context = {
          'form': journalresearch_form,
-         #'data': data,
+         'Data': data,
      }
     return render(request, 'landingpage/backend/journalresearch_backend.html', context)
+
+def journalresearch_backend_delete(request, id):
+    data = get_object_or_404(journalresearch,id=id)
+    
+    if os.path.isfile(data.cover_jurnal.path) == True:
+        os.remove(data.cover_jurnal.path)
+    journalresearch.objects.filter(id=id).delete()
+    redirect('journalresearch_backend' )
+
+def journalresearch_backend_update(request, id):
+    journalresearch_edit = journalresearch.objects.get(id=id)
+
+    data_edit = {
+        'judul_jurnal' : journalresearch_edit.judul_jurnal,
+        'issn' : journalresearch_edit.issn,
+        'publication' : journalresearch_edit.publication,
+        'index' :journalresearch_edit.index,
+        'deskripsi' : journalresearch_edit.deskripsi,
+        'cover_jurnal' : journalresearch_edit.cover_jurnal,
+        'link_view_jurnal' : journalresearch_edit.link_view_jurnal,
+        'link_current_issue' : journalresearch_edit.link_current_issue,
+        'link_online_submission' : journalresearch_edit.link_online_submission,
+        'link_download_template' : journalresearch_edit.link_download_template,
+    }
+    journalresearch_form_edit = JournalresearchForm(request.POST or None,request.FILES or None, initial=data_edit , instance=journalresearch_edit)
+    
+    if request.method == "POST" and journalresearch_form_edit.is_valid():
+        journalresearch_form_edit.save()
+        return redirect('journalresearch_backend')
+    else:
+        print(journalresearch_form_edit.errors)
+
+    context = {
+        'form': journalresearch_form_edit,
+    }
+    return render(request, 'landingpage/backend/journalresearch_backend_update.html', context)

@@ -29,13 +29,15 @@ urlpatterns = [
     path('umktpress/', umktpress, name='umktpress'),
     path('e_learning/', e_learning, name='e_learning'),
 
-    #>>>>>>>>>>>>>>>>>>>>>>Backend Views <<<<<<<<<<<<<<<<<<<<<<<<<<<
+    #>>>>>>>>>>>>>>>>>>>>>>Backend Urls <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     path('orgstruktur-backend/', orgstruktur_backend, name='orgstruktur_backend'),
     path('divisippi-backend/', divisippi_backend, name='divisippi_backend'),
     path('articletranslation-backend/', articletranslation_backend, name='articletranslation_backend' ),
     path('sipena-backend/', sipena_backend, name='sipena_backend'),
-    path('journalresearch-backend/', journalresearch_backend, name='journalresearch_backend' )
+    path('journalresearch-backend/', journalresearch_backend, name='journalresearch_backend' ),
+    path('journalresearch-backend/delete/<str:id>/', journalresearch_backend_delete, name='journalresearch_backend_delete' ),
+    path('journalresearch-backend/update/<str:id>/', journalresearch_backend_update, name='journalresearch_backend_update' ),
 ]
 
 if settings.DEBUG:

@@ -2,106 +2,153 @@
 {% load static %}
 {% block content %}
 <div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h6 class="m-0">Content</h6>
-                <h1 class="m-0">Journals Of Research</h1>
-            </div>
-        </div>
-    </div>
-    <!-- Ambil konten disini -->
-    <div class="col-12 col-sm-12">
-        <div class="card card-primary card-tabs">
-          <div class="card-header p-0 pt-1">
-            <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
-              </li>
+   <div class="container-fluid">
+       <div class="row mb-2">
+           <div class="col-sm-6">
+               <h6 class="m-0">Content</h6>
+               <h1 class="m-0">Journals Of Research</h1>
+           </div>
+       </div>
+   </div>
+   <!-- Ambil konten disini -->
+   <div class="col-12 col-sm-12">
+       <div class="card card-primary card-tabs">
+         <div class="card-header p-0 pt-1">
+           <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+             <li class="nav-item">
+               <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
+             </li>
+             <li class="nav-item">
+              <a class="nav-link" id="custom-tabs-one-profile-tab" data-bs-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Tambah Data</a>
+            </li>
+ 
+           </ul>
+         </div>
+         <div class="card-body">
+           <div class="tab-content" id="custom-tabs-one-tabContent">
+             <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+               <div class="card-body table-responsive p-1">
+                <table class="table table-head-fixed text-nowrap dataTable no-footer" id="table_default" role="grid" aria-describedby="table_default_info">
+                  <thead>
+                    <tr role="row">
+                      <th class="sorting sorting_asc" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Username: activate to sort column ascending">Judul Jurnal</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">ISSN</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Institusi: activate to sort column ascending">Publication</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Institusi: activate to sort column ascending">Index</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Institusi: activate to sort column ascending">Deskripsi</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Institusi: activate to sort column ascending">Link View Jurnal</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Institusi: activate to sort column ascending">Link Current Issue</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Institusi: activate to sort column ascending">Link Online Submission</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Institusi: activate to sort column ascending">Link Download Template</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Tindakan: activate to sort column ascending">Tindakan</th>
+                  </tr>
+                  </thead>
+                  <tbody id="data_tabel">
+                    {% for data in Data  %}
+                    <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.judul_jurnal}}</td>
+                    <td>{{data.issn}}</td>
+                    <td>{{data.publication}}</td>
+                    <td>{{data.index}}</td>
+                    <td>{{data.deskripsi}}</td>
+                    <td>{{data.link_view_jurnal}}</td>
+                    <td>{{data.link_current_issue}}</td>
+                    <td>{{data.link_online_submission}}</td>
+                    <td>{{data.link_download_template}}</td>
+                    <td>
+                      <a class="btn btn-warning btn-sm" href={% url 'journalresearch_backend_update' data.id %} >
+                        <span class="fas fa-edit"></span> Edit
+                      </a>
+                      <a href="{% url 'journalresearch_backend_delete' data.id %}" class="btn btn-danger btn-sm btn-modal-hapus">
+                        <span class="fas fa-trash"></span> Hapus
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                </table>
+               </div>
+             </div>
+            <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+              <div class="card-body table-responsive p-1">
 
-            </ul>
-          </div>
-          <div class="card-body">
-            <div class="tab-content" id="custom-tabs-one-tabContent">
-              <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                <div class="card-body table-responsive p-0">
-                    <div id="content_form_tambah" class="row">
-                        <form method="POST" enctype="multipart/form-data">
-                          <div class="col-12">
-                            <div class="form-floating mb-3 mt-1">
-                              <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label"> Judul Jurnal</label>
-                                {{form.judul_jurnal}}
-                                {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">ISSN</label>
-                                {{form.issn}}
-                                {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Publication</label>
-                                {{form.publication}}
-                                {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
-                              </div>
-                              
-                              <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Index</label>
-                                {{form.index}}
-                                {% comment %} <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> {% endcomment %}
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                                {{form.deskripsi}}
-                                {% comment %} <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> {% endcomment %}
-                              </div>
-
-                              <div class="mb-3 mt-2">
-                                <label for="formFile" class="form-label mb-3">Cover Jurnal</label>
-                                {{form.cover_jurnal}}
-                                {% comment %} <input class="form-control" type="file" id="formFile"> {% endcomment %}
-                              </div>
-
-                              <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Link View Jurnal</label>
-                                {{form.link_view_jurnal}}
-                                {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Link Current Issue</label>
-                                {{form.link_current_issue}}
-                                {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Link Online Submission</label>
-                                {{form.link_online_submission}}
-                                {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Link Download Template</label>
-                                {{form.link_download_template}}
-                                {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
-                              </div>
-                              
+                  <div id="content_form_tambah" class="row">
+                    <form method="POST" enctype="multipart/form-data">
+                     {% csrf_token %}
+                      <div class="col-12">
+                        <div class="form-floating mb-3 mt-1">
+                          <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label"> Judul Jurnal</label>
+                            {{form.judul_jurnal}}
+                            {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
                           </div>
-                        
-                    </div>
-                    <div class="col-md-6 mt-2">
-                      <div class="form-group">
-                        <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span>Tambah</button>
+                          <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">ISSN</label>
+                            {{form.issn}}
+                            {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Publication</label>
+                            {{form.publication}}
+                            {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
+                          </div>
+                         
+                          <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Index</label>
+                            {{form.index}}
+                            {% comment %} <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> {% endcomment %}
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
+                            {{form.deskripsi}}
+                            {% comment %} <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> {% endcomment %}
+                          </div>
+                          <div class="mb-3 mt-2">
+                           <label for="exampleFormControlInput1" class="form-label">Cover Jurnal</label>
+                           {{form.cover_jurnal}} 
+                           {% comment %} <label for="formFile" class="form-label mb-3">Cover Journals</label> {% endcomment %}
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Link View Jurnal</label>
+                            {{form.link_view_jurnal}}
+                            {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Link Current Issue</label>
+                            {{form.link_current_issue}}
+                            {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Link Online Submission</label>
+                            {{form.link_online_submission}}
+                            {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Link Download Template</label>
+                            {{form.link_download_template}}
+                            {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> {% endcomment %}
+                          </div>
+                         
                       </div>
-                      <!-- /.col -->
-                    </div>
-                  </form>   
-                  <!-- /.form-group -->
+                   
                 </div>
+                <div class="col-md-6 mt-2">
+                  <div class="form-group">
+                    <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span>Tambah</button>
+                  </div>
+                  <!-- /.col -->
                 </div>
-              </div>
-
+              </form>  
+              <!-- /.form-group -->
             </div>
-          </div>
-          <!-- /.card -->
-        </div>
-      </div> 
-      <!-- Ini ujung konten -->
+              </div>
+            </div>
+           </div>
+         </div>
+         <!-- /.card -->
+       </div>
+     </div>
+     <!-- Ini ujung konten -->
 {% endblock content %}
