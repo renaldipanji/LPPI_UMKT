@@ -28,7 +28,11 @@ def devisi(request):
     return render(request,'landingpage/frontend/devisi.html')
 
 def contact(request):
-    return render(request, 'landingpage/frontend/contact.html')
+    data = ContactModel.objects.get(id='1')
+    context ={
+        'data': data,
+    }
+    return render(request, 'landingpage/frontend/contact.html',context)
 
 def workprog(request):
     data = WorkProgrammeModel.objects.get(id='1')
@@ -50,7 +54,11 @@ def news_single(request):
     return render(request, 'landingpage/frontend/news_single.html')
 
 def event(request):
-    return render(request, 'landingpage/frontend/event.html')
+    data = EventModel.objects.get(id='1')
+    context ={
+        'data': data,
+    }
+    return render(request, 'landingpage/frontend/event.html',context)
     
 def journal(request):
     return render(request, 'landingpage/frontend/journal.html')
@@ -173,3 +181,57 @@ def textbooks_backend (request):
         #'data' : data,
     }
     return render(request, 'landingpage/backend/textbooks_backend.html', context)
+    return render(request, 'landingpage/e_learning.html')
+
+#>>>>>>>>>>>>>>>>>> Backend Views <<<<<<<<<<<<<<#
+def contact_backend (request):
+    contact_update = ContactModel.objects.get(id='1')
+    data = {
+        'no_hp' : contact_update.no_hp,
+        'email' : contact_update.email,
+        'ig'    : contact_update.ig,
+        'alamat': contact_update.alamat,
+    }
+    contact_form = ContactForm(request.POST or None, request.FILES or None, initial=data, instance=contact_update)
+    
+    if request.method == 'POST' :
+        if contact_form.is_valid():
+            contact_form.save()
+            messages.success(request, 'Data Contact Berhasil di Edit')
+            
+    context = {
+        'data':contact_update,
+        'form':contact_form,
+    }
+    return render(request,'landingpage/backend/contact_backend.html', context)
+
+def journal_serving_backend (request):
+    #data = divisippi.objects.get(id='1')
+   # divisippi_form = DivisippiForm(request.FILES, request.POST or None)
+   # context = {
+   #     'form': divisippi_form,
+   #     #'data': data,
+   # }
+   return render(request, 'landingpage/backend/journal_serving_backend.html')
+
+def event_backend (request):
+    data = EventModel.objects.get(id='1')
+    event_form = EventForm(request.POST, request.FILES or None, instance=data)
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'event_form' in result_request
+        if cek_image == False:
+            if data.event_image:
+                if os.path.isfile(data.event_image.path) == True:
+                    os.remove(data.event_image.path)
+        if event_form.is_valid():
+            event_form.save()
+            event_form = EventForm(instance = data)
+            messages.success(request, 'Data Event Berhasil di Edit')
+            return redirect('event_backend')
+    context = {
+        'form': event_form,
+        'data': data,
+    }
+    return render(request, 'landingpage/backend/event_backend.html', context)

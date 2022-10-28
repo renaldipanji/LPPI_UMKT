@@ -26,4 +26,14 @@ class Migration(migrations.Migration):
                 ('file_workprogramme', models.FileField(blank=True, null=True, upload_to=landingpage.models.filepath)),
             ],
         ),
+        migrations.CreateModel(
+            name='contact',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('no_hp', models.CharField(max_length=40, null=True)),
+                ('email', models.CharField(max_length=40, null=True)),
+                ('ig', models.CharField(max_length=40, null=True)),
+                ('alamat', models.TextField(blank=True)),
+            ],
+        ),
     ]

@@ -36,7 +36,11 @@ urlpatterns = [
     path('visimisi-backend/', visimisi_backend, name='visimisi_backend'),
     path('journals-backend/', journals_backend, name='journals_backend'),
     path('textbooks-backend/', textbooks_backend, name='textbooks_backend'),
+    path('contact-backend/', contact_backend, name='contact_backend'),
+    path('journal_serving-backend/', journal_serving_backend, name='journal_serving_backend'),
+    path('event-backend/', event_backend, name='event_backend'),
 ]
 
+
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
