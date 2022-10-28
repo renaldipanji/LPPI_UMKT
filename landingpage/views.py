@@ -2,12 +2,17 @@ from django.shortcuts import render
 from .forms import *
 from .models import *
 from django.shortcuts import render, redirect, get_object_or_404
-# Create your views here.
+from django.contrib import messages
+
 def about(request):
     return render(request,'landingpage/frontend/about.html')
 
 def visi_misi(request):
-    return render(request,'landingpage/frontend/visi_misi.html')
+    data = VisiMisiModel.objects.get(id='1')
+    context ={
+        'data':data,
+    }
+    return render(request,'landingpage/frontend/visi_misi.html', context)
     
 def index(request):
     return render(request,'landingpage/frontend/index.html')
@@ -26,7 +31,11 @@ def contact(request):
     return render(request, 'landingpage/frontend/contact.html')
 
 def workprog(request):
-    return render(request,'landingpage/frontend/workprog.html')
+    data = WorkProgrammeModel.objects.get(id='1')
+    context ={
+        'data': data,
+    }
+    return render(request,'landingpage/frontend/workprog.html', context)
 
 def divisi_ppi(request):
     return render(request,'landingpage/frontend/divisi_ppi.html')
@@ -84,7 +93,6 @@ def orgstruktur_backend (request):
 
     if request.method == 'POST':
         result_request = dict(request.POST)
-        print(result_request)
         #ambil data cek image
         cek_image = 'orgstruktur_image' in result_request
         if cek_image == False:
@@ -93,10 +101,75 @@ def orgstruktur_backend (request):
                     os.remove(orgstruktur_update.orgstruktur_image.path)
         if orgstruktur_form.is_valid():
             orgstruktur_form.save()
-            # messages.success(request, 'Foto Berhasil di Edit')
+            messages.success(request, 'Data Struktur Organisasi Berhasil di Edit')
             return redirect('orgstruktur_backend')
     context = {
         'form': orgstruktur_form,
         'data': orgstruktur_update,
     }
     return render(request, 'landingpage/backend/orgstruktur_backend.html', context)
+
+def workprogramme_backend (request):
+    workprogramme_update = WorkProgrammeModel.objects.get(id='1')
+    data = {
+        'file_workprogramme' : workprogramme_update.file_workprogramme,
+    }
+    workprogramme_form = WorkProgrammeForm(request.POST or None, request.FILES  or None, initial=data, instance=workprogramme_update)
+
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'file_workprogramme' in result_request
+        if cek_image == False:
+            if workprogramme_update.file_workprogramme:
+                if os.path.isfile(workprogramme_update.file_workprogramme.path) == True:
+                    os.remove(workprogramme_update.file_workprogramme.path)
+        if workprogramme_form.is_valid():
+            workprogramme_form.save()
+            messages.success(request, 'Data Program Kerja Berhasil di Update')
+            return redirect('workprogramme_backend')
+    context = {
+        'form' : workprogramme_form,
+        'data' : data,
+    }
+    return render(request, 'landingpage/backend/workprogramme_backend.html', context)
+
+def visimisi_backend (request):
+    visimisi_update = VisiMisiModel.objects.get(id='1')
+    data = {
+        'visi' : visimisi_update.visi,
+        'misi' : visimisi_update.misi,
+    }
+    visimisi_form = VisiMisiForm(request.POST or None, initial=data, instance=visimisi_update)
+    if request.method == "POST":
+            visimisi_form.save()
+            messages.success(request, 'Data Visi Misi Berhasil di Edit')
+    context = {
+        'form' : visimisi_form,
+        'data' : visimisi_update,
+    }
+    return render(request, 'landingpage/backend/visimisi_backend.html', context)
+
+def journals_backend (request):
+    #data = Visimisi.objects.get(id='1')
+    journals_form = JournalsForm(request.FILES, request.POST or None)
+    # if request.method == "POST":
+    #         result_request = dict(request.POST)
+    #         print(result_request)
+    context = {
+        'form' : journals_form,
+    #     #'data' : data,
+    }
+    return render(request, 'landingpage/backend/journals_backend.html', context)
+
+def textbooks_backend (request):
+    #data = Visimisi.objects.get(id='1')
+    textbooks_form = TextBookForm(request.POST, request.FILES or None)
+    # if request.method == "POST":
+    #         result_request = dict(request.POST)
+    #         print(result_request)
+    context = {
+        'form' : textbooks_form,
+        #'data' : data,
+    }
+    return render(request, 'landingpage/backend/textbooks_backend.html', context)

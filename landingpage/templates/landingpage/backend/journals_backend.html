@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content-header">
+  <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6">
+              <h6 class="m-0">Content</h6>
+              <h1 class="m-0">Journals</h1>
+          </div>
+      </div>
+  </div>
+
+ <!-- Ambil konten disini -->
+ <div class="col-12 col-sm-12">
+    <div class="card card-primary card-tabs">
+      <div class="card-header p-0 pt-1">
+        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
+          </li>
+        </ul>
+    </div>
+
+    <div class="card-body">
+        <div class="tab-content" id="custom-tabs-one-tabContent">
+          <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+            <div class="card-body table-responsive p-0">
+                <form method="POST" enctype="multipart/form-data">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Nama</label>
+                    {{form.nama}}
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Judul Artikel</label>
+                    {{form.judul_artikel}}
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Tahun</label>
+                    {{form.tahun}}
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Link</label>
+                    {{form.link}}
+                  </div>
+                  <div class="col-md-6 mt-2">
+                    <div class="form-group">
+                      <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Tambah</button>
+                    </div>
+</div>
+
+{% endblock content %} 

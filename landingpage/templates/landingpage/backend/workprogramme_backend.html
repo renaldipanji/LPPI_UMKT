@@ -6,7 +6,7 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h6 class="m-0">Content</h6>
-                <h1 class="m-0">Org. Structure</h1>
+                <h1 class="m-0">Work Programme</h1>
             </div>
         </div>
     </div>
@@ -19,39 +19,34 @@
               <li class="nav-item">
                 <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
               </li>
-
             </ul>
           </div>
           <div class="card-body">
             <div class="tab-content" id="custom-tabs-one-tabContent">
               <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                 <div class="card-body table-responsive p-0">
-                    <div id="content_form_tambah" class="row">
-                        <form method="POST" enctype="multipart/form-data">
-                          <div class="col-12">
-                            <img src="/media/{{ data.orgstruktur_image }}" class="img-fluid" alt="...">
-                          </div>
-                          <hr>
-                          <div class="col-12">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="col-12">
+                          <img src="/media/{{data.file_workprogramme}}" class="img-fluid" alt="...">
+                        </div>
+                        <hr>
+                        <div class="col-12">
                             <div class="form-group">
-                                <label>Upload File Org. Structure</label>
+                                <label>Upload File</label>
                                 {% csrf_token %}
-                                {{form.orgstruktur_image}}
+                                {{form.file_workprogramme}}                             
                                 {% comment %} <input type="text" name="username" class="form-control" placeholder="Nama File" maxlength="150" autofocus="" required="" id="id_username"> {% endcomment %}
                                 <p class="fs-6 text-danger">Disarankan ukuran gambar 1024 px X 768 px</p>
-
                               </div>
                         </div>
                     </div>
                     <div class="col-md-6 mt-2">
                       <div class="form-group">
-                        <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span>Update</button>
+                        <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Update</button>
                       </div>
                       <!-- /.col -->
                     </div>
-                  </form>   
-                  <!-- /.form-group -->
-                </div>
+                  </form> 
                 </div>
               </div>
 
