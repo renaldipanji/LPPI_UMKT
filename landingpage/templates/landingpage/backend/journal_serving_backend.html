@@ -2,93 +2,91 @@
 {% load static %}
 {% block content %}
 <div class="content-header">
-   <div class="container-fluid">
-       <div class="row mb-2">
-           <div class="col-sm-6">
-               <h6 class="m-0">Content</h6>
-               <h1 class="m-0">Journals Of Social Serving</h1>
-           </div>
-       </div>
-   </div>
-   <!-- Ambil konten disini -->
-   <div class="col-12 col-sm-12">
-       <div class="card card-primary card-tabs">
-         <div class="card-header p-0 pt-1">
-           <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-             <li class="nav-item">
-               <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
-             </li>
- 
-           </ul>
-         </div>
-         <div class="card-body">
-           <div class="tab-content" id="custom-tabs-one-tabContent">
-             <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-               <div class="card-body table-responsive p-0">
-                   <div id="content_form_tambah" class="row">
-                       <form method="POST" enctype="multipart/form-data">
-                         <div class="col-12">
-                           <div class="form-floating mb-3 mt-1">
-                             <div class="mb-3">
-                               <label for="exampleFormControlInput1" class="form-label"> Judul Jurnal</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                             </div>
-                             <div class="mb-3">
-                               <label for="exampleFormControlInput1" class="form-label">ISSN</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                             </div>
-                             <div class="mb-3">
-                               <label for="exampleFormControlInput1" class="form-label">Publication</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                             </div>
-                             <div class="mb-3">
-                               <label for="exampleFormControlTextarea1" class="form-label">Index</label>
-                               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                             </div>
-                             <div class="mb-3">
-                               <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                             </div>
-                             <div class="mb-3 mt-2">
-                               <label for="formFile" class="form-label mb-3">Cover Journals</label>
-                               <input class="form-control" type="file" id="formFile">
-                             </div>
-                             <div class="mb-3">
-                               <label for="exampleFormControlInput1" class="form-label">Link View Jurnal</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                             </div>
-                             <div class="mb-3">
-                               <label for="exampleFormControlInput1" class="form-label">Link Current Issue</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                             </div>
-                             <div class="mb-3">
-                               <label for="exampleFormControlInput1" class="form-label">Link Online Submission</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                             </div>
-                             <div class="mb-3">
-                               <label for="exampleFormControlInput1" class="form-label">Link Download Template</label>
-                               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                             </div>
-                            
-                         </div>
-                      
-                   </div>
-                   <div class="col-md-6 mt-2">
-                     <div class="form-group">
-                       <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span>Tambah</button>
-                     </div>
-                     <!-- /.col -->
-                   </div>
-                 </form>  
-                 <!-- /.form-group -->
-               </div>
-               </div>
-             </div>
- 
-           </div>
-         </div>
-         <!-- /.card -->
-       </div>
-     </div>
-     <!-- Ini ujung konten -->
-{% endblock content %}
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h6 class="m-0">Content</h6>
+        <h1 class="m-0">Journals Of Social Serving</h1>
+      </div>
+    </div>
+  </div>
+    {% comment %} Include Message {% endcomment %}
+    {% include "pesan.html" %}
+  <!-- Ambil konten disini -->
+  <div class="col-12 col-sm-12">
+    <div class="card card-primary card-tabs">
+      <div class="card-header p-0 pt-1">
+        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home"
+              role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content" id="custom-tabs-one-tabContent">
+          <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel"
+            aria-labelledby="custom-tabs-one-home-tab">
+            <div class="card-body table-responsive p-0">
+              <div id="content_form_tambah" class="row">
+                <form method="POST" enctype="multipart/form-data">
+                  <div class="col-12">
+                    <div class="form-floating mb-3 mt-1">
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label"> Judul Jurnal</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">ISSN</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Publication</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Index</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      </div>
+                      <div class="mb-3 mt-2">
+                        <label for="formFile" class="form-label mb-3">Cover Journals</label>
+                        <input class="form-control" type="file" id="formFile">
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Link View Jurnal</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Link Current Issue</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Link Online Submission</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Link Download Template</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mt-2">
+                    <div class="form-group">
+                      <button type="submit" id="submit_tambah" class="btn btn-primary"><span
+                          class="fas fa-paper-plane"></span>Tambah</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Ini ujung konten -->
+  {% endblock content %}

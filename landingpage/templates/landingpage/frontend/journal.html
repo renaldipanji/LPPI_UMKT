@@ -50,33 +50,15 @@
         </tr>
       </thead>
       <tbody>
+        {% for data in data_journal %}
         <tr>
-          <th scope="row">1</th>
-          <td>Annas Budi Setyawan</td>
-          <td>Pembuktian Ekstrak Daun Kejibeling</td>
-          <td>2018</td>
-          <td> - </td>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{data.nama_dosen}}</td>
+          <td>{{data.judul_artikel}}</td>
+          <td>{{data.tahun}}</td>
+          <td><a href="{{data.link}}" class="fs-5 text-decoration-none d-flex justify-content-center text-secondary"><i class="fa-solid fa-link"></i></a></td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Annas Budi Setyawan</td>
-          <td>Pembuktian Ekstrak Daun Kejibeling</td>
-          <td>2018</td>
-          <td> - </td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Annas Budi Setyawan</td>
-          <td>Pembuktian Ekstrak Daun Kejibeling</td>
-          <td>2018</td>
-          <td> - </td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td>Annas Budi Setyawan</td>
-          <td>Pembuktian Ekstrak Daun Kejibeling</td>
-          <td>2018</td>
-          <td> - </td>
+        {% endfor %}
       </tbody>
     </table>
   </div>

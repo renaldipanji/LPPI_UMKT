@@ -31,14 +31,19 @@ class VisiMisiModel(models.Model):
     misi = models.TextField(blank =True)
 
 class JournalsModel(models.Model):
-    nama = models.CharField(max_length=50, null=True)
+    nidn = models.CharField(max_length=20, null=True)
+    nama_dosen = models.CharField(max_length=50, null=True)
+    program_studi = models.CharField(max_length=50, null=True)
+    fakultas = models.CharField(max_length=50, null=True)
     judul_artikel = models.CharField(max_length=100, null=True)
     tahun = models.CharField(max_length=4, null=True)
     link = models.CharField(max_length=100, null=True)
   
 class TextBooksModel(models.Model):
+    nidn = models.CharField(max_length=20, null=True)
+    nama_dosen = models.CharField(max_length=50, null=True)
     program_studi = models.CharField(max_length=50, null=True)
-    nama = models.CharField(max_length=50, null=True)
+    fakultas = models.CharField(max_length=50, null=True)
     judul_buku = models.CharField(max_length=100, null=True)
     tahap_luaran_10 = models.BooleanField(default=False)
     tahap_luaran_40 = models.BooleanField(default=False)

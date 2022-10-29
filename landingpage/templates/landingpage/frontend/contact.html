@@ -1,35 +1,35 @@
 {% extends 'landingpage/base.html' %}
 {% load static %}
 {% block konten %}
-  <!-- ======= Breadcrumbs ======= -->
-  <section id="breadcrumbs" class="breadcrumbs">
-    <div class="container">
-      <ol>
-        <li><a href="index.html">Home</a></li>
-        <li>Contact</li>
-      </ol>
-      <h2>Contact</h2>
-    </div>
-  </section><!-- End Breadcrumbs -->
-  <!-- ======= About Section ======= -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-xxl-9 col-lg-8 col-sm-12 content">
-          <div class="col-12">
-            <h1 class="contact-description"><i class="fa-solid fa-phone icon_sosmed"></i> {{data.no_hp}}</h1>
-          </div>
-          <div class="col-12">
-            <h1 class="contact-description"><i class="fa-solid fa-envelope "></i> {{data.email}}</h1>
-          </div>
-          <div class="col-12">
-            <h1 class="contact-description"><i class="fa-brands fa-instagram "></i> {{data.ig}}</h1>
-          </div>
-          <h3 class="title-content">Address</h3>
-          <div class="twelve columns" style="margin-top: 10px;">{{data.alamat|linebreaks}}</div>
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Home</a></li>
+      <li>Contact</li>
+    </ol>
+    <h2>Contact</h2>
+  </div>
+</section><!-- End Breadcrumbs -->
+<!-- ======= About Section ======= -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-9 col-lg-8 col-sm-12 content">
+        <div class="col-12">
+          <h1 class="contact-description"><i class="fa-solid fa-phone icon_sosmed"></i> {{data.no_hp}}</h1>
         </div>
-          {% include 'landingpage/recent_post.html' %}
+        <div class="col-12">
+          <h1 class="contact-description"><i class="fa-solid fa-envelope "></i> {{data.email}}</h1>
+        </div>
+        <div class="col-12">
+          <h1 class="contact-description"><i class="fa-brands fa-instagram "></i> {{data.ig}}</h1>
+        </div>
+        <h3 class="title-content">Address</h3>
+        <div class="twelve columns" style="margin-top: 10px;">{{data.alamat|linebreaks}}</div>
       </div>
+      {% include 'landingpage/recent_post.html' %}
     </div>
-  </section><!-- End About Section -->
+  </div>
+</section><!-- End About Section -->
 {% endblock konten %}

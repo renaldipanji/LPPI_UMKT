@@ -2,58 +2,57 @@
 {% load static %}
 {% block content %}
 <div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h6 class="m-0">Content</h6>
-                <h1 class="m-0">Work Programme</h1>
-            </div>
-        </div>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h6 class="m-0">Content</h6>
+        <h1 class="m-0">Work Programme</h1>
+      </div>
     </div>
-    {% include "pesan.html" %}
-    <!-- Ambil konten disini -->
-    <div class="col-12 col-sm-12">
-        <div class="card card-primary card-tabs">
-          <div class="card-header p-0 pt-1">
-            <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
-              </li>
-            </ul>
-          </div>
-          <div class="card-body">
-            <div class="tab-content" id="custom-tabs-one-tabContent">
-              <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                <div class="card-body table-responsive p-0">
-                    <form method="POST" enctype="multipart/form-data">
-                        <div class="col-12">
-                          <img src="/media/{{data.file_workprogramme}}" class="img-fluid" alt="...">
-                        </div>
-                        <hr>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Upload File</label>
-                                {% csrf_token %}
-                                {{form.file_workprogramme}}                             
-                                {% comment %} <input type="text" name="username" class="form-control" placeholder="Nama File" maxlength="150" autofocus="" required="" id="id_username"> {% endcomment %}
-                                <p class="fs-6 text-danger">Disarankan ukuran gambar 1024 px X 768 px</p>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-2">
-                      <div class="form-group">
-                        <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Update</button>
-                      </div>
-                      <!-- /.col -->
-                    </div>
-                  </form> 
+  </div>
+  {% comment %} Include Message {% endcomment %}
+  {% include "pesan.html" %}
+  <!-- Ambil konten disini -->
+  <div class="col-12 col-sm-12">
+    <div class="card card-primary card-tabs">
+      <div class="card-header p-0 pt-1">
+        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home"
+              role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content" id="custom-tabs-one-tabContent">
+          <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel"
+            aria-labelledby="custom-tabs-one-home-tab">
+            <div class="card-body table-responsive p-0">
+              <form method="POST" enctype="multipart/form-data">
+                <div class="col-12">
+                  <img src="/media/{{data.file_workprogramme}}" class="img-fluid" alt="...">
                 </div>
-              </div>
-
+                <hr>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Upload File</label>
+                    {% csrf_token %}
+                    {{form.file_workprogramme}}
+                    <p class="fs-6 text-danger">Disarankan ukuran gambar 1024 px X 768 px</p>
+                  </div>
+                </div>
             </div>
+            <div class="col-md-6 mt-2">
+              <div class="form-group">
+                <button type="submit" id="submit_tambah" class="btn btn-primary"><span
+                    class="fas fa-paper-plane"></span> Update</button>
+              </div>
+            </div>
+            </form>
           </div>
-          <!-- /.card -->
         </div>
-      </div> 
-      <!-- Ini ujung konten -->
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

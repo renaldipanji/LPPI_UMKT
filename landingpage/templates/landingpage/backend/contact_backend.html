@@ -2,71 +2,64 @@
 {% load static %}
 {% block content %}
 <div class="content-header">
-   <div class="container-fluid">
-       <div class="row mb-2">
-           <div class="col-sm-6">
-               <h1 class="m-0">Contact</h1>
-           </div>
-       </div>
-   </div>
-   {% include "pesan.html" %}
-   <!-- Ambil konten disini -->
-   <div class="col-12 col-sm-12">
-       <div class="card card-primary card-tabs">
-         <div class="card-header p-0 pt-1">
-           <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-             <li class="nav-item">
-               <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Contact</a>
-             </li>
-           </ul>
-         </div>
-         <div class="card-body">
-           <div class="tab-content" id="custom-tabs-one-tabContent">
-             <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-               <div class="card-body table-responsive p-0">
-                   <div id="content_form_tambah" class="row">
-                       <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                         <div class="col-12">
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">No Handpone</label>
-                                {{form.no_hp}}
-                                {% comment %} <input type="no_hp" class="form-control" id="exampleFormControlInput1" placeholder="08xxxx"> {% endcomment %}
-                              </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                {{form.email}}
-                                {% comment %} <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"> {% endcomment %}
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Instagram</label>
-                                {{form.ig}}
-                                {% comment %} <input type="ig" class="form-control" id="exampleFormControlInput1" placeholder="umkaltim"> {% endcomment %}
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Alamat</label>
-                                {{form.alamat}}
-                                {% comment %} <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> {% endcomment %}
-                              </div>
-                         </div>
-                      
-                   </div>
-                   <div class="col-md-6 mt-2">
-                     <div class="form-group">
-                       <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span>Update</button>
-                     </div>
-                     <!-- /.col -->
-                   </div>
-                 </form>  
-                 <!-- /.form-group -->
-               </div>
-               </div>
-             </div>
- 
-           </div>
-         </div>
-         <!-- /.card -->
-       </div>
-     </div>
-     <!-- Ini ujung konten -->
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Contact</h1>
+      </div>
+    </div>
+  </div>
+  {% comment %} Include Message {% endcomment %}
+  {% include "pesan.html" %}
+  <div class="col-12 col-sm-12">
+    <div class="card card-primary card-tabs">
+      <div class="card-header p-0 pt-1">
+        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home"
+              role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="tab-content" id="custom-tabs-one-tabContent">
+          <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel"
+            aria-labelledby="custom-tabs-one-home-tab">
+            <div class="card-body table-responsive p-0">
+              <div id="content_form_tambah" class="row">
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">No Handpone</label>
+                      {{form.no_hp}}
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                      {{form.email}}
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Instagram</label>
+                      {{form.ig}}
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleFormControlTextarea1" class="form-label">Alamat</label>
+                      {{form.alamat}}
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-6 mt-2">
+                <div class="form-group">
+                  <button type="submit" id="submit_tambah" class="btn btn-primary"><span
+                      class="fas fa-paper-plane"></span>Update</button>
+                </div>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

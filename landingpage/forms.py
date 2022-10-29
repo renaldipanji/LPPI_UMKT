@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 from django.forms import widgets
 
-CHOICES = [('False', 'False'), ('True', 'True')]
+CHOICES = [('False', 'Belum'), ('True', 'Sudah')]
 
 class OrgstrukturForm(forms.ModelForm):
     class Meta :
@@ -53,29 +53,47 @@ class VisiMisiForm(forms.ModelForm):
 class JournalsForm(forms.ModelForm):
     class Meta :
         model = JournalsModel
-        fields = ('nama','judul_artikel','tahun','link')
+        fields = ('nidn','nama_dosen','program_studi','fakultas','judul_artikel','tahun','link')
         widgets = {
-            'nama' : forms.TextInput(
+            'nidn' : forms.TextInput (
                 attrs={
-                    'class':'form-control form-control-sm',
-                    'placeholder' : 'Nama',
+                    'class':'form-control',
+                    'placeholder' : 'NIDN',
+                }
+            ),
+            'nama_dosen' : forms.TextInput(
+                attrs={
+                    'class':'form-control',
+                    'placeholder' : 'Nama Dosen',
+                }
+            ),
+            'program_studi' : forms.TextInput(
+                attrs={
+                    'class':'form-control',
+                    'placeholder' : 'Program Studi',
+                }
+            ),
+            'fakultas' : forms.TextInput(
+                attrs={
+                    'class':'form-control',
+                    'placeholder' : 'Fakultas',
                 }
             ),
             'judul_artikel' : forms.TextInput(
                 attrs={
-                    'class':'form-control form-control-sm',
+                    'class':'form-control',
                     'placeholder' : 'Judul Artikel',
                 }
             ),
             'tahun' : forms.TextInput(
                 attrs={
-                    'class':'form-control form-control-sm',
+                    'class':'form-control yearpicker',
                     'placeholder' : 'Tahun',
                 }
             ),
             'link' : forms.TextInput(
                 attrs={
-                    'class':'form-control form-control-sm',
+                    'class':'form-control',
                     'placeholder' : 'Link',
                 }
             ),
@@ -84,18 +102,30 @@ class JournalsForm(forms.ModelForm):
 class TextBookForm(forms.ModelForm):
     class Meta:
         model = TextBooksModel
-        fields = ('program_studi','nama','judul_buku','tahap_luaran_10','tahap_luaran_40','tahap_luaran_80','reviewer','tahun','link')
+        fields = ('nidn','nama_dosen','program_studi','fakultas','judul_buku','tahap_luaran_10','tahap_luaran_40','tahap_luaran_80','reviewer','tahun','link')
         widgets = {
-            'program_studi' : forms.TextInput(
-                 attrs={
-                     'class':'form-control',
-                     'placeholder' : 'Program Studi',
-                 }
+            'nidn' : forms.TextInput (
+                attrs={
+                    'class':'form-control',
+                    'placeholder' : 'NIDN',
+                }
             ),
-            'nama' : forms.TextInput(
-                 attrs={
-                     'class':'form-control',
-                     'placeholder' : 'Nama'
+            'nama_dosen' : forms.TextInput(
+                attrs={
+                    'class':'form-control',
+                    'placeholder' : 'Nama Dosen',
+                }
+            ),
+            'program_studi' : forms.TextInput(
+                attrs={
+                    'class':'form-control',
+                    'placeholder' : 'Program Studi',
+                }
+            ),
+            'fakultas' : forms.TextInput(
+                attrs={
+                    'class':'form-control',
+                    'placeholder' : 'Fakultas',
                 }
             ),
             'judul_buku' : forms.TextInput(
@@ -130,7 +160,7 @@ class TextBookForm(forms.ModelForm):
             ),
             'tahun' : forms.TextInput(
                  attrs={
-                     'class':'form-control',
+                     'class':'yearpicker form-control',
                      'placeholder' : 'Tahun'
                 }
             ),

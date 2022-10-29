@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block import_plugin %}
+    <link
+        rel="stylesheet"
+        href="{% static 'landingpage/assets/css/yearpicker.css' %}"/>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+{% endblock import_plugin %}
+{% block content %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h6 class="m-0">Content</h6>
+                    <h1 class="m-0">Text Books</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ambil konten disini -->
+        <div class="col-12 col-sm-12">
+            <div class="card card-primary card-tabs">
+                <div class="card-header p-0 pt-1">
+                    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active"
+                                id="custom-tabs-one-home-tab"
+                                data-bs-toggle="pill"
+                                href="#custom-tabs-one-home"
+                                role="tab"
+                                aria-controls="custom-tabs-one-home"
+                                aria-selected="true">Update Data</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-one-tabContent">
+                        <div
+                            class="tab-pane fade show active"
+                            id="custom-tabs-one-home"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-one-home-tab">
+                            <div class="card-body table-responsive p-1">
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">NIDN</label>
+                                        {{form.nidn}}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Nama Dosen</label>
+                                        {{form.nama_dosen}}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Program Studi</label>
+                                        {{form.program_studi}}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Fakultas</label>
+                                        {{form.fakultas}}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Judul Buku</label>
+                                        {{form.judul_buku}}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Tahun</label>
+                                        {{form.tahun}}
+                                    </div>
+                                    <script src="{% static 'landingpage/assets/js/yearpicker.js' %}"></script>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $(".yearpicker").yearpicker({startYear: 2018, endYear: 2030});
+                                        });
+                                    </script>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Tahap Luaran 10%</label>
+                                        {{form.tahap_luaran_10}}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Tahap Luaran 40%</label>
+                                        {{form.tahap_luaran_40}}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Tahap Luaran 80%</label>
+                                        {{form.tahap_luaran_80}}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Reviewer (Internal 1 & Eksternal 2)</label>
+                                        {{form.reviewer}}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Link</label>
+                                        {{form.link}}
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <div class="form-group">
+                                            <button type="submit" id="submit_tambah" class="btn btn-primary">
+                                                <span class="fas fa-paper-plane"></span>
+                                                Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock content %}

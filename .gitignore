@@ -7,3 +7,4 @@ media/uploads/profil/*
 # Environment
 env/
 LPPI_UMKT/__pycache__
+.vscode/

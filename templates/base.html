@@ -50,6 +50,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- jQuery -->
   <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
    {% comment %} <script src="{% static 'backend/invBarang/function.js' %}"></script> {% endcomment %}
+  
+   {% block import_plugin %}
+   
+   {% endblock import_plugin %}
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">

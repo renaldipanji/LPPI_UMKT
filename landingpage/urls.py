@@ -39,6 +39,11 @@ urlpatterns = [
     path('contact-backend/', contact_backend, name='contact_backend'),
     path('journal_serving-backend/', journal_serving_backend, name='journal_serving_backend'),
     path('event-backend/', event_backend, name='event_backend'),
+    path('journals-backend/delete/<str:id>/', journals_backend_delete, name='journals_backend_delete'),
+    path('journals-backend/update/<str:id>/', journals_backend_update, name='journals_backend_update'),
+    path('textbooks-backend/delete/<str:id>/', textbooks_backend_delete, name='textbooks_backend_delete'),
+    path('textbooks-backend/update/<str:id>/', textbooks_backend_update, name='textbooks_backend_update'),
+
 ]
 
 
