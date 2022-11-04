@@ -41,10 +41,18 @@ def workprog(request):
     return render(request,'landingpage/frontend/workprog.html', context)
 
 def divisi_ppi(request):
-    return render(request,'landingpage/frontend/divisi_ppi.html')
+    data = PPIModel.objects.get(id='1')
+    context ={
+        'data': data,
+    }
+    return render(request,'landingpage/frontend/divisi_ppi.html',context)
 
 def divisi_elearning(request):
-    return render(request, 'landingpage/frontend/divisi_elearning.html')
+    data = ElearningModel.objects.get(id='1')
+    context ={
+        'data': data,
+    }
+    return render(request, 'landingpage/frontend/divisi_elearning.html',context)
 
 def news(request):
     return render(request, 'landingpage/frontend/news.html')
@@ -318,6 +326,176 @@ def textbooks_backend_update (request, id):
     }
     return render(request, 'landingpage/backend/textbooks_backend_update.html', context)
 
+def divisippi_backend (request):
+    divisippi_update = PPIModel.objects.get(id='1')
+    data = {
+        'flowservice_divisippi' : divisippi_update.flowservice_divisippi,
+        'overview_divisippi' : divisippi_update.overview_divisippi,
+    }
+    divisippi_form = DivisippiForm(request.POST or None, request.FILES or None, initial=data, instance=divisippi_update)
 
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'flowservice_divisippi' in result_request
+        if cek_image == False:
+            if divisippi_update.flowservice_divisippi:
+                if os.path.isfile(divisippi_update.flowservice_divisippi.path) == True:
+                    os.remove(divisippi_update.flowservice_divisippi.path)
+        if divisippi_form.is_valid():
+            divisippi_form.save()
+            # messages.success(request, 'Foto Berhasil di Edit')
+            return redirect('divisippi_backend')
+        else:
+            print(divisippi_form.errors)
 
+    context = {
+        'form': divisippi_form,
+        'data': divisippi_update,
+    }
+    return render(request, 'landingpage/backend/divisippi_backend.html', context)
 
+def divisielearning_backend (request):
+    divisielearning_update = ElearningModel.objects.get(id='1')
+    data = {
+        'flowservice_divisielearning' : divisielearning_update.flowservice_divisielearning,
+        'overview_divisielearning' : divisielearning_update.overview_divisielearning,
+    }
+    divisielearning_form = DivisielearningForm(request.POST or None, request.FILES or None, initial=data, instance=divisielearning_update)
+
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'flowservice_divisielearning' in result_request
+        if cek_image == False:
+            if divisielearning_update.flowservice_divisielearning:
+                if os.path.isfile(divisielearning_update.flowservice_divisielearning.path) == True:
+                    os.remove(divisielearning_update.flowservice_divisielearning.path)
+        if divisielearning_form.is_valid():
+            divisielearning_form.save()
+            # messages.success(request, 'Foto Berhasil di Edit')
+            return redirect('divisielearning_backend')
+        else:
+            print(divisielearning_form.errors)
+
+    context = {
+        'form': divisielearning_form,
+        'data': divisielearning_update,
+    }
+    return render(request, 'landingpage/backend/divisielearning_backend.html', context)
+
+def articletranslation_backend (request):
+    articletranslation_update = ServiceModel.objects.get(id='4')
+    data = {
+        'flowservice_service' : articletranslation_update.flowservice_service,
+        'overview_service' : articletranslation_update.overview_service,
+    }
+    articletranslation_form = ServiceForm(request.POST or None, request.FILES or None, initial=data, instance=articletranslation_update)
+
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'flowservice_service' in result_request
+        if cek_image == False:
+            if articletranslation_update.flowservice_service:
+                if os.path.isfile(articletranslation_update.flowservice_service.path) == True:
+                    os.remove(articletranslation_update.flowservice_service.path)
+        if articletranslation_form.is_valid():
+            articletranslation_form.save()
+            messages.info(request, 'Data Article Translations Berhasil di Edit')
+            return redirect('articletranslation_backend')
+        else:
+            print(articletranslation_form.errors)
+
+    context = {
+        'form': articletranslation_form,
+        'data': articletranslation_update,
+    }
+    return render(request, 'landingpage/backend/articletranslation_backend.html', context)
+
+def sipena_backend (request):
+    sipena_update = ServiceModel.objects.get(id='2')
+    data = {
+        'flowservice_service' : sipena_update.flowservice_service,
+        'overview_service' : sipena_update.overview_service,
+    }
+    sipena_form = ServiceForm(request.POST or None, request.FILES or None, initial=data, instance=sipena_update)
+
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'flowservice_service' in result_request
+        if cek_image == False:
+            if sipena_update.flowservice_service:
+                if os.path.isfile(sipena_update.flowservice_service.path) == True:
+                    os.remove(sipena_update.flowservice_service.path)
+        if sipena_form.is_valid():
+            sipena_form.save()
+            messages.info(request, 'Data SIPENA Berhasil di Edit')
+            return redirect('sipena_backend')
+        else:
+            print(sipena_form.errors)
+
+    context = {
+        'form': sipena_form,
+        'data': sipena_update,
+    }
+    return render(request, 'landingpage/backend/sipena_backend.html', context)
+
+def umktpress_backend (request):
+    umktpress_update = ServiceModel.objects.get(id='3')
+    data = {
+        'flowservice_service' : umktpress_update.flowservice_service,
+        'overview_service' : umktpress_update.overview_service,
+    }
+    umktpress_form = ServiceForm(request.POST or None, request.FILES or None, initial=data, instance=umktpress_update)
+
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'flowservice_service' in result_request
+        if cek_image == False:
+            if umktpress_update.flowservice_service:
+                if os.path.isfile(umktpress_update.flowservice_service.path) == True:
+                    os.remove(umktpress_update.flowservice_service.path)
+        if umktpress_form.is_valid():
+            umktpress_form.save()
+            messages.info(request, 'Data UMKT PRESS Berhasil di Edit')
+            return redirect('umktpress_backend')
+        else:
+            print(umktpress_form.errors)
+
+    context = {
+        'form': umktpress_form,
+        'data': umktpress_update,
+    }
+    return render(request, 'landingpage/backend/umktpress_backend.html', context)
+
+def elearningsupport_backend (request):
+    elearningsupport_update = ServiceModel.objects.get(id='1')
+    data = {
+        'flowservice_service' : elearningsupport_update.flowservice_service,
+        'overview_service' : elearningsupport_update.overview_service,
+    }
+    elearningsupport_form = ServiceForm(request.POST or None, request.FILES or None, initial=data, instance=elearningsupport_update)
+
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'flowservice_service' in result_request
+        if cek_image == False:
+            if elearningsupport_update.flowservice_service:
+                if os.path.isfile(elearningsupport_update.flowservice_service.path) == True:
+                    os.remove(elearningsupport_update.flowservice_service.path)
+        if elearningsupport_form.is_valid():
+            elearningsupport_form.save()
+            messages.info(request, 'Data Elearning Support Berhasil di Edit')
+            return redirect('elearningsupport_backend')
+        else:
+            print(elearningsupport_form.errors)
+
+    context = {
+        'form': elearningsupport_form,
+        'data': elearningsupport_update,
+    }
+    return render(request, 'landingpage/backend/elearningsupport_backend.html', context)

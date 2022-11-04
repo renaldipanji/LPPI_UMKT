@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h6 class="m-0">Content</h6>
+                    <h1 class="m-0">Divisi PPI</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% comment %} Include Message {% endcomment %}
+    {% include "pesan.html" %}  
+        <!-- Ambil konten disini -->
+        <div class="col-12 col-sm-12">
+            <div class="card card-primary card-tabs">
+                <div class="card-header p-0 pt-1">
+                    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active"
+                                id="custom-tabs-one-home-tab"
+                                data-bs-toggle="pill"
+                                href="#custom-tabs-one-home"
+                                role="tab"
+                                aria-controls="custom-tabs-one-home"
+                                aria-selected="true">Data Content</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-one-tabContent">
+                        <div
+                            class="tab-pane fade show active"
+                            id="custom-tabs-one-home"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-one-home-tab">
+                            <div class="card-body table-responsive p-1">
+                                <h4 class="title-content my-1">Overview</h4>
+                                <div id="overview_divisippi">{{data.overview_divisippi | linebreaks}}</div>
+                                <h4 class="title-content">Members</h4>
+                                <p>
+                                    <div class="col-12 pt-4 pt-lg-0 content">
+                                        <img
+                                            src="/media/{{data.flowservice_divisippi}}"
+                                            class="img-fluid"
+                                            style="max-width:600px"></img>
+                                    </div>
+                                </p>
+                                <hr>
+                                <script>
+                                    var over = $('#overview_divisippi').text();
+                                    $('#id_overview_divisippi').val(over)
+                                </script>
+                                <div id="content_form_tambah" class="row">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="col-12">
+                                            <div class="form-floating mb-3 mt-1">
+                                                <div class="mb-3">
+                                                    <label for="floatingTextarea2">Overview</label>
+                                                    {{form.overview_divisippi}}
+                                                </div>
+                                                <div class="mb-3 mt-2">
+                                                    <label for="formFile" class="form-label mb-3">Flow Service</label>
+                                                    {{form.flowservice_divisippi}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <div class="form-group">
+                                                <button type="submit" id="submit_tambah" class="btn btn-primary">
+                                                    <span class="fas fa-paper-plane"></span>
+                                                    Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock content %}

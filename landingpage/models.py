@@ -77,3 +77,33 @@ def filepath_event(request, filename):
  
 class EventModel(models.Model):
    event_image = models.FileField(upload_to = filepath_event, null=True, blank=True)
+
+def filepath_divisi_ppi(request, filename):
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('uploads/data_divisippi/', filename)
+
+class PPIModel(models.Model):
+    flowservice_divisippi = models.FileField(upload_to = filepath_divisi_ppi, null=True, blank=True)
+    overview_divisippi = models.TextField(blank=True)
+
+def filepath_divisi_elearning(request, filename):
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('uploads/data_divisielearning/', filename)
+
+class ElearningModel(models.Model):
+    flowservice_divisielearning = models.FileField(upload_to = filepath_divisi_elearning, null=True, blank=True)
+    overview_divisielearning = models.TextField(blank=True)
+
+def filepath_service(request, filename):
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('uploads/data_service/', filename)
+
+class ServiceModel(models.Model):
+    flowservice_service = models.FileField(upload_to = filepath_service, null=True, blank=True)
+    overview_service = models.TextField(blank=True)

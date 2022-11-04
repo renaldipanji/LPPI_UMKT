@@ -17,6 +17,7 @@
           </div>
       </div>
   </div>
+</div>
     {% comment %} Include Message {% endcomment %}
     {% include "pesan.html" %}
  <!-- Ambil konten disini -->
@@ -61,7 +62,7 @@
                     <td>{{data.fakultas}}</td>
                     <td>{{data.judul_artikel}}</td>
                     <td>{{data.tahun}}</td>
-                    <td>{{data.link}}</td>
+                    <td><a href="{{data.link}}" class="text-decoration-none">{{data.link}}</a></td>
                     <td>
                       <a class="btn btn-primary btn-sm" href="{% url 'journals_backend_update' data.id %}">
                         <span class="fas fa-edit"></span> Edit
@@ -124,4 +125,6 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
 {% endblock content %} 

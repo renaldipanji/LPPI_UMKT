@@ -27,7 +27,7 @@ urlpatterns = [
     path('translate_art/', translate_art, name='translate_art'),
     path('sipena/', sipena, name='sipena'),
     path('umktpress/', umktpress, name='umktpress'),
-    path('e_learning/', e_learning, name='e_learning'),
+    path('elearning/', e_learning, name='e_learning'),
 
     #>>>>>>>>>>>>>>>>>>>>>>Backend Views <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -43,6 +43,12 @@ urlpatterns = [
     path('journals-backend/update/<str:id>/', journals_backend_update, name='journals_backend_update'),
     path('textbooks-backend/delete/<str:id>/', textbooks_backend_delete, name='textbooks_backend_delete'),
     path('textbooks-backend/update/<str:id>/', textbooks_backend_update, name='textbooks_backend_update'),
+    path('divisippi-backend/', divisippi_backend, name='divisippi_backend'),
+    path('divisielearning-backend/', divisielearning_backend, name='divisielearning_backend'),
+    path('articletranslation-backend/', articletranslation_backend, name='articletranslation_backend'),
+    path('sipena-backend/', sipena_backend, name='sipena_backend'),
+    path('umktpress-backend/', umktpress_backend, name='umktpress_backend'),
+    path('elearningsupport-backend/', elearningsupport_backend, name='elearningsupport_backend'),
 
 ]
 

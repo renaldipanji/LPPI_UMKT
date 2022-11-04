@@ -220,3 +220,67 @@ class ContactForm(forms.ModelForm):
                 }
             ),
         }
+
+class DivisippiForm(forms.ModelForm):
+
+     class Meta:
+         model = PPIModel
+         fields = ('overview_divisippi', 'flowservice_divisippi')
+         widgets = {
+             'overview_divisippi' : forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Overview',
+
+                }
+            ),
+            'flowservice_divisippi' : forms.FileInput(
+                attrs={
+                    'class': 'form-control form-control',
+                    'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
+                    'oninput': 'setCustomValidity("")',
+                }
+            ),
+         }
+
+class DivisielearningForm(forms.ModelForm):
+    class Meta:
+        model = ElearningModel
+        fields = ('overview_divisielearning','flowservice_divisielearning')
+        widgets = {
+            'overview_divisielearning' : forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Overview',
+
+                }
+            ),
+            'flowservice_divisielearning' : forms.FileInput(
+                attrs={
+                    'class': 'form-control form-control',
+                    'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
+                    'oninput': 'setCustomValidity("")',
+                }
+            ),
+        }
+
+class ServiceForm(forms.ModelForm):
+    class Meta:
+        model = ServiceModel
+        fields = ('overview_service','flowservice_service')
+        widgets = {
+            'overview_service' : forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Overview',
+
+                }
+            ),
+            'flowservice_service' : forms.FileInput(
+                attrs={
+                    'class': 'form-control form-control',
+                    'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
+                    'oninput': 'setCustomValidity("")',
+                }
+            ),
+        }
