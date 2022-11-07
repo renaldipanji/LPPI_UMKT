@@ -38,12 +38,12 @@
                             role="tabpanel"
                             aria-labelledby="custom-tabs-one-home-tab">
                             <h4 class="title-content my-1">Overview</h4>
-                            <div id="overview_divisippi">{{data.overview_divisielearning | linebreaks}}</div>
+                            <div id="overview_divisippi">{{data.overview_divisi | linebreaks}}</div>
                             <h4 class="title-content">Members</h4>
                             <p>
                                 <div class="col-12 pt-4 pt-lg-0 content">
                                     <img
-                                        src="/media/{{data.flowservice_divisielearning}}"
+                                        src="/media/{{data.members_divisi}}"
                                         class="img-fluid"
                                         style="max-width:600px"></img>
                                 </div>
@@ -57,11 +57,11 @@
                                             <div class="form-floating mb-3 mt-1">
                                                 <div class="mb-3">
                                                     <label for="floatingTextarea2">Overview</label>
-                                                    {{form.overview_divisielearning}}
+                                                    {{form.overview_divisi}}
                                                 </div>
                                                 <div class="mb-3 mt-2">
-                                                    <label for="formFile" class="form-label mb-3">Flow Service</label>
-                                                    {{form.flowservice_divisielearning}}
+                                                    <label for="formFile" class="form-label mb-3">Members</label>
+                                                    {{form.members_divisi}}
                                                 </div>
                                             </div>
                                         </div>

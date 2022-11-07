@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='PPIModel',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('flowservice_divisippi', models.FileField(blank=True, null=True, upload_to=landingpage.models.filepath_divisi_ppi)),
+                ('flowservice_divisippi', models.FileField(blank=True, null=True, upload_to=landingpage.models.filepath_divisi)),
                 ('overview_divisippi', models.TextField(blank=True)),
             ],
         ),

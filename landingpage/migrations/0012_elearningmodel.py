@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='ElearningModel',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('flowservice_divisielearning', models.FileField(blank=True, null=True, upload_to=landingpage.models.filepath_divisi_elearning)),
+                ('flowservice_divisielearning', models.FileField(blank=True, null=True, upload_to=landingpage.models.filepath_divisi)),
                 ('overview_divisielearning', models.TextField(blank=True)),
             ],
         ),

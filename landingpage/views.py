@@ -41,14 +41,14 @@ def workprog(request):
     return render(request,'landingpage/frontend/workprog.html', context)
 
 def divisi_ppi(request):
-    data = PPIModel.objects.get(id='1')
+    data = DivisiModel.objects.get(id='1')
     context ={
         'data': data,
     }
     return render(request,'landingpage/frontend/divisi_ppi.html',context)
 
 def divisi_elearning(request):
-    data = ElearningModel.objects.get(id='1')
+    data = DivisiModel.objects.get(id='2')
     context ={
         'data': data,
     }
@@ -327,24 +327,24 @@ def textbooks_backend_update (request, id):
     return render(request, 'landingpage/backend/textbooks_backend_update.html', context)
 
 def divisippi_backend (request):
-    divisippi_update = PPIModel.objects.get(id='1')
+    divisippi_update = DivisiModel.objects.get(id='1')
     data = {
-        'flowservice_divisippi' : divisippi_update.flowservice_divisippi,
-        'overview_divisippi' : divisippi_update.overview_divisippi,
+        'members_divisi' : divisippi_update.members_divisi,
+        'overview_divisi' : divisippi_update.overview_divisi,
     }
-    divisippi_form = DivisippiForm(request.POST or None, request.FILES or None, initial=data, instance=divisippi_update)
+    divisippi_form = DivisiForm(request.POST or None, request.FILES or None, initial=data, instance=divisippi_update)
 
     if request.method == 'POST':
         result_request = dict(request.POST)
         #ambil data cek image
-        cek_image = 'flowservice_divisippi' in result_request
+        cek_image = 'members_divisi' in result_request
         if cek_image == False:
-            if divisippi_update.flowservice_divisippi:
-                if os.path.isfile(divisippi_update.flowservice_divisippi.path) == True:
-                    os.remove(divisippi_update.flowservice_divisippi.path)
+            if divisippi_update.members_divisi:
+                if os.path.isfile(divisippi_update.members_divisi.path) == True:
+                    os.remove(divisippi_update.members_divisi.path)
         if divisippi_form.is_valid():
             divisippi_form.save()
-            # messages.success(request, 'Foto Berhasil di Edit')
+            messages.info(request, 'Data Divisi E-learning Berhasil di Edit')
             return redirect('divisippi_backend')
         else:
             print(divisippi_form.errors)
@@ -356,24 +356,24 @@ def divisippi_backend (request):
     return render(request, 'landingpage/backend/divisippi_backend.html', context)
 
 def divisielearning_backend (request):
-    divisielearning_update = ElearningModel.objects.get(id='1')
+    divisielearning_update = DivisiModel.objects.get(id='2')
     data = {
-        'flowservice_divisielearning' : divisielearning_update.flowservice_divisielearning,
-        'overview_divisielearning' : divisielearning_update.overview_divisielearning,
+        'members_divisi' : divisielearning_update.members_divisi,
+        'overview_divisi' : divisielearning_update.overview_divisi,
     }
-    divisielearning_form = DivisielearningForm(request.POST or None, request.FILES or None, initial=data, instance=divisielearning_update)
+    divisielearning_form = DivisiForm(request.POST or None, request.FILES or None, initial=data, instance=divisielearning_update)
 
     if request.method == 'POST':
         result_request = dict(request.POST)
         #ambil data cek image
-        cek_image = 'flowservice_divisielearning' in result_request
+        cek_image = 'members_divisi' in result_request
         if cek_image == False:
-            if divisielearning_update.flowservice_divisielearning:
-                if os.path.isfile(divisielearning_update.flowservice_divisielearning.path) == True:
-                    os.remove(divisielearning_update.flowservice_divisielearning.path)
+            if divisielearning_update.members_divisi:
+                if os.path.isfile(divisielearning_update.members_divisi.path) == True:
+                    os.remove(divisielearning_update.members_divisi.path)
         if divisielearning_form.is_valid():
             divisielearning_form.save()
-            # messages.success(request, 'Foto Berhasil di Edit')
+            messages.info(request, 'Data Divisi E-learning Berhasil di Edit')
             return redirect('divisielearning_backend')
         else:
             print(divisielearning_form.errors)

@@ -221,20 +221,20 @@ class ContactForm(forms.ModelForm):
             ),
         }
 
-class DivisippiForm(forms.ModelForm):
+class DivisiForm(forms.ModelForm):
 
      class Meta:
-         model = PPIModel
-         fields = ('overview_divisippi', 'flowservice_divisippi')
+         model = DivisiModel
+         fields = ('overview_divisi', 'members_divisi')
          widgets = {
-             'overview_divisippi' : forms.Textarea(
+             'overview_divisi' : forms.Textarea(
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Overview',
 
                 }
             ),
-            'flowservice_divisippi' : forms.FileInput(
+            'members_divisi' : forms.FileInput(
                 attrs={
                     'class': 'form-control form-control',
                     'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
@@ -243,26 +243,6 @@ class DivisippiForm(forms.ModelForm):
             ),
          }
 
-class DivisielearningForm(forms.ModelForm):
-    class Meta:
-        model = ElearningModel
-        fields = ('overview_divisielearning','flowservice_divisielearning')
-        widgets = {
-            'overview_divisielearning' : forms.Textarea(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Overview',
-
-                }
-            ),
-            'flowservice_divisielearning' : forms.FileInput(
-                attrs={
-                    'class': 'form-control form-control',
-                    'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
-                    'oninput': 'setCustomValidity("")',
-                }
-            ),
-        }
 
 class ServiceForm(forms.ModelForm):
     class Meta:
