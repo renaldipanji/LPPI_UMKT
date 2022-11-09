@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h6 class="m-0">Content</h6>
-                    <h1 class="m-0">Journals Of Social Serving</h1>
+                    <h1 class="m-0">Journals Of Research</h1>
                 </div>
             </div>
         </div>
@@ -103,18 +103,18 @@
                                                 <td>
                                                     <a
                                                         class="btn btn-info btn-sm"
-                                                        href={% url 'journal_serving_backend_detail' data.id %}>
+                                                        href={% url 'journal_research_backend_detail' data.id %}>
                                                         <span class="fas fa-info-circle"></span>
                                                         Detail
                                                     </a>
                                                     <a
                                                         class="btn btn-warning btn-sm"
-                                                        href={% url 'journal_serving_backend_update' data.id %}>
+                                                        href={% url 'journal_research_backend_update' data.id %}>
                                                         <span class="fas fa-edit"></span>
                                                         Edit
                                                     </a>
                                                     <a
-                                                        href="{% url 'journal_serving_backend_delete' data.id %}"
+                                                        href="{% url 'journal_research_backend_delete' data.id %}"
                                                         class="btn btn-danger btn-sm btn-modal-hapus">
                                                         <span class="fas fa-trash"></span>
                                                         Hapus
@@ -183,7 +183,7 @@
                                                 </div>
                                             </div>
                                             <script>
-                                              $('#id_jenis_journal').attr('value','serving')
+                                              $('#id_jenis_journal').attr('value','research')
                                             </script>
                                         </div>
                                         <div class="col-md-6 mt-2">

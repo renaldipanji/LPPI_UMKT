@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='journal_serving',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('member_image', models.FileField(blank=True, null=True, upload_to=landingpage.models.filepath_journal_serving)),
+                ('member_image', models.FileField(blank=True, null=True, upload_to=landingpage.models.filepath_journal_umkt)),
                 ('overview', models.TextField(blank=True)),
             ],
         ),

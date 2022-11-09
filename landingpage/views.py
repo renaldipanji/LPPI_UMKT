@@ -88,10 +88,18 @@ def downloads(request):
     return render(request, 'landingpage/frontend/downloads.html')
 
 def journal_research_umkt(request):
-    return render(request, 'landingpage/frontend/jurnal_penelitian_umkt.html')
+    data = JournalUmktModel.objects.all().filter(jenis_journal='research')
+    context ={
+        'data_journal' : data,
+    }
+    return render(request, 'landingpage/frontend/jurnal_penelitian_umkt.html', context)
 
 def journal_social_umkt(request):
-    return render(request, 'landingpage/frontend/jurnal_pengabdian_umkt.html')
+    data = JournalUmktModel.objects.all().filter(jenis_journal='serving')
+    context ={
+        'data_journal' : data,
+    }
+    return render(request, 'landingpage/frontend/jurnal_pengabdian_umkt.html',context)
 
 def translate_art(request):
     return render(request, 'landingpage/frontend/translate_art.html')
@@ -499,3 +507,127 @@ def elearningsupport_backend (request):
         'data': elearningsupport_update,
     }
     return render(request, 'landingpage/backend/elearningsupport_backend.html', context)
+
+def journal_serving_backend (request):
+    data = JournalUmktModel.objects.all().filter(jenis_journal='serving')
+    journalserving_form = JournalUmktForm(request.POST or None, request.FILES or None)
+    
+    if request.method == "POST" and journalserving_form.is_valid():
+        journalserving_form.save()
+        messages.success(request, 'Data Journal of Social Serving Berhasil di Tambahkan')
+        return redirect('journal_serving_backend')
+    else :
+        print(journalserving_form.errors)
+    context = {
+         'form': journalserving_form,
+         'Data': data,
+     }
+    return render(request, 'landingpage/backend/journal_serving_backend.html', context)
+
+def journal_serving_backend_delete(request, id):
+    data = get_object_or_404(JournalUmktModel,id=id)
+    
+    if os.path.isfile(data.cover_jurnal.path) == True:
+        os.remove(data.cover_jurnal.path)
+    JournalUmktModel.objects.filter(id=id).delete()
+    messages.error(request, 'Data Journal of Social Serving Berhasil di Hapus')
+    return redirect('journal_serving_backend' )
+
+def journal_serving_backend_update(request, id):
+    journal_serving_edit = JournalUmktModel.objects.get(id=id)
+
+    data_edit = {
+        'judul_jurnal' : journal_serving_edit.judul_jurnal,
+        'issn' : journal_serving_edit.issn,
+        'publication' : journal_serving_edit.publication,
+        'index' :journal_serving_edit.index,
+        'deskripsi' : journal_serving_edit.deskripsi,
+        'cover_jurnal' : journal_serving_edit.cover_jurnal,
+        'link_view_jurnal' : journal_serving_edit.link_view_jurnal,
+        'link_current_issue' : journal_serving_edit.link_current_issue,
+        'link_online_submission' : journal_serving_edit.link_online_submission,
+        'link_download_template' : journal_serving_edit.link_download_template,
+        'jenis_journal' : journal_serving_edit.jenis_journal,
+    }
+    journal_serving_form_edit = JournalUmktForm(request.POST or None,request.FILES or None, initial=data_edit , instance=journal_serving_edit)
+    
+    if request.method == "POST" and journal_serving_form_edit.is_valid():
+        journal_serving_form_edit.save()
+        messages.info(request, 'Data Journal of Social Serving Berhasil di Edit')
+        return redirect('journal_serving_backend')
+    else:
+        print(journal_serving_form_edit.errors)
+
+    context = {
+        'form': journal_serving_form_edit,
+    }
+    return render(request, 'landingpage/backend/journal_serving_backend_update.html', context)
+
+def journal_serving_backend_detail(request,id):
+    data = JournalUmktModel.objects.get(id=id)
+    context = {
+        'data': data,
+    }
+    return render(request, 'landingpage/backend/journal_serving_backend_detail.html', context)
+    
+def journal_research_backend (request):
+    data = JournalUmktModel.objects.all().filter(jenis_journal='research')
+    journalresearch_form = JournalUmktForm(request.POST or None, request.FILES or None)
+    
+    if request.method == "POST" and journalresearch_form.is_valid():
+        journalresearch_form.save()
+        messages.success(request, 'Data Journal of Social Research Berhasil di Tambahkan')
+        return redirect('journal_research_backend')
+    else :
+        print(journalresearch_form.errors)
+    context = {
+         'form': journalresearch_form,
+         'Data': data,
+     }
+    return render(request, 'landingpage/backend/journal_research_backend.html', context)
+
+def journal_research_backend_delete(request, id):
+    data = get_object_or_404(JournalUmktModel,id=id)
+    
+    if os.path.isfile(data.cover_jurnal.path) == True:
+        os.remove(data.cover_jurnal.path)
+    JournalUmktModel.objects.filter(id=id).delete()
+    messages.error(request, 'Data Journal of Social Research Berhasil di Hapus')
+    return redirect('journal_research_backend' )
+
+def journal_research_backend_update(request, id):
+    journal_research_edit = JournalUmktModel.objects.get(id=id)
+
+    data_edit = {
+        'judul_jurnal' : journal_research_edit.judul_jurnal,
+        'issn' : journal_research_edit.issn,
+        'publication' : journal_research_edit.publication,
+        'index' :journal_research_edit.index,
+        'deskripsi' : journal_research_edit.deskripsi,
+        'cover_jurnal' : journal_research_edit.cover_jurnal,
+        'link_view_jurnal' : journal_research_edit.link_view_jurnal,
+        'link_current_issue' : journal_research_edit.link_current_issue,
+        'link_online_submission' : journal_research_edit.link_online_submission,
+        'link_download_template' : journal_research_edit.link_download_template,
+        'jenis_journal' : journal_research_edit.jenis_journal,
+    }
+    journal_research_form_edit = JournalUmktForm(request.POST or None,request.FILES or None, initial=data_edit , instance=journal_research_edit)
+    
+    if request.method == "POST" and journal_research_form_edit.is_valid():
+        journal_research_form_edit.save()
+        messages.info(request, 'Data Journal of Social Research Berhasil di Edit')
+        return redirect('journal_research_backend')
+    else:
+        print(journal_research_form_edit.errors)
+
+    context = {
+        'form': journal_research_form_edit,
+    }
+    return render(request, 'landingpage/backend/journal_research_backend_update.html', context)
+
+def journal_research_backend_detail(request,id):
+    data = JournalUmktModel.objects.get(id=id)
+    context = {
+        'data': data,
+    }
+    return render(request, 'landingpage/backend/journal_research_backend_detail.html', context)

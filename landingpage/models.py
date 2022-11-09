@@ -59,15 +59,24 @@ class ContactModel(models.Model):
    ig       = models.CharField(max_length=40, null=True)
    alamat   = models.TextField(blank=True)
    
-def filepath_journal_serving(request, filename):
+def filepath_journal_umkt(request, filename):
     old_filename = filename
     timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
     filename = "%s%s" % (timeNow, old_filename)
-    return os.path.join('uploads/data_journalserving/', filename)
+    return os.path.join('uploads/data_journal_umkt/', filename)
  
-class Journal_ServingModel(models.Model):
-   member_image = models.FileField(upload_to = filepath_journal_serving, null=True, blank=True)
-   overview = models.TextField(blank=True)
+class JournalUmktModel(models.Model):
+    cover_jurnal = models.FileField(upload_to = filepath_journal_umkt, null=True, blank=True)
+    judul_jurnal = models.CharField(max_length=50, blank=True)
+    issn = models.CharField(max_length=20, blank=True)
+    publication = models.CharField(max_length=50, blank=True)
+    index = models.TextField(blank=True)
+    deskripsi = models.TextField(blank=True)
+    link_view_jurnal = models.CharField(max_length=100, blank=True)
+    link_current_issue = models.CharField(max_length=100, blank=True)
+    link_online_submission = models.CharField(max_length=100, blank=True)
+    link_download_template = models.CharField(max_length=100, blank=True)
+    jenis_journal = models.CharField(max_length=10, blank=True)
    
 def filepath_event(request, filename):
     old_filename = filename

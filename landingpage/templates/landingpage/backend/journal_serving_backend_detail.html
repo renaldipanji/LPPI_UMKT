@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content-header">
+   <div class="container-fluid">
+       <div class="row mb-2">
+           <div class="col-sm-6">
+               <h6 class="m-0">Content</h6>
+               <h1 class="m-0">Journals Of Social Serving</h1>
+           </div>
+       </div>
+   </div>
+</div>
+   <!-- Ambil konten disini -->
+   <div class="col-12 col-sm-12">
+       <div class="card card-primary card-tabs">
+         <div class="card-header p-0 pt-1">
+           <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+             <li class="nav-item">
+               <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Detail Data</a>
+             </li>
+           </ul>
+         </div>
+         <div class="card-body">
+           <div class="tab-content" id="custom-tabs-one-tabContent">
+             <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+               <div class="card-body table-responsive p-1">
+                       <div class="form-floating mb-3 mt-1">
+                        <img src="/media/{{data.cover_jurnal}}" class="img-thumbnail mb-3 rounded mx-auto d-block" style="max-width:450px;" alt="...">
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Judul Jurnal</label>
+                          <input readonly value="{{data.judul_jurnal}}" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">ISSN</label>
+                          <input readonly value="{{data.issn}}" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Publication</label>
+                          <input readonly value="{{data.publication}}" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Index</label>
+                          <textarea readonly class="form-control">{{data.index}}</textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Deskripsi</label>
+                          <textarea readonly  class="form-control" rows="5">{{data.deskripsi}}</textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Link View Jurnal</label>
+                          <input readonly value="{{data.link_view_jurnal}}" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Link Current Issue</label>
+                          <input readonly value="{{data.link_current_issue}}" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Link Online Submission</label>
+                          <input readonly value="{{data.link_online_submission}}" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Link Download Template</label>
+                          <input readonly value="{{data.link_download_template}}" class="form-control">
+                        </div>
+                     </div>
+               <div class="col-md-6 mt-2">
+                <a href="{% url 'journal_serving_backend'%}" class='btn btn-primary'>Kembali</a>
+               </div>
+               </div>
+             </div>
+
+           </div>
+         </div>
+       </div>
+     </div>
+     
+{% endblock content %}

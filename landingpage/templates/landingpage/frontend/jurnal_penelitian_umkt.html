@@ -15,74 +15,42 @@
   </section><!-- End Breadcrumbs -->
   <section id="journal_research" class="journal_research">
     <div class="container-fluid px-md-5 px-sm-3">
-
         <div class="row" class="jurnal-research">
         <!-- Card -->
+        {% for data in data_journal  %}
         <div class="col-12 mb-5">
           <div class="row">
             <div class="col-3 box-cover-journal">
-              <img class="cover-journal rounded" src="{% static 'landingpage/assets/img/journal-cover/cover-jse.png' %}">
+              <img class="cover-journal rounded" src="/media/{{data.cover_jurnal}}">
             </div>
             <div class="col-9 box-content-journal py-2">
               <div class="row">
                 <div class="col-12 title-jurnal mb-1">
-                  <a href="#"> JSE Journal of Science and Engineering </a>
+                  <a href="#"> {{data.judul_jurnal}} </a>
                 </div>
                 <div class="col-12 issn-jurnal">
-                  ISSN 2723-3944
+                  ISSN {{data.issn}}
                 </div>
                 <div class="col-12 publication-range-jurnal">
-                  Publication: Twice a year (January and July)
+                  Publication: {{data.publication}}
                 </div>
                 <div class="col-12 index-jurnal mb-sm-3 mb-1">
-                  Index:  Google Scholar, PKP Index, Crossref, Publons, Scilit, ICI World of journals, ResearchBib, OneSearch
+                  Index:  {{data.index}}
                 </div>
                 <div class="col-12 description-jurnal mb-sm-3 mb-1">
-                  JSE Journal of Science and Engineering is an open-access and peer-reviewed scholarly international journal for engineers and technologist. This journal accepts unpublished research and review papers in the areas of Mechanical and Manufacturing Engineering, Structural and Civil Engineering, also Informatics and Information Technology. Potential authors are invited to submit articles in English. Each published article has a permanent Digital Object Identifier (DOI) in compliance with the international standard ISO 26324.
+                  {{data.deskripsi}}
                 </div>
                 <div class="col-12 other-jurnal">
-                  <a href="https://journals.umkt.ac.id/index.php/jse" class="btn btn-secondary rounded btn-view-journal mr-sm-3 mr-1">View Journal</a>
-                  <a href="https://journals.umkt.ac.id/index.php/jse/issue" class="btn btn-secondary rounded btn-current-journal mr-sm-3 mr-1">Current Issue</a>
-                  <a href="http://journals.umkt.ac.id/index.php/jse/about/submissions" class="btn btn-secondary rounded btn-current-journal mr-sm-3 mr-1">Online Submission</a>
-                  <a href="http://fst.umkt.ac.id/v1/sites/default/files/webform/myfiles/template-JSE-new.doc" class="btn btn-secondary rounded btn-current-journal mr-sm-3 mr-1">Download Template</a>
+                  <a href="{{data.link_view_jurnal}}" class="btn btn-secondary rounded btn-view-journal mr-sm-3 mr-1">View Journal</a>
+                  <a href="{{data.link_current_issue}}" class="btn btn-secondary rounded btn-current-journal mr-sm-3 mr-1">Current Issue</a>
+                  <a href="{{data.link_online_submission}}" class="btn btn-secondary rounded btn-current-journal mr-sm-3 mr-1">Online Submission</a>
+                  <a href="{{data.link_download_template}}" class="btn btn-secondary rounded btn-current-journal mr-sm-3 mr-1">Download Template</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="col-12">
-          <div class="row">
-            <div class="col-3 box-cover-journal">
-              <img class="cover-journal rounded" src="{% static 'landingpage/assets/img/journal-cover/cover-actiya.png' %}">
-            </div>
-            <div class="col-9 box-content-journal py-2">
-              <div class="row">
-                <div class="col-12 title-jurnal mb-1">
-                  <a href="#">Acitya: Journal of Teaching and Education </a>
-                </div>
-                <div class="col-12 issn-jurnal">
-                  E-ISSN: 2655-9722
-                </div>
-                <div class="col-12 publication-range-jurnal">
-                  Publication: Twice a year (January and July)
-                </div>
-                <div class="col-12 index-jurnal mb-sm-3 mb-1">
-                  Index:  SINTA 4, Google Scholar, DOAJ, Garuda, Neliti, PKP Index, Crossref, Publons, Scilit, ICI World of journals, ResearchBib, OneSearch, BASE, Scientific Indexing Services, ISJD, WorldCat, Moraref, Dimensions.
-                </div>
-                <div class="col-12 description-jurnal mb-sm-3 mb-1">
-                  ACITYA Journal of Teaching & Education provides scientific articles of teaching and education that can be publications of scientific articles, book reviews, original research reports, and reviews in education. This journal consists of three sections. The paper must be submitted according to the section areas. The sections include English Language Teaching, English Literature, Linguistics, & English for Specific Purpose, Curriculum Development, Teacher Education, ICT & Learning Media, Physical Education, Classroom Action Research, & Educational Studies.
-                </div>
-                <div class="col-12 other-jurnal">
-                  <a href="https://journals.umkt.ac.id/index.php/acitya" class="btn btn-secondary rounded btn-view-journal mr-sm-3 mr-1">View Journal</a>
-                  <a href="https://journals.umkt.ac.id/index.php/acitya/issue/" class="btn btn-secondary rounded btn-current-journal mr-sm-3 mr-1">Current Issue</a>
-                  <a href="http://journals.umkt.ac.id/index.php/acitya/logreg" class="btn btn-secondary rounded btn-current-journal mr-sm-3 mr-1">Online Submission</a>
-                  <a href="https://drive.google.com/file/d/1cim0GdeF0lUmwYPDVuL50vXOcqlf9Ht4/view" class="btn btn-secondary rounded btn-current-journal mr-sm-3 mr-1">Download Template</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
