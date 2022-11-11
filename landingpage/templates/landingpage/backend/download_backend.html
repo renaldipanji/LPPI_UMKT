@@ -1,0 +1,108 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h6 class="m-0">Content</h6>
+        <h1 class="m-0">Downloads</h1>
+      </div>
+    </div>
+  </div>
+  </div>
+      {% comment %} Include Message {% endcomment %}
+      {% include "pesan.html" %}  
+    <!-- Ambil konten disini -->
+    <div class="col-12 col-sm-12">
+      <div class="card card-primary card-tabs">
+        <div class="card-header p-0 pt-1">
+          <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="custom-tabs-one-profile-tab" data-bs-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Tambah Data</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content" id="custom-tabs-one-tabContent">
+            <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+              <div class="card-body table-responsive p-0">
+                <table class="table table-head-fixed text-nowrap dataTable no-footer" id="table_default" role="grid" aria-describedby="table_default_info">
+                    <thead>
+                      <tr role="row">
+                        <th class="sorting sorting_asc" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+                        <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Username: activate to sort column ascending">Nama File</th>
+                        <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">Jenis File</th>
+                        <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Institusi: activate to sort column ascending">Size</th>
+                        <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Tindakan: activate to sort column ascending">Tindakan</th>
+                    </tr>
+                    </thead>
+                    <tbody id="data_tabel">
+                      {% for data in Data  %}
+                      <tr>
+                        <td>{{forloop.counter}}</td>
+                      <td>{{data.nama_file}}</td>
+                      <td><img src="{{data.jenis_file}}" style="max-height:30px;" alt=""></td>
+                      <td>{{data.ukuran_file}}</td>
+                      <td>
+                        <a href="/media/{{data.file_download}}"  class="btn btn-info btn-sm btn-modal-lihat">
+                          <span class="fas fa-eye"></span> Lihat File
+                        </a>
+                        <a href="{% url 'downloads_backend_update' data.id %}" class="btn btn-warning btn-sm btn-modal-reset-pass">
+                          <span class="fa-solid fa-pen-to-square"></span> Edit
+                        </a>
+                        <a href="{% url 'downloads_backend_delete' data.id %}" class="btn btn-danger btn-sm btn-modal-hapus">
+                          <span class="fas fa-trash"></span> Hapus
+                        </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                  </table>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+              <div class="card-body">
+                <div class="row">
+                  <form method="POST" enctype="multipart/form-data">
+                    <div id="content_form_tambah" class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nama File</label>
+                                {% csrf_token %}
+                                {{form.nama_file}}
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis File</label>
+                                {{form.jenis_file}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ukuran File</label>
+                            {{form.ukuran_file}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload File Download</label>
+                            {{form.file_download}}
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-2">
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Kirim</button>
+                      </div>
+                    </div>
+                  </form>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+{% endblock %}

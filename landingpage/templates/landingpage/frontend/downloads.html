@@ -26,92 +26,30 @@
         </div>
         <div class="row justify-content-lg-center">
         <!-- Card -->
+        {% for data in data_downloads %}
+        
         <div class="col-lg-5 col-12 mb-4 download-box me-5">
           <div class="row">
             <div class="col-2 box-logo-file">
-              <img class="logo-file" src="{% static 'landingpage/assets/img/logo/pdf.svg' %}">
+              <img class="logo-file" src="{{data.jenis_file}}">
             </div>
             <div class="col-7 box-title-download">
               <div class="row">
               </div>
               <div class="col-12 title-download">
-                <h5>Perkuliahan Online dengan Open learning</h5>
+                <h5>{{data.nama_file}}</h5>
               </div>
               <div class="col-12 size-file text-muted">
-                <i class="fa-solid fa-hard-drive"></i> 2 MB
+                <i class="fa-solid fa-hard-drive"></i> {{data.ukuran_file}}
               </div>
             </div>
             <div class="col-3 btn-download">
-              <a class="btn btn-secondary download-text">Download</a>
+              <a class="btn btn-secondary download-text" href="/media/{{data.file_download}}">Download</a>
               <a class="btn btn-secondary download-icon"><i class="fa-solid fa-download"></i></a>
             </div>
           </div>
         </div>
-        
-        <div class="col-lg-5 col-12 mb-4 download-box">
-          <div class="row">
-            <div class="col-2 box-logo-file">
-              <img class="logo-file" src="{% static 'landingpage/assets/img/logo/pdf.svg' %}">
-            </div>
-            <div class="col-7 box-title-download">
-              <div class="row">
-              </div>
-              <div class="col-12 title-download">
-                <h5>Panduan Penulisan Buku Ajar</h5>
-              </div>
-              <div class="col-12 size-file text-muted">
-                <i class="fa-solid fa-hard-drive"></i> 6.2 MB
-              </div>
-            </div>
-            <div class="col-3 btn-download">
-              <a class="btn btn-secondary download-text">Download</a>
-              <a class="btn btn-secondary download-icon"><i class="fa-solid fa-download"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-5 col-12 mb-4 download-box me-5">
-          <div class="row">
-            <div class="col-2 box-logo-file">
-              <img class="logo-file" src="{% static 'landingpage/assets/img/logo/pdf.svg' %}">
-            </div>
-            <div class="col-7 box-title-download">
-              <div class="row">
-              </div>
-              <div class="col-12 title-download">
-                <h5>Koordinasi Penerima Hibah Buku Ajar</h5>
-              </div>
-              <div class="col-12 size-file text-muted">
-                <i class="fa-solid fa-hard-drive"></i> 5 MB
-              </div>
-            </div>
-            <div class="col-3 btn-download">
-              <a class="btn btn-secondary download-text">Download</a>
-              <a class="btn btn-secondary download-icon"><i class="fa-solid fa-download"></i></a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-5 col-12 mb-4 download-box">
-          <div class="row">
-            <div class="col-2 box-logo-file">
-              <img class="logo-file" src="{% static 'landingpage/assets/img/logo/pdf.svg' %}">
-            </div>
-            <div class="col-7 box-title-download">
-              <div class="row">
-              </div>
-              <div class="col-12 title-download">
-                <h5>Materi Pengembangan Naskah Publikasi</h5>
-              </div>
-              <div class="col-12 size-file text-muted">
-                <i class="fa-solid fa-hard-drive"></i> 3.2 MB
-              </div>
-            </div>
-            <div class="col-3 btn-download">
-              <a class="btn btn-secondary download-text">Download</a>
-              <a class="btn btn-secondary download-icon"><i class="fa-solid fa-download"></i></a>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
 
       </div>
     </div>

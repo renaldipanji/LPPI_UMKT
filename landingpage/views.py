@@ -85,7 +85,11 @@ def textbook(request):
     return render(request, 'landingpage/frontend/textbook.html',context)
 
 def downloads(request):
-    return render(request, 'landingpage/frontend/downloads.html')
+    data = DownloadContent.objects.all()
+    context={
+        'data_downloads':data,
+    }
+    return render(request, 'landingpage/frontend/downloads.html',context)
 
 def journal_research_umkt(request):
     data = JournalUmktModel.objects.all().filter(jenis_journal='research')
@@ -267,15 +271,6 @@ def contact_backend (request):
         'form':contact_form,
     }
     return render(request,'landingpage/backend/contact_backend.html', context)
-
-def journal_serving_backend (request):
-    #data = divisippi.objects.get(id='1')
-   # divisippi_form = DivisippiForm(request.FILES, request.POST or None)
-   # context = {
-   #     'form': divisippi_form,
-   #     #'data': data,
-   # }
-   return render(request, 'landingpage/backend/journal_serving_backend.html')
 
 def event_backend (request):
     data = EventModel.objects.get(id='1')
@@ -550,7 +545,15 @@ def journal_serving_backend_update(request, id):
         'jenis_journal' : journal_serving_edit.jenis_journal,
     }
     journal_serving_form_edit = JournalUmktForm(request.POST or None,request.FILES or None, initial=data_edit , instance=journal_serving_edit)
-    
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'cover_jurnal' in result_request
+        if cek_image == False:
+            if journal_serving_edit.cover_jurnal:
+                if os.path.isfile(journal_serving_edit.cover_jurnal.path) == True:
+                    os.remove(journal_serving_edit.cover_jurnal.path)
+
     if request.method == "POST" and journal_serving_form_edit.is_valid():
         journal_serving_form_edit.save()
         messages.info(request, 'Data Journal of Social Serving Berhasil di Edit')
@@ -612,7 +615,15 @@ def journal_research_backend_update(request, id):
         'jenis_journal' : journal_research_edit.jenis_journal,
     }
     journal_research_form_edit = JournalUmktForm(request.POST or None,request.FILES or None, initial=data_edit , instance=journal_research_edit)
-    
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'cover_jurnal' in result_request
+        if cek_image == False:
+            if journal_research_edit.cover_jurnal:
+                if os.path.isfile(journal_research_edit.cover_jurnal.path) == True:
+                    os.remove(journal_research_edit.cover_jurnal.path)
+
     if request.method == "POST" and journal_research_form_edit.is_valid():
         journal_research_form_edit.save()
         messages.info(request, 'Data Journal of Social Research Berhasil di Edit')
@@ -631,3 +642,61 @@ def journal_research_backend_detail(request,id):
         'data': data,
     }
     return render(request, 'landingpage/backend/journal_research_backend_detail.html', context)
+
+def downloads_backend(request):
+    download_form = DownloadForm(request.POST,request.FILES or None)
+    data = DownloadContent.objects.all()
+    if request.method == 'POST':
+        if download_form.is_valid():
+            download_form.save()
+            messages.success(request, 'Data Download Berhasil di Tambahkan')
+            return redirect('downloads_backend')
+        else:
+            print(download_form.errors)
+    
+    context = {
+        'form': download_form,
+        'Data': data,
+    }
+    return render(request, 'landingpage/backend/download_backend.html', context)
+
+def downloads_backend_update(request, id):
+    download_edit = DownloadContent.objects.get(id=id)
+
+    data_edit = {
+        'nama_file' : download_edit.nama_file,
+        'jenis_file' : download_edit.jenis_file,
+        'ukuran_file' : download_edit.ukuran_file,
+        'file_download' :download_edit.file_download,
+    }
+    download_form_edit = DownloadForm(request.POST or None,request.FILES or None, initial=data_edit , instance=download_edit)
+    
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'file_download' in result_request
+        if cek_image == False:
+            if download_edit.file_download:
+                if os.path.isfile(download_edit.file_download.path) == True:
+                    os.remove(download_edit.file_download.path)
+
+    if request.method == "POST" and download_form_edit.is_valid():
+        download_form_edit.save()
+        messages.info(request, 'Data Download Berhasil di Edit')
+        return redirect('downloads_backend')
+    else:
+        print(download_form_edit.errors)
+
+    context = {
+        'form': download_form_edit,
+    }
+    return render(request, 'landingpage/backend/download_backend_update.html', context)
+
+def downloads_backend_delete(request, id):
+    data = get_object_or_404(DownloadContent,id=id)
+    
+    if os.path.isfile(data.file_download.path) == True:
+        os.remove(data.file_download.path)
+    DownloadContent.objects.filter(id=id).delete()
+    messages.error(request, 'Data Download Berhasil di Hapus')
+    return redirect('downloads_backend' )

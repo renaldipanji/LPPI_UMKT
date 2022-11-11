@@ -56,6 +56,9 @@ urlpatterns = [
     path('sipena-backend/', sipena_backend, name='sipena_backend'),
     path('umktpress-backend/', umktpress_backend, name='umktpress_backend'),
     path('elearningsupport-backend/', elearningsupport_backend, name='elearningsupport_backend'),
+    path('downloads-backend/', downloads_backend, name='downloads_backend'),
+    path('downloads-backend-update/<str:id>/', downloads_backend_update, name='downloads_backend_update'),
+    path('downloads-backend-delete/<str:id>/', downloads_backend_delete, name='downloads_backend_delete'),
 
 ]
 
