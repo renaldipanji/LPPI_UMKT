@@ -8,3 +8,4 @@ media/uploads/profil/*
 env/
 LPPI_UMKT/__pycache__
 .vscode/
+static/

@@ -1,7 +1,7 @@
 from django import forms
 from .models import *
 from django.forms import widgets
-
+from ckeditor.widgets import CKEditorWidget
 CHOICES = [('False', 'Belum'), ('True', 'Sudah')]
 
 class OrgstrukturForm(forms.ModelForm):
@@ -361,6 +361,28 @@ class DownloadForm(forms.ModelForm):
                     'class':'form-control', 'placeholder':'Ukuran File'
                 }),
             'file_download': forms.FileInput(
+                attrs={
+                    'class':'form-control',
+                    'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',
+                    'oninput': 'setCustomValidity("")'
+                }
+            ), 
+        }
+
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = NewsModel
+        fields = ['user','judul','created_at','updated_at','content','cover_berita']
+        widgets = {
+            'user' : forms.HiddenInput(),
+            'judul' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama File'
+                }),
+            'created_at' : forms.HiddenInput(),
+            'updated_at' : forms.HiddenInput(),
+            'content' : CKEditorWidget(),
+            'cover_berita': forms.FileInput(
                 attrs={
                     'class':'form-control',
                     'oninvalid': 'this.setCustomValidity("Data tidak boleh kosong")',

@@ -2,6 +2,7 @@ from .forms import *
 from .models import *
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+import time
 
 def about(request):
     return render(request,'landingpage/frontend/about.html')
@@ -250,7 +251,8 @@ def textbooks_backend (request):
     return render(request, 'landingpage/backend/textbooks_backend.html', context)
     return render(request, 'landingpage/e_learning.html')
 
-#>>>>>>>>>>>>>>>>>> Backend Views <<<<<<<<<<<<<<#
+#>>>>>>>>>>>>>>>>>>>>> Backend Views <<<<<<<<<<<<<<<<<<#
+
 def contact_backend (request):
     contact_update = ContactModel.objects.get(id='1')
     data = {
@@ -644,7 +646,7 @@ def journal_research_backend_detail(request,id):
     return render(request, 'landingpage/backend/journal_research_backend_detail.html', context)
 
 def downloads_backend(request):
-    download_form = DownloadForm(request.POST,request.FILES or None)
+    download_form = DownloadForm(request.POST or None,request.FILES or None)
     data = DownloadContent.objects.all()
     if request.method == 'POST':
         if download_form.is_valid():
@@ -700,3 +702,24 @@ def downloads_backend_delete(request, id):
     DownloadContent.objects.filter(id=id).delete()
     messages.error(request, 'Data Download Berhasil di Hapus')
     return redirect('downloads_backend' )
+
+def news_backend(request):
+    news_form = NewsForm(request.POST or None,request.FILES or None)
+    data = NewsModel.objects.all()
+    user = request.user.id
+    created_at = int(round(time.time() * 1000))
+    if request.method == 'POST':
+        if news_form.is_valid():
+            news_form.save()
+            messages.success(request, 'Data Berita Berhasil di Tambahkan')
+            return redirect('news_backend')
+        else:
+            print(news_form.errors)
+    
+    context = {
+        'form': news_form,
+        'user': user,
+        'created_at': created_at,
+        # 'Data': data,
+    }
+    return render(request, 'landingpage/backend/news_backend.html',context)

@@ -1,6 +1,10 @@
 from django.db import models
 import datetime
 import os
+from ckeditor.fields import RichTextField
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.db.models.deletion import CASCADE
 # Create your models here.
 def filepath_workprogramme(request, filename):
     old_filename = filename
@@ -118,3 +122,17 @@ class DownloadContent(models.Model):
     jenis_file = models.CharField(max_length = 100, null=True)
     ukuran_file = models.CharField(max_length = 10, null=True)
     file_download = models.FileField(upload_to = filepath_downloads, null=True, blank=True)
+
+def filepath_news(request, filename):
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('uploads/file_news/', filename)
+
+class NewsModel(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
+    judul = models.CharField(max_length = 150, null=True)
+    cover_berita = models.FileField(upload_to = filepath_news, null=True, blank=True)
+    content = RichTextField(blank=True, null=True)
+    created_at = models.BigIntegerField(blank=True, null=True)
+    updated_at = models.BigIntegerField(blank=True, null=True)
