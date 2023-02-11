@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 import os
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
@@ -133,6 +134,6 @@ class NewsModel(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
     judul = models.CharField(max_length = 150, null=True)
     cover_berita = models.FileField(upload_to = filepath_news, null=True, blank=True)
-    content = RichTextField(blank=True, null=True)
+    content = RichTextUploadingField(blank=True, null=True)
     created_at = models.BigIntegerField(blank=True, null=True)
     updated_at = models.BigIntegerField(blank=True, null=True)

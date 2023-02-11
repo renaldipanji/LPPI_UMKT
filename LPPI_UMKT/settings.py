@@ -168,12 +168,12 @@ CKEDITOR_CONFIGS = {
             'embedsemantic',
             'autogrow',
             # 'devtools',
-            'widget',
-            'lineutils',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath'
+            # 'widget',
+            # 'lineutils',
+            # 'clipboard',
+            # 'dialog',
+            # 'dialogui',
+            # 'elementspath'
         ]),
     }
 }

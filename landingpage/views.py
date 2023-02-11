@@ -720,6 +720,15 @@ def news_backend(request):
         'form': news_form,
         'user': user,
         'created_at': created_at,
-        # 'Data': data,
+        'Data': data,
     }
     return render(request, 'landingpage/backend/news_backend.html',context)
+
+def news_backend_delete(request, id):
+    data = get_object_or_404(NewsModel,id=id)
+    
+    if os.path.isfile(data.cover_berita.path) == True:
+        os.remove(data.cover_berita.path)
+    NewsModel.objects.filter(id=id).delete()
+    messages.error(request, 'Data Berita Berhasil di Hapus')
+    return redirect('news_backend' )

@@ -48,7 +48,7 @@
                             role="tabpanel"
                             aria-labelledby="custom-tabs-one-home-tab">
                             <div class="card-body table-responsive p-1">
-                                {% comment %} <table
+                                <table
                                     class="table table-head-fixed text-nowrap dataTable no-footer"
                                     id="table_default"
                                     role="grid"
@@ -69,21 +69,7 @@
                                                 aria-controls="table_default"
                                                 rowspan="1"
                                                 colspan="1"
-                                                aria-label="Username: activate to sort column ascending">Judul Jurnal</th>
-                                            <th
-                                                class="sorting"
-                                                tabindex="0"
-                                                aria-controls="table_default"
-                                                rowspan="1"
-                                                colspan="1"
-                                                aria-label="Email: activate to sort column ascending">ISSN</th>
-                                            <th
-                                                class="sorting"
-                                                tabindex="0"
-                                                aria-controls="table_default"
-                                                rowspan="1"
-                                                colspan="1"
-                                                aria-label="Institusi: activate to sort column ascending">Publication</th>
+                                                aria-label="Username: activate to sort column ascending">Judul Berita</th>
                                             <th
                                                 class="sorting"
                                                 tabindex="0"
@@ -97,24 +83,22 @@
                                         {% for data in Data %}
                                             <tr>
                                                 <td>{{forloop.counter}}</td>
-                                                <td>{{data.judul_jurnal}}</td>
-                                                <td>{{data.issn}}</td>
-                                                <td>{{data.publication}}</td>
+                                                <td>{{data.judul}}</td>
                                                 <td>
                                                     <a
                                                         class="btn btn-info btn-sm"
-                                                        href={% url 'journal_research_backend_detail' data.id %}>
+                                                        href="{% url 'journal_research_backend_detail' data.id %}">
                                                         <span class="fas fa-info-circle"></span>
                                                         Detail
                                                     </a>
                                                     <a
                                                         class="btn btn-warning btn-sm"
-                                                        href={% url 'journal_research_backend_update' data.id %}>
+                                                        href="{% url 'journal_research_backend_update' data.id %}">
                                                         <span class="fas fa-edit"></span>
                                                         Edit
                                                     </a>
                                                     <a
-                                                        href="{% url 'journal_research_backend_delete' data.id %}"
+                                                        href="{% url 'news_backend_delete' data.id %}"
                                                         class="btn btn-danger btn-sm btn-modal-hapus">
                                                         <span class="fas fa-trash"></span>
                                                         Hapus
@@ -123,7 +107,7 @@
                                             </tr>
                                         {% endfor %}
                                     </tbody>
-                                </table> {% endcomment %}
+                                </table>
                             </div>
                         </div>
                         <div
