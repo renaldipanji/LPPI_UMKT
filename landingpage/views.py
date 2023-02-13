@@ -250,6 +250,24 @@ def textbooks_backend (request):
     return render(request, 'landingpage/backend/textbooks_backend.html', context)
     return render(request, 'landingpage/e_learning.html')
 
+def penelitian_backend(request):
+    return render(request, 'landingpage/backend/penelitian_backend.html')
+
+def pengabdian_backend(request):
+    return render(request, 'landingpage/backend/pengabdian_backend.html')
+
+def master_fakultas_backend(request):
+    return render(request, "landingpage/backend/master_fakultas_backend.html")
+
+def master_prodi_backend(request):
+    return render(request, "landingpage/backend/master_prodi_backend.html")
+
+def master_dosen_backend(request):
+    return render(request, "landingpage/backend/master_dosen_backend.html")
+
+def master_mahasiswa_backend(request):
+    return render(request, "landingpage/backend/master_mahasiswa_backend.html")
+
 #>>>>>>>>>>>>>>>>>> Backend Views <<<<<<<<<<<<<<#
 def contact_backend (request):
     contact_update = ContactModel.objects.get(id='1')

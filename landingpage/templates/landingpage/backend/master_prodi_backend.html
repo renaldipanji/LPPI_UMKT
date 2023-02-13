@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block import_plugin %}
+    <link
+        rel="stylesheet"
+        href="{% static 'landingpage/assets/css/yearpicker.css' %}"/>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+{% endblock import_plugin %}
+{% block content %}
+<div class="content-header">
+  <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6">
+              <h6 class="m-0">Data Master</h6>
+              <h1 class="m-0">Program Studi</h1>
+          </div>
+      </div>
+  </div>
+</div>
+    {% comment %} Include Message {% endcomment %}
+    {% include "pesan.html" %}
+ <!-- Ambil konten disini -->
+ <div class="col-12 col-sm-12">
+    <div class="card card-primary card-tabs">
+      <div class="card-header p-0 pt-1">
+        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="custom-tabs-one-profile-tab" data-bs-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Tambah Data</a>
+          </li>
+        </ul>
+    </div>
+
+    <div class="card-body">
+        <div class="tab-content" id="custom-tabs-one-tabContent">
+          <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+            <div class="card-body table-responsive p-1">
+              <table class="table table-head-fixed text-nowrap dataTable no-footer" id="table_default" role="grid" aria-describedby="table_default_info">
+                  <thead>
+                    <tr role="row">
+                      <th class="sorting sorting_asc" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Judul: activate to sort column ascending">Fakultas</th>
+                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Judul: activate to sort column ascending">Program Studi</th>
+                  </tr>
+                  </thead>
+                  <tbody id="data_tabel">
+                     {% for data in Data  %}
+                    <tr>
+                      <td>1</td>
+                    <td>{{data.nidn}}</td>
+                    <td>{{data.nama_dosen}}</td>
+                    <td>{{data.program_studi}}</td>
+                    <td>{{data.fakultas}}</td>
+                    <td>{{data.judul_artikel}}</td>
+                    <td>{{data.tahun}}</td>
+                    <td><a href="{{data.link}}" class="text-decoration-none">{{data.link}}</a></td>
+                    <td>
+                      <a class="btn btn-primary btn-sm" href="{% url 'journals_backend_update' data.id %}">
+                        <span class="fas fa-edit"></span> Edit
+                      </a>
+                      <a href="{% url 'journals_backend_delete' data.id %}" class="btn btn-danger btn-sm btn-modal-hapus">
+                        <span class="fas fa-trash"></span> Hapus
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+            <div class="card-body table-responsive p-1">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Fakultas</label>
+                  <input type="text" class="form-control" placeholder="Pilih Fakultas">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Nama Program Studi</label>
+                  <input type="text" class="form-control" placeholder="Nama Program Studi">
+                </div>
+                <div class="col-md-6 mt-2">
+                  <div class="form-group">
+                    <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Tambah</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %} 
