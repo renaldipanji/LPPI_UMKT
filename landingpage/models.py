@@ -133,6 +133,7 @@ def filepath_news(request, filename):
 class NewsModel(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
     judul = models.CharField(max_length = 150, null=True)
+    kategori = models.CharField(max_length = 100, null=True)
     cover_berita = models.FileField(upload_to = filepath_news, null=True, blank=True)
     content = RichTextUploadingField(blank=True, null=True)
     created_at = models.BigIntegerField(blank=True, null=True)

@@ -60,6 +60,8 @@ urlpatterns = [
     path('downloads-backend-update/<str:id>/', downloads_backend_update, name='downloads_backend_update'),
     path('downloads-backend-delete/<str:id>/', downloads_backend_delete, name='downloads_backend_delete'),
     path('news-backend/', news_backend, name='news_backend'),
+    path('news-backend-detail/<str:id>/', news_backend_detail, name='news_backend_detail'),
+    path('news-backend-update/<str:id>/', news_backend_update, name='news_backend_update'),
     path('news-backend-delete/<str:id>/', news_backend_delete, name='news_backend_delete'),
 ]
 

@@ -11,10 +11,15 @@
             </div>
         </div>
     </div>
+    <script> 
+        $(document).ready(function () {
+        $(".django-ckeditor-widget").css("width", "100%")
+     });
+    </script>
         {% comment %} Include Message {% endcomment %}
-        {% include "pesan.html" %}
         <!-- Ambil konten disini -->
         <div class="col-12 col-sm-12">
+            {% include "pesan.html" %}
             <div class="card card-primary card-tabs">
                 <div class="card-header p-0 pt-1">
                     <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
@@ -60,23 +65,25 @@
                                                 tabindex="0"
                                                 aria-controls="table_default"
                                                 rowspan="1"
-                                                colspan="1"
-                                                aria-sort="ascending"
-                                                aria-label="No: activate to sort column descending">No</th>
+                                                colspan="1">No</th>
                                             <th
                                                 class="sorting"
                                                 tabindex="0"
                                                 aria-controls="table_default"
                                                 rowspan="1"
-                                                colspan="1"
-                                                aria-label="Username: activate to sort column ascending">Judul Berita</th>
+                                                colspan="1">Judul Berita</th>
                                             <th
                                                 class="sorting"
                                                 tabindex="0"
                                                 aria-controls="table_default"
                                                 rowspan="1"
-                                                colspan="1"
-                                                aria-label="Tindakan: activate to sort column ascending">Tindakan</th>
+                                                colspan="1">Kategori Berita</th>
+                                            <th
+                                                class="sorting"
+                                                tabindex="0"
+                                                aria-controls="table_default"
+                                                rowspan="1"
+                                                colspan="1">Tindakan</th>
                                         </tr>
                                     </thead>
                                     <tbody id="data_tabel">
@@ -84,16 +91,17 @@
                                             <tr>
                                                 <td>{{forloop.counter}}</td>
                                                 <td>{{data.judul}}</td>
+                                                <td>{{data.kategori}}</td>
                                                 <td>
                                                     <a
                                                         class="btn btn-info btn-sm"
-                                                        href="{% url 'journal_research_backend_detail' data.id %}">
+                                                        href="{% url 'news_backend_detail' data.id %}">
                                                         <span class="fas fa-info-circle"></span>
                                                         Detail
                                                     </a>
                                                     <a
                                                         class="btn btn-warning btn-sm"
-                                                        href="{% url 'journal_research_backend_update' data.id %}">
+                                                        href="{% url 'news_backend_update' data.id %}">
                                                         <span class="fas fa-edit"></span>
                                                         Edit
                                                     </a>
@@ -131,6 +139,11 @@
                                                     <label for="exampleFormControlInput1" class="form-label">
                                                         Judul Berita</label>
                                                     {{form.judul}}
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlInput1" class="form-label">
+                                                        Kategori Berita</label>
+                                                    {{form.kategori}}
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="exampleFormControlInput1" class="form-label">Cover Berita</label>

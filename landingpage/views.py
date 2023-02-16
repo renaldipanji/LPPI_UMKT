@@ -724,11 +724,58 @@ def news_backend(request):
     }
     return render(request, 'landingpage/backend/news_backend.html',context)
 
+def news_backend_detail(request,id):
+    data = NewsModel.objects.get(id=id)
+    context = {
+        'data': data,
+    }
+    return render(request, 'landingpage/backend/news_backend_detail.html', context)
+
 def news_backend_delete(request, id):
     data = get_object_or_404(NewsModel,id=id)
-    
-    if os.path.isfile(data.cover_berita.path) == True:
-        os.remove(data.cover_berita.path)
+    try:
+        if os.path.isfile(data.cover_berita.path) == True:
+            os.remove(data.cover_berita.path)
+    except Exception as e:
+        print (e)   
     NewsModel.objects.filter(id=id).delete()
     messages.error(request, 'Data Berita Berhasil di Hapus')
     return redirect('news_backend' )
+
+def news_backend_update(request, id):
+    news_edit = NewsModel.objects.get(id=id)
+
+    data_edit = {
+        'judul' : news_edit.judul,
+        'user' : news_edit.user,
+        'kategori' : news_edit.kategori,
+        'cover_berita' : news_edit.cover_berita,
+        'content' :news_edit.content,
+        'created_at' : news_edit.created_at,
+        'updated_at' : news_edit.updated_at,
+    }
+    news_form_edit = NewsForm(request.POST or None,request.FILES or None, initial=data_edit , instance=news_edit)
+    if request.method == 'POST':
+        result_request = dict(request.POST)
+        #ambil data cek image
+        cek_image = 'cover_berita' in result_request
+        if cek_image == False:
+            if news_edit.cover_berita:
+                try:
+                    if os.path.isfile(news_edit.cover_berita.path) == True:
+                        os.remove(news_edit.cover_berita.path)
+                except Exception as e:
+                    print (e)   
+
+    if request.method == "POST" and news_form_edit.is_valid():
+        news_form_edit.save()
+        messages.info(request, 'Data Berita Berhasil di Edit')
+        return redirect('news_backend')
+    else:
+        print(news_form_edit.errors)
+
+    context = {
+        'form': news_form_edit,
+        'data': news_edit,
+    }
+    return render(request, 'landingpage/backend/news_backend_update.html', context)

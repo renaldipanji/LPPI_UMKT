@@ -3,6 +3,7 @@ from .models import *
 from django.forms import widgets
 from ckeditor.widgets import CKEditorWidget
 CHOICES = [('False', 'Belum'), ('True', 'Sudah')]
+kategori_berita = [('Workshop', 'Workshop'), ('Pengumuman', 'Pengumuman'), ('Pelatihan', 'Pelatihan')]
 
 class OrgstrukturForm(forms.ModelForm):
     class Meta :
@@ -243,7 +244,6 @@ class DivisiForm(forms.ModelForm):
             ),
          }
 
-
 class ServiceForm(forms.ModelForm):
     class Meta:
         model = ServiceModel
@@ -372,9 +372,15 @@ class DownloadForm(forms.ModelForm):
 class NewsForm(forms.ModelForm):
     class Meta:
         model = NewsModel
-        fields = ['user','judul','created_at','updated_at','content','cover_berita']
+        fields = ['user','judul','created_at','updated_at','content','cover_berita','kategori']
         widgets = {
             'user' : forms.HiddenInput(),
+            'kategori' : forms.Select(
+                choices=kategori_berita,
+                 attrs={
+                     'class':'form-control',
+                     'placeholder' : 'Tahap Luaran 10'
+                }),
             'judul' : forms.TextInput(
                 attrs={
                     'class':'form-control', 'placeholder':'Nama File'

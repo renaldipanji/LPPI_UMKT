@@ -83,7 +83,6 @@ def lupaPassword(request):
             ssl = request.is_secure()
             send_forget_password_mail(user_obj.email, token, domain, ssl)
             return redirect('konfirmasi_reset_pass')
-    
     except Exception as e:
         print (e)    
     return render(request, 'akun/lupa_password.html')
