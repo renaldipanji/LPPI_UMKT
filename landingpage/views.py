@@ -251,22 +251,273 @@ def textbooks_backend (request):
     return render(request, 'landingpage/e_learning.html')
 
 def penelitian_backend(request):
-    return render(request, 'landingpage/backend/penelitian_backend.html')
+    form = PenelitianDosenForm(request.POST or None)
+    data = PenelitianDosenModel.objects.all()
+    if request.method == 'POST' and form.is_valid():
+        id_dosen = request.POST['ketua_peneliti']
+        data_dosen = DosenModel.objects.get(id=id_dosen)
+        penelitian_form = form.save(commit=False)
+        penelitian_form.fakultas = data_dosen.fakultas
+        penelitian_form.prodi = data_dosen.prodi
+        penelitian_form.save()
+        messages.success(request, 'Data Penelitian Berhasil di Tambahkan')
+        redirect('penelitian_backend')
+    else:
+        print(form.errors)
+        
+    context = {
+        'form': form,
+        'Data':data,
+    }
+    return render(request, 'landingpage/backend/penelitian_backend.html', context)
 
 def pengabdian_backend(request):
     return render(request, 'landingpage/backend/pengabdian_backend.html')
 
 def master_fakultas_backend(request):
-    return render(request, "landingpage/backend/master_fakultas_backend.html")
+    data = FakultasModel.objects.all()
+    fakultas_form = FakultasForm(request.POST or None)
+    if request.method == "POST" and fakultas_form.is_valid():
+        fakultas_form.save()
+        messages.success(request, 'Data Fakultas Berhasil di Tambahkan')
+        redirect('master_fakultas_backend')
+    else :
+        print(fakultas_form.errors)
+    
+    context = {
+        'Data' : data,
+        'form' : fakultas_form,
+        'action' : 'create',
+    }
+
+    return render(request, "landingpage/backend/master_fakultas_backend.html", context)
+
+def master_fakultas_backend_update(request,id):
+    fakultas_edit = FakultasModel.objects.get(id=id)
+
+    data_edit = {
+        'nama_fakultas' : fakultas_edit.nama_fakultas,
+    }
+    fakultas_form_edit = FakultasForm(request.POST or None, initial=data_edit, instance=fakultas_edit) 
+
+    if request.method == "POST" and fakultas_form_edit.is_valid():
+        fakultas_form_edit.save()
+        messages.info(request, 'Data Fakultas Berhasil di Edit')
+        return redirect('master_fakultas_backend')
+    else :
+        print(fakultas_form_edit.errors)
+
+    context = {
+        'form_edit' : fakultas_form_edit,
+        'action' : 'update',
+    }
+
+    return render(request, "landingpage/backend/master_fakultas_backend.html", context)
+
+def master_fakultas_backend_delete(request, id):
+    FakultasModel.objects.filter(id=id).delete()
+    messages.error(request, 'Data Fakultas Berhasil di Hapus')
+    return redirect('master_fakultas_backend')
 
 def master_prodi_backend(request):
-    return render(request, "landingpage/backend/master_prodi_backend.html")
+    data = ProdiModel.objects.select_related('fakultas')
+    prodi_form = ProdiForm(request.POST or None)
+
+    if request.method == "POST" and prodi_form.is_valid():
+        prodi_form.save()
+        messages.info(request, 'Data Prodi Berhasil ditambahkan')
+        return redirect('master_prodi_backend')
+    else :
+        print(prodi_form.errors)
+
+    context={
+        'Data': data,
+        'form': prodi_form,
+        'action': 'create',
+    }
+    return render(request, "landingpage/backend/master_prodi_backend.html", context)
+
+def master_prodi_backend_update(request,id):
+    prodi_edit = ProdiModel.objects.get(id=id)
+
+    data_edit = {
+        'fakultas' : prodi_edit.fakultas,
+        'nama_prodi' : prodi_edit.nama_prodi,
+    }
+    prodi_form_edit = ProdiForm(request.POST or None, initial=data_edit, instance=prodi_edit) 
+
+    if request.method == "POST" and prodi_form_edit.is_valid():
+        prodi_form_edit.save()
+        messages.info(request, 'Data Fakultas Berhasil di Edit')
+        return redirect('master_prodi_backend')
+    else :
+        print(prodi_form_edit.errors)
+
+    context = {
+        'form_edit' : prodi_form_edit,
+        'action' : 'update',
+    }
+
+    return render(request, "landingpage/backend/master_prodi_backend.html", context)
+
+def master_prodi_backend_delete(request, id):
+    ProdiModel.objects.filter(id=id).delete()
+    messages.error(request, 'Data Prodi Berhasil di Hapus')
+    return redirect('master_prodi_backend')
 
 def master_dosen_backend(request):
-    return render(request, "landingpage/backend/master_dosen_backend.html")
+    data = DosenModel.objects.all()
+    dosen_form = DosenForm(request.POST or None)
+
+    if request.method == "POST" and dosen_form.is_valid():
+        id_prodi = request.POST['prodi']
+        id_fakultas = ProdiModel.objects.get(id=id_prodi)
+        dosen =  dosen_form.save(commit=False)
+        dosen.fakultas = id_fakultas.fakultas
+        dosen.save()
+        messages.info(request, 'Data Dosen Berhasil ditambahkan')
+        return redirect('master_dosen_backend')
+    else :
+        print(dosen_form.errors)
+
+    context = {
+        'Data':data,
+        'form': dosen_form,
+        'action': 'create',
+    }
+    return render(request, "landingpage/backend/master_dosen_backend.html", context)
+
+def master_kategori_index_backend(request):
+    data = KategoriIndexModel.objects.all()
+    kategori_index_form = KategoriIndexForm(request.POST or None)
+
+    if request.method == "POST" and kategori_index_form.is_valid():
+        kategori_index_form.save()
+        messages.info(request, 'Data Kategori Index Berhasil ditambahkan')
+        return redirect('master_kategori_index_backend')
+    else :
+        print(kategori_index_form.errors)
+
+    context = {
+        'Data':data,
+        'form': kategori_index_form,
+        'action': 'create',
+    }
+    return render(request, "landingpage/backend/master_kategori_index_backend.html", context)
+
+def master_kategori_index_backend_delete(request, id):
+    KategoriIndexModel.objects.filter(id=id).delete()
+    messages.error(request, 'Data Kategori Index Berhasil di Hapus')
+    return redirect('master_kategori_index_backend')
+
+def master_kategori_index_backend_update(request,id):
+    kategori_index_edit = KategoriIndexModel.objects.get(id=id)
+
+    data_edit = {
+        'nama' : kategori_index_edit.nama,
+    }
+    kategori_index_form_edit = KategoriIndexForm(request.POST or None, initial=data_edit, instance=kategori_index_edit) 
+
+    if request.method == "POST" and kategori_index_form_edit.is_valid():
+        kategori_index_form_edit.save()
+        messages.info(request, 'Data Kategori Index Berhasil di Edit')
+        return redirect('master_kategori_index_backend')
+    else :
+        print(kategori_index_form_edit.errors)
+
+    context = {
+        'form_edit' : kategori_index_form_edit,
+        'action' : 'update',
+    }
+    return render(request, "landingpage/backend/master_kategori_index_backend.html", context)
+
+def master_dosen_backend_update(request,id):
+    dosen_edit = DosenModel.objects.get(id=id)
+
+    data_edit = {
+        'nidn' : dosen_edit.nidn,
+        'nama' : dosen_edit.nama,
+        'prodi' : dosen_edit.prodi,
+    }
+    dosen_form_edit = DosenForm(request.POST or None, initial=data_edit, instance=dosen_edit) 
+
+    if request.method == "POST" and dosen_form_edit.is_valid():
+        id_prodi = request.POST['prodi']
+        id_fakultas = ProdiModel.objects.get(id=id_prodi)
+        dosen = dosen_form_edit.save(commit=False)
+        dosen.fakultas  = id_fakultas.fakultas
+        dosen.save()
+        messages.info(request, 'Data dosen Berhasil di Edit')
+        return redirect('master_dosen_backend')
+    else :
+        print(dosen_form_edit.errors)
+
+    context = {
+        'form_edit' : dosen_form_edit,
+        'action' : 'update',
+    }
+    return render(request, "landingpage/backend/master_dosen_backend.html", context)
+
+def master_dosen_backend_delete(request, id):
+    DosenModel.objects.filter(id=id).delete()
+    messages.error(request, 'Data Dosen Berhasil di Hapus')
+    return redirect('master_dosen_backend')
 
 def master_mahasiswa_backend(request):
-    return render(request, "landingpage/backend/master_mahasiswa_backend.html")
+    data = MahasiswaModel.objects.all()
+    mahasiswa_form = MahasiswaForm(request.POST or None)
+
+    if request.method == "POST" and mahasiswa_form.is_valid():
+        id_prodi = request.POST['prodi']
+        id_fakultas = ProdiModel.objects.get(id=id_prodi)
+        mahasiswa =  mahasiswa_form.save(commit=False)
+        mahasiswa.fakultas = id_fakultas.fakultas
+        mahasiswa.save()
+        messages.info(request, 'Data Mahasiswa Berhasil ditambahkan')
+        return redirect('master_mahasiswa_backend')
+    else :
+        print(mahasiswa_form.errors)
+
+    context = {
+        'Data':data,
+        'form': mahasiswa_form,
+        'action' : 'create',
+    }    
+    return render(request, "landingpage/backend/master_mahasiswa_backend.html", context)
+
+def master_mahasiswa_backend_update(request,id):
+    mahasiswa_edit = MahasiswaModel.objects.get(id=id)
+
+    data_edit = {
+        'nim' : mahasiswa_edit.nim,
+        'nama' : mahasiswa_edit.nama,
+        'angkatan' : mahasiswa_edit.angkatan,
+        'prodi' : mahasiswa_edit.prodi,
+    }
+    mahasiswa_form_edit = MahasiswaForm(request.POST or None, initial=data_edit, instance=mahasiswa_edit) 
+
+    if request.method == "POST" and mahasiswa_form_edit.is_valid():
+        id_prodi = request.POST['prodi']
+        id_fakultas = ProdiModel.objects.get(id=id_prodi)
+        mahasiswa = mahasiswa_form_edit.save(commit=False)
+        mahasiswa.fakultas  = id_fakultas.fakultas
+        mahasiswa.save()
+        messages.info(request, 'Data Mahasiswa Berhasil di Edit')
+        return redirect('master_mahasiswa_backend')
+    else :
+        print(mahasiswa_form_edit.errors)
+
+    context = {
+        'form_edit' : mahasiswa_form_edit,
+        'action' : 'update',
+    }
+    return render(request, "landingpage/backend/master_mahasiswa_backend.html", context)
+
+def master_mahasiswa_backend_delete(request, id):
+    MahasiswaModel.objects.filter(id=id).delete()
+    messages.error(request, 'Data Mahasiswa Berhasil di Hapus')
+    return redirect('master_mahasiswa_backend')
+
 
 #>>>>>>>>>>>>>>>>>> Backend Views <<<<<<<<<<<<<<#
 def contact_backend (request):

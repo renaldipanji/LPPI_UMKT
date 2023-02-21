@@ -118,3 +118,56 @@ class DownloadContent(models.Model):
     jenis_file = models.CharField(max_length = 100, null=True)
     ukuran_file = models.CharField(max_length = 10, null=True)
     file_download = models.FileField(upload_to = filepath_downloads, null=True, blank=True)
+class FakultasModel(models.Model):
+    nama_fakultas = models.TextField(blank=True)
+    
+    def __str__(self):
+        return self.nama_fakultas
+class KategoriIndexModel(models.Model):
+    nama = models.TextField(blank=True)
+    
+    def __str__(self):
+        return self.nama
+    
+class ProdiModel(models.Model):
+    fakultas =  models.ForeignKey(FakultasModel, on_delete=models.CASCADE)
+    nama_prodi = models.TextField(blank=True)
+    
+    def __str__(self):
+        return self.nama_prodi
+
+class DosenModel(models.Model):
+    nidn = models.TextField(max_length = 30, blank=True)
+    nama = models.TextField(max_length = 100, blank=True)
+    fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
+    prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.nama
+
+class MahasiswaModel(models.Model):
+    nim = models.TextField(max_length = 30, blank=True)
+    angkatan = models.TextField(max_length = 5, blank=True)
+    nama = models.TextField(max_length = 100, blank=True)
+    fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
+    prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nama
+
+class PenelitianDosenModel(models.Model):
+    judul = models.TextField(max_length = 150, blank=True)
+    tahun = models.TextField(max_length = 4, blank=True)
+    penyedia_jurnal = models.TextField(max_length = 100, blank=True)
+    kategori_index = models.ForeignKey(KategoriIndexModel, on_delete=models.CASCADE)
+    asal_pendanaan = models.TextField(max_length=100, blank=True)
+    total_pendanaan = models.IntegerField(blank=True)
+    link_publikasi = models.TextField(max_length=200, blank=True)
+    ketua_peneliti = models.ForeignKey(DosenModel, on_delete=models.CASCADE)
+    anggota_peneliti = models.ManyToManyField(Dosen, related_name='anggota_peneliti')
+    fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
+    prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.nama
+    

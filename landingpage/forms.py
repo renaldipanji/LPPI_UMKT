@@ -368,3 +368,123 @@ class DownloadForm(forms.ModelForm):
                 }
             ), 
         }
+class FakultasForm(forms.ModelForm):
+    class Meta:
+        model = FakultasModel
+        fields = ['nama_fakultas']
+        widgets = {
+            'nama_fakultas' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama Fakultas'
+                }), 
+        }
+
+class ProdiForm(forms.ModelForm):
+    class Meta:
+        model = ProdiModel
+        fields = ['fakultas','nama_prodi']
+        widgets = {
+            'fakultas' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+            'nama_prodi' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama Prodi'
+                }), 
+        }
+
+class DosenForm(forms.ModelForm):
+    class Meta:
+        model = DosenModel
+        fields = ['nidn','nama','prodi']
+        widgets = {
+            'nidn' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'NIDN'
+            }), 
+            'nama' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama Dosen'
+            }), 
+            'prodi' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+        }
+
+class MahasiswaForm(forms.ModelForm):
+    class Meta:
+        model = MahasiswaModel
+        fields = ['nim','nama','angkatan','prodi']
+        widgets = {
+            'nim' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'NIM'
+            }), 
+            'nama' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama Mahasiswa'
+            }), 
+            'angkatan' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Angkatan'
+            }), 
+            'prodi' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+        }
+
+class KategoriIndexForm(forms.ModelForm):
+    class Meta:
+        model = KategoriIndexModel
+        fields = ['nama']
+        widgets = {
+            'nama' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama Kategori Index'
+            }),
+        }
+class PenelitianDosenForm(forms.ModelForm):
+    class Meta:
+        model = PenelitianDosenModel
+        fields = ['judul','tahun','penyedia_jurnal','kategori_index','asal_pendanaan','total_pendanaan','link_publikasi','ketua_peneliti']
+        widgets = {
+            'judul' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Judul Penelitian'
+            }),
+            'penyedia_jurnal' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Penyedia Jurnal'
+            }),
+            'tahun' : forms.TextInput(
+                attrs={
+                    'class':'form-control yearpicker',
+            }),
+            'kategori_index' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+            'asal_pendanaan' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Asal Pendanaan'
+            }),
+            'asal_pendanaan' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Asal Pendanaan'
+            }),
+            'total_pendanaan' : forms.TextInput(
+                attrs={
+                    'class':'form-control'
+            }),
+            'link_publikasi' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Link Publikasi'
+            }),
+            'ketua_peneliti' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+        }
