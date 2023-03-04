@@ -1,8 +1,14 @@
 {% extends 'landingpage/base.html' %}
 {% load static %}
 {% block konten %}
-
-  <!-- Card -->
+<style>
+  @media (max-width: 1200px) {
+    .author-text, .author-name{
+      padding-left: 28px;
+    }
+  }
+</style>
+<!-- Card -->
   <div class="container-fluid py-5">
     <div class="row">
       <div class="col-12" ><h1 class="title-news"> New Post</h1></div>
@@ -15,7 +21,7 @@
           <div class="col-lg-7 col-md-12 news-recent-post">
             <div class="content-news-recent-post">
               <div class="date-news-recent-post"><small><b id="tag-news-recent-post">Workshop</b> - 2 Juni 2022</small></div>
-              <h5 class="title-news-recent-post">Koordinasi Pengelola Jurnal Mahasiswa (Borneo Student Research)</h5>
+              <h5 class="title-news-recent-post"><a href="{% url 'news_single' %}" class="text-decoration-none"> Koordinasi Pengelola Jurnal Mahasiswa (Borneo Student Research)</a></h5>
               <p class="description-news-recent-post">Pusat Penerbitan Ilmiah(PPI) UMKT ,Pada Hari Kamis (20/06/2019) bertempat di Ruang Rapat LPPM diadakan rapat pembahasan pengelolaan Jurnal Penelitian, dengan peserta rapat  ± 18 orang yang terdiri dari Dewan Redaksi Yang terdiri dari beberapa mahasiswa semester 4-6.</p>
                 <div class="row">
                   <div class="col-md-2 col-4">

@@ -1,4 +1,5 @@
 from .models import *
+from landingpage.models import *
 import uuid
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
@@ -119,6 +120,18 @@ def changePassword(request, token):
 
 def konfVerifAkun(request):
     return render(request, 'akun/konf_email_verifikasi_akun.html')
+
+def dashboard(request):
+    data_penelitian = PenelitianDosenModel.objects.count()
+    data_pengabdian = PengabdianDosenModel.objects.count()
+    data_openlearning = ValidasiOpl.objects.count()
+
+    context={
+        'data_penelitian' : data_penelitian,
+        'data_openlearning' : data_openlearning,
+        'data_pengabdian' : data_pengabdian,
+    }
+    return render(request, 'akun/dashboard.html', context)
 
 def verifAkun(request):
     try:

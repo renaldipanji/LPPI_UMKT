@@ -6,10 +6,49 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h6 class="m-0">Layanan</h6>
-        <h1 class="m-0">Editing</h1>
+        <h1 class="m-0">Dashboard</h1>
       </div><!-- /.col -->
     </div><!-- /.row -->
+
+    <div class="row mt-5">
+      <div class="col-md-4 col-12">
+        <div class="small-box bg-info">
+          <div class="inner">
+          <h3>{{data_penelitian}}</h3>
+          <p>Penelitian</p>
+          </div>
+          <div class="icon">
+          <i class="fa-solid fa-book-open-reader"></i>
+          </div>
+          <a href="{% url 'penelitian_backend' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="small-box bg-success">
+          <div class="inner">
+          <h3>{{data_pengabdian}}</h3>
+          <p>Pengabdian</p>
+          </div>
+          <div class="icon">
+          <i class="fa-regular fa-handshake"></i>
+          </div>
+          <a href="{% url 'pengabdian_backend' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="small-box bg-warning">
+          <div class="inner">
+          <h3>{{data_openlearning}}</h3>
+          <p>Course Openlearning</p>
+          </div>
+          <div class="icon">
+          <i class="fa-solid fa-book-bookmark"></i>
+          </div>
+          <a href="{% url 'openlearning_dosen' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+      </div>
+    </div>
+
   </div>
 </div>
 {% endblock %}
