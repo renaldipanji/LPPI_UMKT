@@ -1,6 +1,9 @@
 from django.db import models
 import datetime
 import os
+from django.utils import timezone
+import hashlib
+import secrets
 # Create your models here.
 def filepath_workprogramme(request, filename):
     old_filename = filename
@@ -146,7 +149,7 @@ class DosenModel(models.Model):
         return self.nama
 
 class MahasiswaModel(models.Model):
-    nim = models.TextField(max_length = 30, blank=True)
+    nim = models.TextField(unique=True,max_length = 30, blank=True)
     angkatan = models.TextField(max_length = 5, blank=True)
     nama = models.TextField(max_length = 100, blank=True)
     fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
@@ -155,7 +158,23 @@ class MahasiswaModel(models.Model):
     def __str__(self):
         return self.nama
 
-class PenelitianDosenModel(models.Model):
+class EncryptedModel(models.Model):
+    id = models.CharField(primary_key=True, max_length=64)
+    salt = models.CharField(max_length=64, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.salt = secrets.token_hex(32)
+            salted_id = (str(self.id) + self.salt).encode('utf-8')
+            self.id = hashlib.sha256(salted_id).hexdigest()
+        else:
+           pass 
+        super().save(*args, **kwargs)
+
+    class Meta:
+        abstract = True
+
+class PenelitianDosenModel(EncryptedModel):
     judul = models.TextField(max_length = 150, blank=True)
     tahun = models.TextField(max_length = 4, blank=True)
     penyedia_jurnal = models.TextField(max_length = 100, blank=True)
@@ -164,10 +183,79 @@ class PenelitianDosenModel(models.Model):
     total_pendanaan = models.IntegerField(blank=True)
     link_publikasi = models.TextField(max_length=200, blank=True)
     ketua_peneliti = models.ForeignKey(DosenModel, on_delete=models.CASCADE)
-    anggota_peneliti = models.ManyToManyField(Dosen, related_name='anggota_peneliti')
     fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
     prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.nama
+        return self.judul
+
+class AnggotaPenelitiDosenModel(EncryptedModel):
+    penelitian = models.ForeignKey(PenelitianDosenModel, on_delete=models.CASCADE,null=True)
+    anggota_dosen = models.ForeignKey(DosenModel, on_delete=models.CASCADE,null=True)
+    prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE, null=True)
+    fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
+
+
+class AnggotaPenelitiMahasiswaModel(EncryptedModel):
+    penelitian = models.ForeignKey(PenelitianDosenModel, on_delete=models.CASCADE)
+    anggota_mahasiswa = models.ForeignKey(MahasiswaModel, on_delete=models.CASCADE)
+    prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE, null=True)
+    fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
+
+class PengabdianDosenModel(EncryptedModel):
+    judul = models.TextField(max_length = 150, blank=True)
+    tahun = models.TextField(max_length = 4, blank=True)
+    asal_pendanaan = models.TextField(max_length=100, blank=True)
+    total_pendanaan = models.IntegerField(blank=True)
+    link_laporan = models.TextField(max_length=200, blank=True)
+    ketua_peneliti = models.ForeignKey(DosenModel, on_delete=models.CASCADE)
+    fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
+    prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.judul
+
+class AnggotaPengabdianDosenModel(EncryptedModel):
+    pengabdian = models.ForeignKey(PengabdianDosenModel, on_delete=models.CASCADE,null=True)
+    anggota_dosen = models.ForeignKey(DosenModel, on_delete=models.CASCADE,null=True)
+    prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE, null=True)
+    fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
+
+class AnggotaPengabdianMahasiswaModel(EncryptedModel):
+    pengabdian = models.ForeignKey(PengabdianDosenModel, on_delete=models.CASCADE)
+    anggota_mahasiswa = models.ForeignKey(MahasiswaModel, on_delete=models.CASCADE)
+    prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE, null=True)
+    fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
+
+class ValidasiOpl(EncryptedModel):
+    kode_matkul = models.CharField(max_length=10, unique=True)
+    nama_matkul = models.CharField(max_length=50)
+    link_matkul = models.CharField(max_length=255)
+    fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)
+    prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE, null=True)
+    pemilik_course = models.ForeignKey(DosenModel, on_delete=models.CASCADE,null=True)
+    ch1 = models.FloatField(max_length=2, default=0)
+    ch2 = models.FloatField(max_length=2, default=0)
+    ch3 = models.FloatField(max_length=2, default=0)
+    ch4 = models.FloatField(max_length=2, default=0)
+    ch5 = models.FloatField(max_length=2, default=0)
+    ch6 = models.FloatField(max_length=2, default=0)
+    ch7 = models.FloatField(max_length=2, default=0)
+    ch8 = models.FloatField(max_length=2, default=0)
+    ch9 = models.FloatField(max_length=2, default=0)
+    ch10 = models.FloatField(max_length=2, default=0)
+    ch11 = models.FloatField(max_length=2, default=0)
+    ch12 = models.FloatField(max_length=2, default=0)
+    ch13 = models.FloatField(max_length=2, default=0)
+    ch14 = models.FloatField(max_length=2, default=0)
+    progres = models.FloatField(max_length=4,default=0)
+    keterangan = models.CharField(max_length=100, default='-')
+    status_haki = models.CharField(max_length=1, default=0)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+
+class TeamTeachingModel(EncryptedModel):
+    matkul = models.ForeignKey(ValidasiOpl, on_delete=models.CASCADE)
+    team_teaching = models.ForeignKey(DosenModel, on_delete=models.CASCADE)
+    prodi = models.ForeignKey(ProdiModel, on_delete=models.CASCADE, null=True)
+    fakultas = models.ForeignKey(FakultasModel, on_delete=models.CASCADE, null=True)

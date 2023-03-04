@@ -1,0 +1,463 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block import_plugin %}
+    <link rel="stylesheet" href="{% static 'plugins/chosen/chosen.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'plugins/chosen/prism.css' %}"/>
+    <script src="{% static 'landingpage/assets/js/formatter.js' %}"></script>
+    <script src="{% static 'plugins/chosen/chosen.jquery.min.js' %}"></script>
+    <script src="{% static 'plugins/chosen/init.js' %}"></script>
+    <script src="{% static 'plugins/chosen/prism.js' %}"></script>
+    <style>
+      .chosen-container-single .chosen-single {
+        display: block;
+        width: 100%;
+        text-decoration:none;
+        padding: .375rem 2.25rem 1.75rem .75rem;
+        -moz-padding-start: calc(0.75rem - 3px);
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right .75rem center;
+        background-size: 16px 12px;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        }
+        .chosen-container-single .chosen-single div b{
+          background:none;
+        }
+        .chosen-container-single .chosen-single span{
+          margin-right:0;
+        }
+    </style>
+{% endblock import_plugin %}
+{% block content %}
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h6 class="m-0">OpenLearning</h6>
+        <h1 class="m-0 mb-4">Validasi Mata Kuliah OpenLearning</h1>
+      </div>
+      
+      <div class="col-12 col-sm-12 mb-5">
+        <div class="card card-primary card-tabs">
+          <!-- nav tabs -->
+          <div class="card-header p-0 pt-1">
+            <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="pills-home" aria-selected="true">Validasi Mata Kuliah</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="custom-tabs-one-profile-tab" data-bs-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Edit Mata Kuliah</a>
+              </li>
+            </ul>          
+          <!-- nav tabs -->
+          </div>
+          <div class="card-body">
+            <div class="tab-content" id="custom-tabs-one-tabContent">
+              <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                <div class="card-body table-responsive p-2" style="height: 300px;">
+                  <table id="table_default" class="table table-head-fixed text-nowrap">
+                    <thead>
+                      <tr>
+                        <th class="text-center" colspan="2">
+                          <select class="form-select chosen-select" id="validasi_opl_filter" style="width: 100%;">
+                            <option value='all' selected>Semua Prodi</option>
+                            {% for data in data_prodi %}
+                            <option value='{{data.id}}' >{{data.nama_prodi}}</option>
+                            {% endfor %}
+                          </select>
+                        </th>
+                        <th>
+                        <button type="button" class="btn btn-primary" id="btn_filter_validasi_opl">Filter</button>
+                        </th>
+                        <th class="text-center" colspan="4">Standar Penliaian Checklist Quality</th>
+                      </tr>
+                      <tr>
+                        <th>#</th>
+                        <th>Kode Matkul</th>
+                        <th>Mata Kuliah</th>
+                        <th>Progress</th>
+                        <th>Status HAKI</th>
+                        <th>Keterangan</th>
+                        <th>Tindakan</th>
+                      </tr>
+                    </thead>
+                    <tbody id="data_validasi_opl">                  
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+                <div class="card-body">
+                  <div class="card-body table-responsive p-3" style="height: 300px;">
+                    <table id="table_biasa" class="table table-head-fixed text-nowrap">
+                      <thead>
+                        <tr>
+                          <th class="text-center" colspan="2">
+                            <select class="form-select chosen-select" id="filter_data_matkul" style="width: 100%;">
+                              <option value='all' selected>Semua Prodi</option>
+                              {% for data in data_prodi %}
+                              <option value='{{data.id}}' >{{data.nama_prodi}}</option>
+                              {% endfor %}
+                            </select>
+                          </th>
+                          <th>
+                            <button type="button" class="btn btn-primary" id="btn_filter_data_matkul">Filter</button>
+                          </th>
+                          <th class="text-center" colspan="16">Standar Penliaian Checklist Quality</th>
+                        </tr>
+                        <tr>
+                          <th>#</th>
+                          <th>Kode Matkul</th>
+                          <th>Mata Kuliah</th>
+                          <th>Link Mata Kuliah</th>
+                          <th>Pemilik Course</th>
+                          <th>Tindakan</th>
+                        </tr>
+                      </thead>
+                      <tbody id="data_matkul">
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card -->
+        </div>
+      </div> 
+      <!-- Ini ujung konten -->
+
+    </div><!-- /.row -->
+  </div> 
+  </div>
+
+<!-- Modal Validasi -->
+<div class="modal fade" id="modal_validasi_opl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-2 text-warning" id="modal_validasi_opl_label">
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center" colspan="2">Standar Penliaian Checklist Quality</th>
+                </tr>
+              </thead>
+              <tbody>
+              <form method="POST" id="form_validasi_opl" enctype="multipart/form-data">
+              <!-- Input Checklist Course OPL -->
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH1</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch1}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH2</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch2}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH3</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch3}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH4</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch4}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH5</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch5}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH6</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch6}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH7</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch7}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH8</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch8}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH9</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch9}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH10</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch10}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH11</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch11}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH12</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch12}} 
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH13</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch13}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <div class="row">
+                      <label class="col-6 col-lg-8 col-form-label">CH14</label>
+                      <div class="col-6 col-lg-4">
+                        {{data_form_validasi_opl.ch14}}
+                      </div>
+                    </div>                  
+                  </th>
+                </tr>
+              <!-- Input Checklist Course OPL -->
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="col-6">
+            <label for="keterangan" class="form-label fs-3">Keterangan</label>
+            {{data_form_validasi_opl.keterangan}}
+            <div class="form-text">
+              Berikan keterangan jika salah satu atau beberapa <strong>checklist</strong> pada course ini belum lengkap
+            </div>
+            <hr>
+            <div class="mb-3">
+              <label class="form-label fs-5">Status HAKI</label>
+              {{data_form_validasi_opl.status_haki}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default float-start fw-bold text-danger" data-bs-dismiss="modal">Tutup</button>
+        <button type="submit" class="btn btn-success" id="submit_validasi_opl">Validasi</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<!-- Modal Validasi -->
+
+<!-- Modal Tambah Mata Kuliah -->
+  <div class="modal fade" id="modal_tambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Mata Kuliah</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal-body-tambah">
+            <form method="POST" id="form_matkul" enctype="multipart/form-data">
+            <div id="content_form_matkul_tambah">
+                {% csrf_token %}
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Kode Matkul</label>
+                {{form_matkul.kode_matkul}}
+                <div id="kode_matkul_tambah" class="form-text"></div>
+                </div>
+                <div class="mb-3">
+                <label class="form-label">Mata Kuliah</label>
+                {{form_matkul.nama_matkul}}
+                </div>
+                <div class="mb-3">
+                <label class="form-label">Link Mata Kuliah</label>
+                {{form_matkul.link_matkul}}
+                </div>
+                <div class="mb-3">
+                <label class="form-label">Pemilik Course</label>
+                {{form_matkul.pemilik_course}}
+                </div>
+                <div class="mb-3">
+                <label class="form-label">Program Studi</label>
+                {{form_matkul.prodi}}
+                </div>            
+            </div>
+        </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default text-danger fw-bold" data-bs-dismiss="modal">Tutup</button>
+              <button type="submit" class="btn btn-success"><span class="fas fa-plus"></span> Tambah</button>
+            </div>
+          </form>                      
+      </div>
+    </div>
+  </div>
+<!-- Modal Tambah Mata Kuliah -->
+
+<!-- Modal Edit Mata Kuliah -->
+  <div class="modal fade" id="modal_edit" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Mata Kuliah</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" id="form_matkul_edit" enctype="multipart/form-data">
+              <div id="content_form_matkul_edit">
+                {% csrf_token %}
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Kode Matkul</label>
+                {{form_matkul.kode_matkul}}
+                <div id="kode_matkul_tambah" class="form-text"></div>
+                </div>
+                <div class="mb-3">
+                <label class="form-label">Mata Kuliah</label>
+                {{form_matkul.nama_matkul}}
+                </div>
+                <div class="mb-3">
+                <label class="form-label">Link Mata Kuliah</label>
+                {{form_matkul.link_matkul}}
+                </div>
+                <div class="mb-3">
+                <label class="form-label">Pemiliki Course</label>
+                {{form_matkul.pemilik_course}}
+                </div>
+                <div class="mb-3">
+                <label class="form-label">Program Studi</label>
+                {{form_matkul.prodi}}
+                </div>   
+              </div>
+        </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default text-danger fw-bold" data-bs-dismiss="modal">Tutup</button>
+              <button type="submit" class="btn btn-success" id="submit_edit_matkul"> Edit</button>
+            </div>
+          </form>                      
+      </div>
+    </div>
+  </div>
+<!-- Modal Edit Mata Kuliah -->
+
+<!-- Modal Hapus Mata Kuliah-->
+<div class="modal fade" id="modal_hapus" tabindex="-1" aria-labelledby="modal_hapus" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_hapus">Hapus Mata Kuliah</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <input type="text" id="id_matkul_hapus" hidden>
+         <h5>Kode Mata Kuliah</h5>
+          <p class="text-danger" id="kode_matkul_hapus"></p>
+          <hr>
+          <h5>Nama Mata Kuliah</h5>
+          <p class="text-danger" id="nama_matkul_hapus"></p>
+          <hr>
+          <h5>Link Mata Kuliah</h5>
+          <p class="text-danger" id="link_matkul_hapus"></p>
+          <hr>
+          <h5>Pemilik Course</h5>
+          <p class="text-danger" id="pemilik_course_hapus"></p>
+          <hr>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default fw-bold" data-bs-dismiss="modal">Tutup</button>
+        <button type="button" id="btn_hapus_matkul" class="btn btn-danger">Hapus Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(window).on("load", function() {
+    $('#table_biasa_wrapper > div:nth-child(1) > div:nth-child(1)').append('<button type="button" class="btn btn-success mb-1 mb-md-0" id="btn_tambah_matkul" data-bs-toggle="modal" data-bs-target="#modal_tambah"> <span class="fas fa-plus"></span> Tambah Mata Kuliah </button>');
+    $(".chosen-select").chosen({ width: '100%' });
+  });
+  </script>
+<!-- Modal Hapus Mata Kuliah-->
+<script src="{% static 'landingpage/assets/js/openlearning.js' %}"></script>
+{% endblock %}

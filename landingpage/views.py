@@ -1,7 +1,11 @@
 from .forms import *
 from .models import *
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_protect
+from django.db.models import Q
 
 def about(request):
     return render(request,'landingpage/frontend/about.html')
@@ -67,12 +71,53 @@ def event(request):
     }
     return render(request, 'landingpage/frontend/event.html',context)
     
-def journal(request):
-    data = JournalsModel.objects.all()
+def penelitian(request):
+    if request.method == "GET":
+        if request.GET.get('dosen'):
+            dosen = request.GET.get('dosen')
+            data_research = PenelitianDosenModel.objects.filter(Q(ketua_peneliti=dosen) | Q(anggotapenelitidosenmodel__anggota_dosen=dosen))
+        elif request.GET.get('prodi'):
+            prodi = request.GET.get('prodi')
+            data_research = PenelitianDosenModel.objects.select_related('prodi').filter(prodi=prodi)
+        elif request.GET.get('akreditasi'):
+            akreditasi = request.GET.get('akreditasi')
+            data_research = PenelitianDosenModel.objects.select_related('kategori_index').filter(kategori_index=akreditasi)
+        elif request.GET.get('tahun'):
+            tahun = request.GET.get('tahun')
+            data_research = PenelitianDosenModel.objects.filter(tahun=tahun)
+        else:
+            data_research = PenelitianDosenModel.objects.all()
+        for research in data_research:
+            research.anggota_peneliti = AnggotaPenelitiDosenModel.objects.filter(penelitian=research)
+
+    data_prodi = ProdiModel.objects.all()
     context ={
-        'data_journal': data,
+        'data_research': data_research,
+        'data_prodi': data_prodi,
     }   
-    return render(request, 'landingpage/frontend/journal.html',context)
+    return render(request, 'landingpage/frontend/penelitian.html',context)
+
+def pengabdian(request):
+    if request.method == "GET":
+        if request.GET.get('dosen'):
+            dosen = request.GET.get('dosen')
+            data_research = PengabdianDosenModel.objects.filter(Q(ketua_peneliti=dosen) | Q(anggotapengabdiandosenmodel__anggota_dosen=dosen)) 
+        elif request.GET.get('prodi'):
+            prodi = request.GET.get('prodi')
+            data_research = PengabdianDosenModel.objects.select_related('prodi').filter(prodi=prodi)
+        elif request.GET.get('tahun'):
+            tahun = request.GET.get('tahun')
+            data_research = PengabdianDosenModel.objects.filter(tahun=tahun)
+        else:
+            data_research = PengabdianDosenModel.objects.select_related('ketua_peneliti').all()
+        for research in data_research:
+            research.anggota_peneliti = AnggotaPengabdianDosenModel.objects.filter(pengabdian=research)
+    data_prodi = ProdiModel.objects.all()
+    context ={
+        'data_research': data_research,
+        'data_prodi': data_prodi,
+    }   
+    return render(request, 'landingpage/frontend/pengabdian.html',context)
 
 def newspaper(request):
     return render(request, 'landingpage/frontend/newspaper.html')
@@ -253,7 +298,10 @@ def textbooks_backend (request):
 def penelitian_backend(request):
     form = PenelitianDosenForm(request.POST or None)
     data = PenelitianDosenModel.objects.all()
+    dosen = DosenModel.objects.all()
+    mahasiswa = MahasiswaModel.objects.all()
     if request.method == 'POST' and form.is_valid():
+        # Logic Simpan Penelitian
         id_dosen = request.POST['ketua_peneliti']
         data_dosen = DosenModel.objects.get(id=id_dosen)
         penelitian_form = form.save(commit=False)
@@ -261,7 +309,7 @@ def penelitian_backend(request):
         penelitian_form.prodi = data_dosen.prodi
         penelitian_form.save()
         messages.success(request, 'Data Penelitian Berhasil di Tambahkan')
-        redirect('penelitian_backend')
+        return redirect('penelitian_backend_detail', penelitian_form.id)
     else:
         print(form.errors)
         
@@ -271,8 +319,252 @@ def penelitian_backend(request):
     }
     return render(request, 'landingpage/backend/penelitian_backend.html', context)
 
+@require_POST
+@csrf_protect
+def penelitian_backend_delete(request, id):
+    data = get_object_or_404(PenelitianDosenModel,id=id)
+    data.delete()  
+    messages.error(request, 'Data Penelitian Berhasil di Hapus')
+    return redirect('penelitian_backend')
+
+def anggota_penelitian_mahasiswa_delete(request, id):
+    data = get_object_or_404(AnggotaPenelitiMahasiswaModel,id=id)
+    data.delete()  
+    messages.error(request, 'Anggota Peneliti (Mahasiswa) Berhasil di Hapus')
+    return redirect('penelitian_backend_detail', data.penelitian.id) 
+
+def anggota_penelitian_dosen_delete(request, id):
+    data = get_object_or_404(AnggotaPenelitiDosenModel,id=id)
+    data.delete()  
+    messages.error(request, 'Anggota Peneliti (Dosen) Berhasil di Hapus')
+    return redirect('penelitian_backend_detail', data.penelitian.id) 
+
+def tambah_anggota_penelitian_mhs(request, id):
+    form_mahasiswa = AnggotaPenelitiMahasiswaForm(request.POST or None)
+    if request.method == 'POST' and form_mahasiswa.is_valid():
+        # Logic Simpan Penelitian
+        id_mahasiswa = request.POST['anggota_mahasiswa']
+        if AnggotaPenelitiMahasiswaModel.objects.filter(anggota_mahasiswa=id_mahasiswa,penelitian=id).exists():
+            messages.error(request, 'Anggota Penelitian (Mahasiswa) Sudah ada')
+            return redirect('penelitian_backend_detail', id)
+        if PenelitianDosenModel.objects.filter(anggota_mahasiswa=id_mahasiswa,id=id).exists():
+            messages.error(request, 'Anggota Penelitian (Mahasiswa) Sudah ada')
+            return redirect('penelitian_backend_detail', id)
+        else:
+            penelitian = PenelitianDosenModel.objects.get(id=id)
+            data_mahasiswa = MahasiswaModel.objects.get(id=id_mahasiswa)
+            penelitian_form = form_mahasiswa.save(commit=False)
+            penelitian_form.penelitian = penelitian
+            penelitian_form.fakultas = data_mahasiswa.fakultas
+            penelitian_form.prodi = data_mahasiswa.prodi
+            penelitian_form.save()
+            messages.success(request, 'Anggota Penelitian (Mahasiswa) Berhasil di Tambahkan')
+            return redirect('penelitian_backend_detail', id)    
+        
+def penelitian_backend_detail(request, id):
+    data = get_object_or_404(PenelitianDosenModel,id=id)
+    data_anggota_dosen = AnggotaPenelitiDosenModel.objects.select_related('anggota_dosen').filter(penelitian=id)
+    data_anggota_mahasiswa = AnggotaPenelitiMahasiswaModel.objects.select_related('anggota_mahasiswa').filter(penelitian=id)
+    form_dosen = AnggotaPenelitiDosenForm(request.POST or None)
+    form_mahasiswa = AnggotaPenelitiMahasiswaForm(request.POST or None)
+    if request.method == 'POST' and form_dosen.is_valid():
+        # Logic Simpan Penelitian
+        id_dosen = request.POST['anggota_dosen']
+        if AnggotaPenelitiDosenModel.objects.filter(anggota_dosen=id_dosen,penelitian=id).exists():
+            messages.error(request, 'Anggota Penelitian (Dosen) Sudah ada')
+            redirect('penelitian_backend_detail', id)
+        else:
+            penelitian = PenelitianDosenModel.objects.get(id=id)
+            data_dosen = DosenModel.objects.get(id=id_dosen)
+            penelitian_form = form_dosen.save(commit=False)
+            penelitian_form.penelitian = penelitian
+            penelitian_form.fakultas = data_dosen.fakultas
+            penelitian_form.prodi = data_dosen.prodi
+            penelitian_form.save()
+            messages.success(request, 'Anggota Penelitian (Dosen) Berhasil di Tambahkan')
+            redirect('penelitian_backend_detail', id)
+    else:
+        print(form_dosen.errors)
+        
+    context = {
+        'Data':data,
+        'aksi':'detail',
+        'form_dosen': form_dosen,
+        'form_mahasiswa': form_mahasiswa,
+        'data_anggota_dosen':data_anggota_dosen,
+        'data_anggota_mahasiswa':data_anggota_mahasiswa,
+    }
+    return render(request, 'landingpage/backend/penelitian_backend_detail.html', context)
+
+def penelitian_backend_update(request, id):
+    object_data = get_object_or_404(PenelitianDosenModel,id=id)
+    data_anggota_dosen = AnggotaPenelitiDosenModel.objects.select_related('anggota_dosen').filter(penelitian=id)
+    data_anggota_mahasiswa = AnggotaPenelitiMahasiswaModel.objects.select_related('anggota_mahasiswa').filter(penelitian=id)
+    form_dosen = AnggotaPenelitiDosenForm(request.POST or None)
+    form_mahasiswa = AnggotaPenelitiMahasiswaForm(request.POST or None)
+    data_edit = {
+        'judul' : object_data.judul,
+        'tahun' : object_data.tahun,
+        'penyedia_jurnal' : object_data.penyedia_jurnal,
+        'kategori_index' : object_data.kategori_index,
+        'asal_pendanaan' : object_data.asal_pendanaan,
+        'total_pendanaan' : object_data.total_pendanaan,
+        'link_publikasi' : object_data.link_publikasi,
+        'ketua_peneliti' : object_data.ketua_peneliti,
+    }
+    form_edit = PenelitianDosenForm(request.POST or None, initial=data_edit, instance=object_data) 
+
+    if request.method == "POST" and form_edit.is_valid():
+        form_edit.save()
+        messages.info(request, 'Data Penelitian Berhasil di Edit')
+        return redirect('penelitian_backend')
+    else :
+        print(form_edit.errors)
+
+    context = {
+        'form_edit' : form_edit,
+        'aksi' : 'update',
+        'form_dosen': form_dosen,
+        'Data': object_data,
+        'form_mahasiswa': form_mahasiswa,
+        'data_anggota_dosen':data_anggota_dosen,
+        'data_anggota_mahasiswa':data_anggota_mahasiswa,
+    }
+
+    return render(request, 'landingpage/backend/penelitian_backend_detail.html', context)
+
+def pengabdian_backend_detail(request, id):
+    data = get_object_or_404(PengabdianDosenModel,id=id)
+    data_anggota_dosen = AnggotaPengabdianDosenModel.objects.select_related('anggota_dosen').filter(pengabdian=id)
+    data_anggota_mahasiswa = AnggotaPengabdianMahasiswaModel.objects.select_related('anggota_mahasiswa').filter(pengabdian=id)
+    form_dosen = AnggotaPengabdianDosenForm(request.POST or None)
+    form_mahasiswa = AnggotaPengabdianMahasiswaForm(request.POST or None)
+    if request.method == 'POST' and form_dosen.is_valid():
+        # Logic Simpan Penelitian
+        id_dosen = request.POST['anggota_dosen']
+        if AnggotaPengabdianDosenModel.objects.filter(anggota_dosen=id_dosen,pengabdian=id).exists():
+            messages.error(request, 'Anggota Penelitian (Dosen) Sudah ada')
+            redirect('pengabdian_backend_detail', id)
+        else:
+            pengabdian = PengabdianDosenModel.objects.get(id=id)
+            data_dosen = DosenModel.objects.get(id=id_dosen)
+            pengabdian_form = form_dosen.save(commit=False)
+            pengabdian_form.pengabdian = pengabdian
+            pengabdian_form.fakultas = data_dosen.fakultas
+            pengabdian_form.prodi = data_dosen.prodi
+            pengabdian_form.save()
+            messages.success(request, 'Anggota Pengabdian (Dosen) Berhasil di Tambahkan')
+            redirect('pengabdian_backend_detail', id)
+    else:
+        print(form_dosen.errors)
+        
+    context = {
+        'Data':data,
+        'aksi':'detail',
+        'form_dosen': form_dosen,
+        'form_mahasiswa': form_mahasiswa,
+        'data_anggota_dosen':data_anggota_dosen,
+        'data_anggota_mahasiswa':data_anggota_mahasiswa,
+    }
+    return render(request, 'landingpage/backend/pengabdian_backend_detail.html', context)
+
+def anggota_pengabdian_mahasiswa_delete(request, id):
+    data = get_object_or_404(AnggotaPengabdianMahasiswaModel,id=id)
+    data.delete()  
+    messages.error(request, 'Anggota Pengabdian (Mahasiswa) Berhasil di Hapus')
+    return redirect('pengabdian_backend_detail', data.pengabdian.id) 
+
+def anggota_pengabdian_dosen_delete(request, id):
+    data = get_object_or_404(AnggotaPengabdianDosenModel,id=id)
+    data.delete()  
+    messages.error(request, 'Anggota Pengabdian (Dosen) Berhasil di Hapus')
+    return redirect('pengabdian_backend_detail', data.pengabdian.id) 
+
+def tambah_anggota_pengabdian_mhs(request, id):
+    form_mahasiswa = AnggotaPengabdianMahasiswaForm(request.POST or None)
+    if request.method == 'POST' and form_mahasiswa.is_valid():
+        # Logic Simpan Penelitian
+        id_mahasiswa = request.POST['anggota_mahasiswa']
+        if AnggotaPengabdianMahasiswaModel.objects.filter(anggota_mahasiswa=id_mahasiswa,pengabdian=id).exists():
+            messages.error(request, 'Anggota Pengabdian (Mahasiswa) Sudah ada')
+            return redirect('pengabdian_backend_detail', id)
+        else:
+            pengabdian = PengabdianDosenModel.objects.get(id=id)
+            data_mahasiswa = MahasiswaModel.objects.get(id=id_mahasiswa)
+            pengabdian_form = form_mahasiswa.save(commit=False)
+            pengabdian_form.pengabdian = pengabdian
+            pengabdian_form.fakultas = data_mahasiswa.fakultas
+            pengabdian_form.prodi = data_mahasiswa.prodi
+            pengabdian_form.save()
+            messages.success(request, 'Anggota Pengabdian (Mahasiswa) Berhasil di Tambahkan')
+            return redirect('pengabdian_backend_detail', id)   
+
+def pengabdian_backend_update(request, id):
+    object_data = get_object_or_404(PengabdianDosenModel,id=id)
+    data_anggota_dosen = AnggotaPengabdianDosenModel.objects.select_related('anggota_dosen').filter(pengabdian=id)
+    data_anggota_mahasiswa = AnggotaPengabdianMahasiswaModel.objects.select_related('anggota_mahasiswa').filter(pengabdian=id)
+    form_dosen = AnggotaPengabdianDosenForm(request.POST or None)
+    form_mahasiswa = AnggotaPengabdianMahasiswaForm(request.POST or None)
+    data_edit = {
+        'judul' : object_data.judul,
+        'tahun' : object_data.tahun,
+        'asal_pendanaan' : object_data.asal_pendanaan,
+        'total_pendanaan' : object_data.total_pendanaan,
+        'link_laporan' : object_data.link_laporan,
+        'ketua_peneliti' : object_data.ketua_peneliti,
+    }
+    form_edit = PengabdianDosenForm(request.POST or None, initial=data_edit, instance=object_data) 
+
+    if request.method == "POST" and form_edit.is_valid():
+        form_edit.save()
+        messages.info(request, 'Data Pengabdian Berhasil di Edit')
+        return redirect('pengabdian_backend')
+    else :
+        print(form_edit.errors)
+
+    context = {
+        'form_edit' : form_edit,
+        'aksi' : 'update',
+        'form_dosen': form_dosen,
+        'Data': object_data,
+        'form_mahasiswa': form_mahasiswa,
+        'data_anggota_dosen':data_anggota_dosen,
+        'data_anggota_mahasiswa':data_anggota_mahasiswa,
+    }
+
+    return render(request, 'landingpage/backend/pengabdian_backend_detail.html', context)
+
+@require_POST
+@csrf_protect
+def pengabdian_backend_delete(request, id):
+    data = get_object_or_404(PengabdianDosenModel,id=id)
+    data.delete()  
+    messages.error(request, 'Data Pengabdian Berhasil di Hapus')
+    return redirect('pengabdian_backend')
+
 def pengabdian_backend(request):
-    return render(request, 'landingpage/backend/pengabdian_backend.html')
+    form = PengabdianDosenForm(request.POST or None)
+    data = PengabdianDosenModel.objects.all()
+    dosen = DosenModel.objects.all()
+    mahasiswa = MahasiswaModel.objects.all()
+    if request.method == 'POST' and form.is_valid():
+        # Logic Simpan Penelitian
+        id_dosen = request.POST['ketua_peneliti']
+        data_dosen = DosenModel.objects.get(id=id_dosen)
+        pengabdian_form = form.save(commit=False)
+        pengabdian_form.fakultas = data_dosen.fakultas
+        pengabdian_form.prodi = data_dosen.prodi
+        pengabdian_form.save()
+        messages.success(request, 'Data Penelitian Berhasil di Tambahkan')
+        return redirect('pengabdian_backend_detail',pengabdian_form.id)
+    else:
+        print(form.errors)
+        
+    context = {
+        'form': form,
+        'Data':data,
+    }
+    return render(request, 'landingpage/backend/pengabdian_backend.html', context)
 
 def master_fakultas_backend(request):
     data = FakultasModel.objects.all()
@@ -790,7 +1082,6 @@ def journal_serving_backend (request):
 
 def journal_serving_backend_delete(request, id):
     data = get_object_or_404(JournalUmktModel,id=id)
-    
     if os.path.isfile(data.cover_jurnal.path) == True:
         os.remove(data.cover_jurnal.path)
     JournalUmktModel.objects.filter(id=id).delete()
@@ -969,3 +1260,293 @@ def downloads_backend_delete(request, id):
     DownloadContent.objects.filter(id=id).delete()
     messages.error(request, 'Data Download Berhasil di Hapus')
     return redirect('downloads_backend' )
+
+def status(value):
+    val_status = ''
+    badge = ''
+    if value == '0':
+        val_status = 'Belum'
+        badge = 'danger'
+    elif value == '1':
+        val_status = 'Dalam Pengajuan'
+        badge = 'primary'
+    elif value == '2':
+        val_status = 'Sudah'
+        badge = 'success'
+    
+    return val_status, badge
+
+# @login_required(login_url='login')
+# @group_required(('admin','staff'), login_url='/403/')
+def validasiOpenlearning(request):
+    data_prodi = ProdiModel.objects.all()
+    form_matkul = matkulForm(request.POST or None)
+    form_team_teach = TeamTeachingForm(request.POST or None)
+    form_validasi_opl = validasiOplForm(request.POST or None)
+    if request.method == "POST":
+        if request.is_ajax():
+            # print('cek data',request.POST['pemilik_course'])
+            if form_matkul.is_valid():
+                form_matkul.save()
+                data = ValidasiOpl()
+                data.kode_matkul = form_matkul.cleaned_data['kode_matkul']
+                data.nama_matkul = form_matkul.cleaned_data['nama_matkul']
+                data.link_matkul = form_matkul.cleaned_data['link_matkul']
+                data.pemilik_course = form_matkul.cleaned_data['pemilik_course']
+                data.prodi = form_matkul.cleaned_data['prodi']
+
+                return JsonResponse({
+                    'id' : data.id,
+                    'kode_matkul' : data.kode_matkul,
+                    'nama_matkul' : data.nama_matkul,
+                    'link_matkul' : data.link_matkul,
+                    'pemilik_course' : data.pemilik_course.nama,
+                })
+            else:
+                print(form_matkul.errors)
+    
+    context = {
+        'data_prodi':data_prodi,
+        'form_matkul':form_matkul,
+        'form_team_teach':form_team_teach,
+        'data_form_validasi_opl':form_validasi_opl,
+    }
+    
+
+    return render(request, 'landingpage/backend/openlearning_backend.html', context)
+
+def validasi_openlearning_detail(request, id):
+    data = get_object_or_404(ValidasiOpl,id=id)
+    data_anggota_dosen = TeamTeachingModel.objects.select_related('team_teaching').filter(matkul=id)
+    form_team_teaching = TeamTeachingForm(request.POST or None)
+    if request.method == 'POST' and form_team_teaching.is_valid():
+        # Logic Simpan Penelitian
+        id_team_teaching = request.POST['team_teaching']
+        if TeamTeachingModel.objects.filter(team_teaching=id_team_teaching,matkul=id).exists():
+            messages.error(request, 'Dosen Team Teaching Sudah ada')
+            redirect('validasi_openlearning_detail', id)
+        elif ValidasiOpl.objects.filter(pemilik_course=id_team_teaching,id=id).exists():
+            messages.error(request, 'Dosen Sudah Menjadi Pemilik Course')
+            redirect('validasi_openlearning_detail', id)
+        else:
+            matkul = ValidasiOpl.objects.get(id=id)
+            data_dosen = DosenModel.objects.get(id=id_team_teaching)
+            matkul_form = form_team_teaching.save(commit=False)
+            matkul_form.matkul = matkul
+            matkul_form.fakultas = data_dosen.fakultas
+            matkul_form.prodi = data_dosen.prodi
+            matkul_form.save()
+            messages.success(request, 'Dosen Team Teaching Berhasil di Tambahkan')
+            redirect('validasi_openlearning_detail', id)
+    else:
+        print(form_team_teaching.errors)
+        
+    context = {
+        'Data':data,
+        'aksi':'detail',
+        'form_team_teaching': form_team_teaching,
+        'data_anggota_dosen':data_anggota_dosen,
+    }
+    return render(request, 'landingpage/backend/openlearning_backend_detail.html', context)
+
+def team_teach_delete(request, id):
+    data = get_object_or_404(TeamTeachingModel,id=id)
+    data.delete()  
+    messages.error(request, 'Dosen Team Teaching Berhasil di Hapus')
+    return redirect('validasi_openlearning_detail', data.matkul.id) 
+
+# @login_required(login_url='login')
+# @group_required(('admin','staff'), login_url='/403/')
+def showDataMatkul(request):
+    data_validasi_opl = ValidasiOpl.objects.select_related('pemilik_course').all()
+    data = []
+    for obj in data_validasi_opl:
+        statushaki , badge = status(obj.status_haki)
+        item = {
+            'id' : obj.id,
+            'kode_matkul' : obj.kode_matkul,
+            'nama_matkul' : obj.nama_matkul,
+            'link_matkul' : obj.link_matkul,
+            'pemilik_course' : obj.pemilik_course.nama,            
+            'progres' : obj.progres,            
+            'keterangan' : obj.keterangan,            
+            'status_haki' : statushaki,            
+            'badge' : badge,            
+        }
+        data.append(item)
+    return JsonResponse({'data' : data})
+
+def show_team_teaching(request, id):
+    data_team_teach = TeamTeachingModel.objects.select_related('matkul','team_teaching','prodi').filter(matkul=id)
+    data = []
+    for obj in data_team_teach:
+        item = {
+            'id' : obj.id,
+            'team_teaching' : obj.team_teaching.nama,
+            'prodi' : obj.team_teaching.prodi.nama_prodi,
+        }
+        data.append(item)
+    return JsonResponse({'data' : data})
+
+# @login_required(login_url='login')
+# @group_required(('admin','staff'), login_url='/403/')
+def filterValidasiMatkul(request , data_filter):
+    if data_filter == 'all':
+        data_validasi_opl = ValidasiOpl.objects.all()
+    else:
+        data_validasi_opl = ValidasiOpl.objects.select_related('pemilik_course').filter(prodi = data_filter)
+    data = []
+    for obj in data_validasi_opl:
+        statushaki , badge = status(obj.status_haki)
+        item = {
+            'id' : obj.id,
+            'kode_matkul' : obj.kode_matkul,
+            'nama_matkul' : obj.nama_matkul,
+            'link_matkul' : obj.link_matkul,
+            'pemilik_course' : obj.pemilik_course.nama,         
+            'progres' : obj.progres,            
+            'keterangan' : obj.keterangan,            
+            'status_haki' : statushaki,            
+            'badge' : badge,            
+        }
+        data.append(item)
+    return JsonResponse({'data' : data})
+
+# @login_required(login_url='login')
+# @group_required(('admin','staff'), login_url='/403/')
+def filterDataMatkul(request , data_filter):
+    if data_filter == 'all':
+        data_validasi_opl = ValidasiOpl.objects.select_related('pemilik_course').all()
+    else:
+        data_validasi_opl = ValidasiOpl.objects.select_related('pemilik_course').filter(prodi = data_filter)
+    data = []
+    for obj in data_validasi_opl:
+        item = {
+            'id' : obj.id,
+            'kode_matkul' : obj.kode_matkul,
+            'nama_matkul' : obj.nama_matkul,
+            'link_matkul' : obj.link_matkul,
+            'pemilik_course' : obj.pemilik_course.nama,        
+            'progres' : obj.progres,            
+            'keterangan' : obj.keterangan,            
+            'status_haki' : obj.status_haki,            
+        }
+        data.append(item)
+    return JsonResponse({'data' : data})
+
+# @login_required(login_url='login')
+# @group_required(('admin','staff'), login_url='/403/')
+def detailDataMatkul(request, id):
+    data_matkul = ValidasiOpl.objects.select_related('pemilik_course','prodi').get(id=id)
+
+    data = {
+        'id' : id,
+        'kode_matkul' : data_matkul.kode_matkul,
+        'nama_matkul' : data_matkul.nama_matkul,
+        'link_matkul' : data_matkul.link_matkul,
+        'pemilik_course' : data_matkul.pemilik_course.id,
+        'pemilik_course_nama' : data_matkul.pemilik_course.nama,
+        'prodi' : data_matkul.prodi.id,
+        'ch1' : data_matkul.ch1,
+        'ch2' : data_matkul.ch2,
+        'ch3' : data_matkul.ch3,
+        'ch4' : data_matkul.ch4,
+        'ch5' : data_matkul.ch5,
+        'ch6' : data_matkul.ch6,
+        'ch7' : data_matkul.ch7, 
+        'ch8' : data_matkul.ch8,
+        'ch9' : data_matkul.ch9,
+        'ch10' : data_matkul.ch10,
+        'ch11' : data_matkul.ch11,
+        'ch12' : data_matkul.ch12,
+        'ch13' : data_matkul.ch13,
+        'ch14' : data_matkul.ch14,
+        'progres' : data_matkul.progres,
+        'keterangan' : data_matkul.keterangan,
+        'status_haki' : data_matkul.status_haki,
+    }
+    return JsonResponse({'dataDetailMatkul': data})
+
+# @login_required(login_url='login')
+# @group_required(('admin','staff'), login_url='/403/')
+def editDataMatkul(request, id):
+    data_matkul_edit =  get_object_or_404(ValidasiOpl,id=id)
+    if request.method == "POST" :
+        form_matkul = matkulForm(request.POST,instance=data_matkul_edit)
+        if form_matkul.is_valid():
+            form_matkul.save()
+        else:
+            print('dataInvalid')
+
+    return JsonResponse({'data': id})
+
+def tambah_team_teach(request, id):
+    form_team_teach = TeamTeachingForm(request.POST or None)
+    if request.method == "POST" and form_team_teach.is_valid() :
+            id_dosen = request.POST['team_teaching']
+            matkul = ValidasiOpl.objects.get(id=id)
+            data_dosen = DosenModel.objects.get(id=id_dosen)
+            form = form_team_teach.save(commit=False)
+            form.matkul = matkul
+            form.fakultas = data_dosen.fakultas
+            form.prodi = data_dosen.prodi
+            form.save()
+            print('Berhasil -----------------------------------')
+    else:
+        print('dataInvalid', form_team_teach.errors)
+
+    return JsonResponse({'data': id})
+
+
+# @login_required(login_url='login')
+def hapusDataMatkul(request, id):
+    data_matkul_hapus = ValidasiOpl.objects.get(id=id)
+
+    if request.is_ajax() and request.method == "POST":
+        data_matkul_hapus.delete()
+    
+    return JsonResponse({'data_hapus': data_matkul_hapus.nama_matkul})    
+
+def hapus_team_teach(request, id):
+    data_team_teach = TeamTeachingModel.objects.select_related('team_teaching').get(id=id)
+
+    if request.is_ajax() and request.method == "POST":
+        data_team_teach.delete()
+    
+    return JsonResponse({'data_hapus': data_team_teach.team_teaching.nama})    
+
+# @login_required(login_url='login')
+# @group_required(('admin','staff'), login_url='/403/')
+def validasiMatkulOpl(request, id):
+    data_validasi_opl = get_object_or_404(ValidasiOpl,id = id)
+    form_validasi_opl = validasiOplForm(request.POST, instance = data_validasi_opl)
+    progres = request.POST.get('progres')
+    if request.is_ajax :
+        if form_validasi_opl.is_valid():
+            form_validasi_opl.save()
+        else:
+            pass
+
+    return JsonResponse({'data_validasi': data_validasi_opl.nama_matkul})
+
+def openlearning_dosen(request):
+    if request.method == "GET":
+        if request.GET.get('dosen'):
+            dosen = request.GET.get('dosen')
+            data_openlearning = ValidasiOpl.objects.filter(Q(pemilik_course=dosen) | Q(teamteachingmodel__team_teaching=dosen))
+        elif request.GET.get('prodi'):
+            prodi = request.GET.get('prodi')
+            data_openlearning = ValidasiOpl.objects.select_related('prodi').filter(prodi=prodi)
+        else:
+            data_openlearning = ValidasiOpl.objects.all()
+        
+        for openlearning in data_openlearning:
+            openlearning.progres = int(openlearning.progres)
+            openlearning.team_teach = TeamTeachingModel.objects.filter(matkul=openlearning)
+
+    data_prodi = ProdiModel.objects.all()
+    context ={
+        'data_openlearning': data_openlearning,
+        'data_prodi': data_prodi,
+    }   
+    return render(request, 'landingpage/backend/openlearning_backend_dosen.html',context)

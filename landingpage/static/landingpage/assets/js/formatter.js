@@ -7,7 +7,15 @@ function inputRupiah(id_rupiah,inputRupiah){
         rupiah.value = formatRupiah(this.value, 'Rp. ');
         formRupiah.value = valueRupiah(rupiah.value);
     });
+}
 
+function editRupiah(id_rupiah,inputRupiah){
+    var rupiah = document.getElementById(id_rupiah);
+    var formRupiah = document.getElementById(inputRupiah);
+    $(window).on("load", function() {
+        rupiah.value = formatRupiah(formRupiah.value, 'Rp. ');
+    });
+}
     /* Fungsi formatRupiah */
     function formatRupiah(angka, prefix){
         var number_string = angka.replace(/[^,\d]/g, '').toString(),
@@ -32,4 +40,22 @@ function inputRupiah(id_rupiah,inputRupiah){
         let ganti = parseInt(gantiTitik) 
         return ganti;
     }
-}
+
+    function hapusData(selector_html) {
+        event.preventDefault(); // membatalkan submit form
+        Swal.fire({
+          title: 'Apakah Anda yakin?',
+          text: 'Data akan dihapus permanen!',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Hapus',
+          cancelButtonText: 'Batal'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // submit form
+            document.querySelector(selector_html).submit();
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire('Data tidak dihapus.', '', 'info');
+          }
+        });
+      }
