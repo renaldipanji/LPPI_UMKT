@@ -268,6 +268,18 @@
                 <p>Newspaper Articles</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{% url 'penelitian_backend' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Penelitian</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'pengabdian_backend' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Pengabdian</p>
+              </a>
+            </li>
           </ul>
         </li>
         <li class="nav-item">
@@ -289,6 +301,41 @@
               <a href="{% url 'journal_serving_backend' %}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Social Serving</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-database"></i>
+            <p>
+              Data Master
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'master_fakultas_backend' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Fakultas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'master_prodi_backend' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Program Studi</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'master_dosen_backend' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dosen</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'master_mahasiswa_backend' %}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Mahasiswa</p>
               </a>
             </li>
           </ul>
