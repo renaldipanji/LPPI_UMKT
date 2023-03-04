@@ -18,15 +18,16 @@
       </div>
   </div>
 </div>
-    {% comment %} Include Message {% endcomment %}
-    {% include "pesan.html" %}
- <!-- Ambil konten disini -->
- <div class="col-12 col-sm-12">
+{% if action == 'create' %}
+<!-- Ambil konten disini -->
+<div class="col-12 col-sm-12">
+   {% comment %} Include Message {% endcomment %}
+   {% include "pesan.html" %}
     <div class="card card-primary card-tabs">
       <div class="card-header p-0 pt-1">
         <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Content</a>
+            <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">List Data</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="custom-tabs-one-profile-tab" data-bs-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Tambah Data</a>
@@ -39,36 +40,32 @@
           <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
             <div class="card-body table-responsive p-1">
               <table class="table table-head-fixed text-nowrap dataTable no-footer" id="table_default" role="grid" aria-describedby="table_default_info">
-                  <thead>
-                    <tr role="row">
-                      <th class="sorting sorting_asc" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Judul: activate to sort column ascending">Fakultas</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Judul: activate to sort column ascending">Program Studi</th>
+                <thead>
+                  <tr role="row">
+                    <th class="sorting sorting_asc" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+                    <th>Fakultas</th>
+                    <th>Nama Prodi</th>
+                    <th>Aksi</th>
                   </tr>
-                  </thead>
-                  <tbody id="data_tabel">
-                     {% for data in Data  %}
-                    <tr>
-                      <td>1</td>
-                    <td>{{data.nidn}}</td>
-                    <td>{{data.nama_dosen}}</td>
-                    <td>{{data.program_studi}}</td>
-                    <td>{{data.fakultas}}</td>
-                    <td>{{data.judul_artikel}}</td>
-                    <td>{{data.tahun}}</td>
-                    <td><a href="{{data.link}}" class="text-decoration-none">{{data.link}}</a></td>
+                </thead>
+                <tbody id="data_tabel">
+                   {% for data in Data  %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.fakultas.nama_fakultas}}</td>
+                    <td>{{data.nama_prodi}}</td>
                     <td>
-                      <a class="btn btn-primary btn-sm" href="{% url 'journals_backend_update' data.id %}">
-                        <span class="fas fa-edit"></span> Edit
-                      </a>
-                      <a href="{% url 'journals_backend_delete' data.id %}" class="btn btn-danger btn-sm btn-modal-hapus">
-                        <span class="fas fa-trash"></span> Hapus
-                      </a>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                  </tbody>
-                </table>
+                    <a class="btn btn-primary btn-sm" href="{% url 'master_prodi_backend_update' data.id %}">
+                      <span class="fas fa-edit"></span> Edit
+                    </a>
+                    <a href="{% url 'master_prodi_backend_delete' data.id %}" class="btn btn-danger btn-sm btn-modal-hapus">
+                      <span class="fas fa-trash"></span> Hapus
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              </table>
             </div>
           </div>
           <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
@@ -77,11 +74,11 @@
                 {% csrf_token %}
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">Fakultas</label>
-                  <input type="text" class="form-control" placeholder="Pilih Fakultas">
+                  {{form.fakultas}}
                 </div>
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">Nama Program Studi</label>
-                  <input type="text" class="form-control" placeholder="Nama Program Studi">
+                  {{form.nama_prodi}}
                 </div>
                 <div class="col-md-6 mt-2">
                   <div class="form-group">
@@ -95,4 +92,46 @@
       </div>
     </div>
   </div>
+
+  {% else %}
+  <div class="col-12 col-sm-12">
+       <div class="card card-primary card-tabs">
+         <div class="card-header p-0 pt-1">
+           <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+             <li class="nav-item">
+               <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Update Data</a>
+             </li>
+           </ul>
+         </div>
+         <div class="card-body">
+           <div class="tab-content" id="custom-tabs-one-tabContent">
+             <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+               <div class="card-body table-responsive p-1">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                     <div class="col-12">
+                       <div class="form-floating mb-3 mt-1">
+                         <div class="mb-3">
+                           <label for="exampleFormControlInput1" class="form-label"> Fakultas</label>
+                           {{form_edit.fakultas}}
+                         </div>
+                         <div class="mb-3">
+                           <label for="exampleFormControlInput1" class="form-label"> Nama Prodi</label>
+                           {{form_edit.nama_prodi}}
+                         </div>
+                     </div>
+               </div>
+               <div class="col-md-6 mt-2">
+                 <div class="form-group">
+                   <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Update</button>
+                 </div>
+               </div>
+             </form> 
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     {% endif %}
 {% endblock content %} 

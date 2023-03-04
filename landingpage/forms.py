@@ -390,3 +390,307 @@ class NewsForm(forms.ModelForm):
                 }
             ), 
         }
+class FakultasForm(forms.ModelForm):
+    class Meta:
+        model = FakultasModel
+        fields = ['nama_fakultas']
+        widgets = {
+            'nama_fakultas' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama Fakultas'
+                }), 
+        }
+
+class ProdiForm(forms.ModelForm):
+    class Meta:
+        model = ProdiModel
+        fields = ['fakultas','nama_prodi']
+        widgets = {
+            'fakultas' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+            'nama_prodi' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama Prodi'
+                }), 
+        }
+
+class DosenForm(forms.ModelForm):
+    class Meta:
+        model = DosenModel
+        fields = ['nidn','nama','prodi']
+        widgets = {
+            'nidn' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'NIDN'
+            }), 
+            'nama' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama Dosen'
+            }), 
+            'prodi' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+        }
+
+class MahasiswaForm(forms.ModelForm):
+    class Meta:
+        model = MahasiswaModel
+        fields = ['nim','nama','angkatan','prodi']
+        widgets = {
+            'nim' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'NIM'
+            }), 
+            'nama' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama Mahasiswa'
+            }), 
+            'angkatan' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Angkatan'
+            }), 
+            'prodi' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+        }
+
+class KategoriIndexForm(forms.ModelForm):
+    class Meta:
+        model = KategoriIndexModel
+        fields = ['nama']
+        widgets = {
+            'nama' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Nama Kategori Index'
+            }),
+        }
+class AnggotaPenelitiDosenForm(forms.ModelForm):
+    class Meta:
+        model = AnggotaPenelitiDosenModel
+        fields = ['anggota_dosen']
+        widgets = {
+            'anggota_dosen' : forms.Select(
+            attrs={
+                'class':'form-select chosen-select'
+            }),
+        }
+class AnggotaPenelitiMahasiswaForm(forms.ModelForm):
+    class Meta:
+        model = AnggotaPenelitiMahasiswaModel
+        fields = ['anggota_mahasiswa']
+        widgets = {
+            'anggota_mahasiswa' : forms.Select(
+            attrs={
+                'class':'form-select chosen-select'
+            }),
+        }
+class PenelitianDosenForm(forms.ModelForm):
+    class Meta:
+        model = PenelitianDosenModel
+        fields = ['judul','tahun','penyedia_jurnal','kategori_index','asal_pendanaan','total_pendanaan','link_publikasi','ketua_peneliti']
+        widgets = {
+            'judul' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Judul Penelitian'
+            }),
+            'penyedia_jurnal' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Penyedia Jurnal'
+            }),
+            'tahun' : forms.TextInput(
+                attrs={
+                    'class':'form-control yearpicker',
+            }),
+            'kategori_index' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+            'asal_pendanaan' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Asal Pendanaan'
+            }),
+            'total_pendanaan' : forms.TextInput(
+                attrs={
+                    'class':'form-control'
+            }),
+            'link_publikasi' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Link Publikasi'
+            }),
+            'ketua_peneliti' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+        }
+
+class PengabdianDosenForm(forms.ModelForm):
+    class Meta:
+        model = PengabdianDosenModel
+        fields = ['judul','tahun','asal_pendanaan','total_pendanaan','link_laporan','ketua_peneliti']
+        widgets = {
+            'judul' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Judul Pengabdian'
+            }),
+            'tahun' : forms.TextInput(
+                attrs={
+                    'class':'form-control yearpicker',
+            }),
+            'asal_pendanaan' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Asal Pendanaan'
+            }),
+            'total_pendanaan' : forms.TextInput(
+                attrs={
+                    'class':'form-control'
+            }),
+            'link_laporan' : forms.TextInput(
+                attrs={
+                    'class':'form-control', 'placeholder':'Link Laporan'
+            }),
+            'ketua_peneliti' : forms.Select(
+            attrs={
+                'class':'form-select'
+            }),
+        }
+class AnggotaPengabdianDosenForm(forms.ModelForm):
+    class Meta:
+        model = AnggotaPengabdianDosenModel
+        fields = ['anggota_dosen']
+        widgets = {
+            'anggota_dosen' : forms.Select(
+            attrs={
+                'class':'form-select chosen-select'
+            }),
+        }
+class AnggotaPengabdianMahasiswaForm(forms.ModelForm):
+    class Meta:
+        model = AnggotaPengabdianMahasiswaModel
+        fields = ['anggota_mahasiswa']
+        widgets = {
+            'anggota_mahasiswa' : forms.Select(
+            attrs={
+                'class':'form-select chosen-select'
+            }),
+        }
+class TeamTeachingForm(forms.ModelForm):
+    class Meta:
+        model = TeamTeachingModel
+        fields = ['team_teaching']
+        widgets = {
+            'team_teaching' : forms.Select(
+            attrs={
+                'class':'form-select chosen-select'
+            }),
+        }
+class matkulForm(forms.ModelForm):
+    class Meta:
+        list_prodi =(
+        ("TI","Teknik Informatika"),
+        ("TS","Teknik Sipil"),
+        ("TM","Teknik Mesin"),
+        ("Farmasi","Farmasi"),
+        ("Kesmas","Kesehatan Masyarakat"),
+        ("KepS1","Keperawatan S1"),
+        ("KepD3","Keperawatan D3"),
+        ("KeslingS1","Kesehatan Lingkungan S1"),
+        ("KeslingD3","Kesehatan Lingkungan D3"),
+        ("PBI","Pendidikan Bahasa Inggris"),
+        ("POR","Pendidikan Olahraga"),
+        ("HI","Hubungan Internasional"),
+        ("Psikologi","Psikologi"),
+        ("Hukum","Hukum"),
+        ("Manajemen","Manajemen"),
+        ("Lainnya","Lainnya"),
+    )
+        model = ValidasiOpl
+        fields = ['kode_matkul', 'nama_matkul','prodi','link_matkul','pemilik_course']
+
+        widgets = {
+            'kode_matkul' : forms.TextInput(attrs={
+                'class':'form-control'
+            }),
+            'nama_matkul': forms.TextInput(attrs={
+                'class' : 'form-control'
+            }),
+            'link_matkul': forms.TextInput(attrs={
+                'class' : 'form-control'
+            }),
+            'prodi': forms.Select(choices = list_prodi,attrs={
+                'class' : 'form-select'
+            }),
+            'pemilik_course': forms.Select(attrs={
+                'class' : 'form-control'
+            }),
+        }
+
+
+
+class validasiOplForm(forms.ModelForm):
+    class Meta:
+        # status HAKI Course
+        pil_status_haki = (
+        ('0','Belum'),
+        ('1','Dalam Pengajuan'),
+        ('2','Sudah'),
+        )        
+        model = ValidasiOpl
+        fields = ['ch1', 'ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9','ch10','ch11','ch12','ch13','ch14','keterangan','status_haki','progres']
+
+        widgets = {
+            'ch1' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch2' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch3' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch4' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch5' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch6' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch7' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch8' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch9' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch10' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch11' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch12' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch13' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'ch14' : forms.NumberInput(attrs={
+            'class':'form-control', 'step':'0.1', 'min':'0', 'max':'1'
+            }),
+            'keterangan' : forms.Textarea(attrs={
+            'class':'form-control','rows':'16'
+             }),
+            'status_haki' : forms.Select(choices=pil_status_haki,attrs={
+            'class':'form-select'
+            }),
+            'progres': forms.HiddenInput(attrs={
+            'class' : 'form-control'
+            }),
+            }

@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block import_plugin %}
+    <link rel="stylesheet" href="{% static 'landingpage/assets/css/yearpicker.css' %}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <link rel="stylesheet" href="{% static 'plugins/chosen/chosen.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'plugins/chosen/prism.css' %}"/>
+    <script src="{% static 'landingpage/assets/js/formatter.js' %}"></script>
+    <script src="{% static 'plugins/chosen/chosen.jquery.min.js' %}"></script>
+    <script src="{% static 'plugins/chosen/init.js' %}"></script>
+    <script src="{% static 'plugins/chosen/prism.js' %}"></script>
+    
+{% endblock import_plugin %}
+{% block content %}
+<div class="content-header">
+  <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-12">
+              <h6 class="m-0">Content</h6>
+              <h1 class="m-0">Penelitian</h1>
+          </div>
+      </div>
+  </div>
+</div>
+{% if messages %}
+<script>
+  $( document ).ready(function() {
+    $('#custom-tabs-one-home-tab').attr('class','nav-link')
+    $('#custom-tabs-one-home').attr('class','tab-pane fade')
+    $('#custom-tabs-one-profile-tab').attr('class','nav-link active')
+    $('#custom-tabs-one-profile').attr('class','tab-pane fade active show')
+});
+</script>
+{% endif %}
+<!-- Ambil konten disini -->
+<div class="col-12 col-sm-12">
+   {% comment %} Include Message {% endcomment %}
+   {% include "pesan.html" %}
+    <div class="card card-primary card-tabs">
+      <div class="card-header p-0 pt-1">
+        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">{% if aksi == 'detail' %}Detail {% else %}Update {% endif %} Penelitian</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="custom-tabs-one-profile-tab" data-bs-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Kelola Anggota</a>
+          </li>
+        </ul>
+    </div>
+
+    <div class="card-body">
+        <div class="tab-content" id="custom-tabs-one-tabContent">
+          {% if aksi == 'detail' %}
+          <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+            <div class="card-body table-responsive p-1">
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Judul Penelitian</label>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">: <span class="fw-normal">{{Data.judul}}</span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Tahun</label>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">: <span class="fw-normal">{{Data.tahun}}</span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Ketua Peneliti</label>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">: <span class="fw-normal">{{Data.ketua_peneliti}}</span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Anggota Peneliti Dosen</label>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">: <span class="fw-normal">{% if not data_anggota_dosen %} - {% endif %}{% for data in data_anggota_dosen  %} {{data.anggota_dosen}}, {% endfor %}</span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Anggota Peneliti Mahasiswa</label>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">: <span class="fw-normal">{% if not data_anggota_mahasiswa %} - {% endif %} {% for data in data_anggota_mahasiswa  %} {{data.anggota_mahasiswa}}, {% endfor %}</span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Terindeks</label>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">: <span class="fw-normal">{{Data.kategori_index}}</span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Penyedia Jurnal</label>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">: <span class="fw-normal">{{Data.penyedia_jurnal}}</span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Asal Pendanaan</label>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">: <span class="fw-normal">{{Data.asal_pendanaan}}</span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Total Pendanaan</label>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">: <span class="fw-normal">{{Data.total_pendanaan|intcomma}}</span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Link Jurnal</label>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">: <span class="fw-normal"><a href="{{Data.link_publikasi}}" class="text-decoration-none">{{Data.link_publikasi}}</a></span></label>
+                  </div>
+                </div>
+            </div>
+          </div>
+              {% else %}
+              <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                <div class="card-body table-responsive p-1">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Judul</label>
+                  {{form_edit.judul}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Nama Ketua Peneliti</label>
+                  {{form_edit.ketua_peneliti}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Index</label>
+                  {{form_edit.kategori_index}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Penyedia Jurnal</label>
+                  {{form_edit.penyedia_jurnal}}
+                </div>
+                <div class="mb-3">  
+                  <label for="exampleFormControlInput1" class="form-label">Tahun</label>
+                  {{form_edit.tahun}}
+                </div>
+                <script src="{% static 'landingpage/assets/js/yearpicker.js' %}"></script>
+                <script>
+                    $(document).ready(function () {
+                        $(".yearpicker").yearpicker({year: 2019, startYear: 2018, endYear: 2030});
+                    });
+                </script>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Total Pendanaan</label>
+                  <input type="text" id="total_pendanaan" class="form-control" placeholder="Total Pendanaan">
+                  {{form_edit.total_pendanaan.as_hidden}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Asal Pendanaan</label>
+                  {{form_edit.asal_pendanaan}}
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Link</label>
+                  {{form_edit.link_publikasi}}
+                </div> 
+                <script>
+                  $( document ).ready(function() {
+                    $(".chosen-select").chosen({ width: '100%' });
+                });
+                </script>
+                <div class="col-md-6 mt-2">
+                  <div class="form-group">
+                    <button type="submit" id="submit_tambah" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Update</button>
+                  </div>
+                </form>
+                </div>
+            </div>
+          </div>
+          {% endif %}
+          <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+            <div class="card-body table-responsive p-1">
+              <div class="row">
+                <div class="col-12 mb-3 mb-md-0">
+                  <button type="button" onclick="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDosen" >Tambah Anggota Peneliti (Dosen)</button>
+                </div>
+                <div class="col-12">
+                  <table class="table table-head-fixed text-nowrap dataTable no-footer" id="table_dosen" role="grid" aria-describedby="table_dosen_info">
+                    <thead>
+                      <tr role="row">
+                        <th class="sorting sorting_asc" tabindex="0" aria-controls="table_dosen" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+                        <th >NIDN</th>
+                        <th >Nama Dosen</th>
+                        <th >Prodi</th>
+                        <th >Tindakan</th>
+                    </tr>
+                    </thead>
+                    <tbody id="data_tabel">
+                        {% for data in data_anggota_dosen  %}
+                      <tr>
+                        <td>{{forloop.counter}}</td>
+                      <td>{{data.anggota_dosen.nidn}}</td>
+                      <td>{{data.anggota_dosen}}</td>
+                      <td>{{data.prodi}}</td>
+                      <td>
+                        <a href="{% url 'anggota_penelitian_dosen_delete' data.id %}" class="btn btn-danger btn-sm btn-modal-hapus">
+                          <span class="fas fa-trash"></span> Hapus
+                        </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="card-body table-responsive p-1">
+              <button type="button" onclick="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMahasiswa" >Tambah Anggota Peneliti (Mahasiswa)</button>
+              <table class="table table-head-fixed text-nowrap dataTable no-footer" id="table_user" role="grid" aria-describedby="table_user_info">
+                <thead>
+                  <tr role="row">
+                    <th class="sorting sorting_asc" tabindex="0" aria-controls="table_user" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+                    <th >NIDN</th>
+                    <th >Nama Dosen</th>
+                    <th >Prodi</th>
+                    <th >Tindakan</th>
+                </tr>
+                </thead>
+                <tbody id="data_tabel">
+                    {% for data in data_anggota_mahasiswa  %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                  <td>{{data.anggota_mahasiswa.nim}}</td>
+                  <td>{{data.anggota_mahasiswa}}</td>
+                  <td>{{data.prodi}}</td>
+                  <td>
+                    <a href="{% url 'anggota_penelitian_mahasiswa_delete' data.id %}" class="btn btn-danger btn-sm btn-modal-hapus">
+                      <span class="fas fa-trash"></span> Hapus
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <a href="{% url 'penelitian_backend' %}" class="btn btn-secondary my-2 me-md-3 px-4 float-end"> Kembali</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+
+<div class="modal fade" id="modalDosen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Anggota Peneliti (Dosen)</h1>
+        <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="col-form-label">Nama Dosen</label>
+            {{form_dosen.anggota_dosen}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kembali</button>
+          <button type="submit" class="btn btn-primary">Tambah Anggota</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modalMahasiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Anggota Peneliti (Mahasiswa)</h1>
+        <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{% url 'tambah_anggota_penelitian_mhs' Data.id %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="col-form-label">Nama Mahasiswa</label>
+            {{form_mahasiswa.anggota_mahasiswa}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kembali</button>
+          <button type="submit" class="btn btn-primary">Tambah Anggota</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(window).on("load", function() {
+  $(".chosen-select").chosen({ width: '100%' });
+});
+</script>
+  <script type="text/javascript">
+    inputRupiah('total_pendanaan','id_total_pendanaan');
+    editRupiah('total_pendanaan','id_total_pendanaan');
+  </script>
+{% endblock content %} 

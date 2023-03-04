@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block import_plugin %}
-    <link
-        rel="stylesheet"
-        href="{% static 'landingpage/assets/css/yearpicker.css' %}"/>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <link rel="stylesheet" href="{% static 'landingpage/assets/css/yearpicker.css' %}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="{% static 'landingpage/assets/js/formatter.js' %}"></script>
+    <script src="{% static 'landingpage/assets/js/yearpicker.js' %}"></script>
 {% endblock import_plugin %}
 {% block content %}
 <div class="content-header">
@@ -18,10 +18,10 @@
       </div>
   </div>
 </div>
-    {% comment %} Include Message {% endcomment %}
-    {% include "pesan.html" %}
- <!-- Ambil konten disini -->
- <div class="col-12 col-sm-12">
+<!-- Ambil konten disini -->
+<div class="col-12 col-sm-12">
+   {% comment %} Include Message {% endcomment %}
+   {% include "pesan.html" %}
     <div class="card card-primary card-tabs">
       <div class="card-header p-0 pt-1">
         <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
@@ -41,36 +41,37 @@
               <table class="table table-head-fixed text-nowrap dataTable no-footer" id="table_default" role="grid" aria-describedby="table_default_info">
                   <thead>
                     <tr role="row">
-                      <th class="sorting sorting_asc" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Judul: activate to sort column ascending">Judul</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Nama Peneliti: activate to sort column ascending">Nama Peneliti</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Penyedia Jurnal: activate to sort column ascending">Laporan Pengabdian</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Terindeks: activate to sort column ascending">Terindeks</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Tahun: activate to sort lgocolumn ascending">Tahun</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Total Pendanaan: activate to sort lgocolumn ascending">Total Pendanaan</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Asal Pendanaan: activate to sort column ascending">Asal Pendanaan</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Link: activate to sort column ascending">Link</th>
-                      <th class="sorting" tabindex="0" aria-controls="table_default" rowspan="1" colspan="1" aria-label="Tindakan: activate to sort column ascending">Tindakan</th>
+                      <th>No</th>
+                      <th>Judul</th>
+                      <th>Ketua Peneliti</th>
+                      <th>Tahun</th>
+                      <th>Total Pendanaan</th>
+                      <th>Asal Pendanaan</th>
+                      <th>Laporan Pengabdian</th>
+                      <th>Tindakan</th>
                   </tr>
                   </thead>
                   <tbody id="data_tabel">
                      {% for data in Data  %}
                     <tr>
                       <td>1</td>
-                    <td>{{data.nidn}}</td>
-                    <td>{{data.nama_dosen}}</td>
-                    <td>{{data.program_studi}}</td>
-                    <td>{{data.fakultas}}</td>
-                    <td>{{data.judul_artikel}}</td>
+                    <td>{{data.judul}}</td>
+                    <td>{{data.ketua_peneliti}}</td>
                     <td>{{data.tahun}}</td>
-                    <td><a href="{{data.link}}" class="text-decoration-none">{{data.link}}</a></td>
+                    <td>Rp. {{data.total_pendanaan|intcomma}}</td>
+                    <td>{{data.asal_pendanaan}}</td>
+                    <td><a href="{{data.link_laporan}}" class="text-decoration-none">{{data.link_laporan}}</a></td>
                     <td>
-                      <a class="btn btn-primary btn-sm" href="{% url 'journals_backend_update' data.id %}">
+                    <form id="hapus" action="{% url 'pengabdian_backend_delete' data.id %}" method="post">
+                      <a href="{% url 'pengabdian_backend_detail' data.id %}" class="btn btn-secondary btn-sm btn-modal-hapus">
+                        <span class="fas fa-info-circle"></span> Detail
+                      </a> 
+                      <a class="btn btn-primary btn-sm" href="{% url 'pengabdian_backend_update' data.id %}">
                         <span class="fas fa-edit"></span> Edit
                       </a>
-                      <a href="{% url 'journals_backend_delete' data.id %}" class="btn btn-danger btn-sm btn-modal-hapus">
-                        <span class="fas fa-trash"></span> Hapus
-                      </a>
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger btn-sm" onclick="hapusData('#hapus')"><span class="fas fa-trash"></span> Hapus</button>
+                    </form>
                     </td>
                   </tr>
                   {% endfor %}
@@ -84,33 +85,29 @@
                 {% csrf_token %}
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">Judul</label>
-                  <input type="text" class="form-control" placeholder="Judul">
+                  {{form.judul}}
                 </div>
                 <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label">Nama Peneliti</label>
-                  <input type="text" class="form-control" placeholder="Nama Peneliti">
+                  <label for="exampleFormControlInput1" class="form-label">Ketua Peneliti</label>
+                  {{form.ketua_peneliti}}
                 </div>
                 <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label">Laporan Pengabdian</label>
-                  <input type="text" class="form-control" placeholder="Laporan Pengabdian">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label">Index</label>
-                  <input type="text" class="form-control" placeholder="Index">
+                  <label for="exampleFormControlInput1" class="form-label">Link Laporan Pengabdian</label>
+                  {{form.link_laporan}}
                 </div>
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">Tahun</label>
-                  <input type="text" class="form-control  yearpicker" placeholder="Tahun">
+                  {{form.tahun}}
                 </div>
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">Total Pendanaan</label>
-                  <input type="text" class="form-control" placeholder="Total Pendanaan">
+                  <input type="text" id="total_pendanaan" class="form-control" placeholder="Total Pendanaan">
+                  {{form.total_pendanaan.as_hidden}}
                 </div>
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">Asal Pendanaan</label>
-                  <input type="text" class="form-control" placeholder="Asal Pendanaan">
+                  {{form.asal_pendanaan}}
                 </div>
-                <script src="{% static 'landingpage/assets/js/yearpicker.js' %}"></script>
                 <script>
                     $(document).ready(function () {
                         $(".yearpicker").yearpicker({year: 2019, startYear: 2018, endYear: 2030});
@@ -128,4 +125,7 @@
       </div>
     </div>
   </div>
+  <script>
+    inputRupiah('total_pendanaan','id_total_pendanaan');
+	</script>
 {% endblock content %} 

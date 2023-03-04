@@ -35,6 +35,13 @@
   <link href="{% static 'landingpage/assets/vendor/glightbox/css/glightbox.min.css' %} " rel="stylesheet">
   <link href="{% static 'landingpage/assets/vendor/swiper/swiper-bundle.min.css' %} " rel="stylesheet">
 
+  
+  <!-- Data Table -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css">
   <!-- Template Main CSS File -->
   <link href="{% static 'landingpage/assets/css/style.css' %}" rel="stylesheet">
   {% block css_page %}
@@ -46,6 +53,9 @@
       border: 0px;
     }
   </style>
+  {% block import_plugin %}
+   
+  {% endblock import_plugin %}
 </head>
 
 <body>
@@ -94,7 +104,7 @@
               <li><a href="{% url 'event' %}">Event</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="portfolio.html"><span>Service</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href=""><span>Service</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'translate_art' %}">Article Transtlation</a></li>
               <li><a href="{% url 'sipena' %}">Incentive App (SIPENA)</a></li>
@@ -102,14 +112,15 @@
               <li><a href="{% url 'e_learning' %}">E-Learning Support</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="team.html"><span>Publication</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href=""><span>Publication</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="{% url 'journal' %}">Journals</a></li>
+              <li><a href="{% url 'penelitian' %}">Research</a></li>
+              <li><a href="{% url 'pengabdian' %}">Social Serving</a></li>
               <li><a href="{% url 'textbook' %}">Text Books</a></li>
               <li><a href="{% url 'newspaper' %}">Newspaper Articles</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="pricing.html"><span>E-Journals UMKT</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href=""><span>E-Journals UMKT</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'journal_research_umkt' %}">Journals of Research</a></li>
               <li><a href="{% url 'journal_social_umkt' %}">Journals of Social Serving</a></li>
@@ -205,6 +216,13 @@
   <!-- JavaScript -->
   <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
   <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#example').DataTable();
+  });
+  </script>
+
 </body>
 
 </html>

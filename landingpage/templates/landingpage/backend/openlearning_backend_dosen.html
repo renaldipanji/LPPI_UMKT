@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div class="content-header">
+   <div class="container-fluid">
+       <div class="row mb-2">
+           <div class="col-sm-6">
+               <h6 class="m-0">Content</h6>
+               <h1 class="m-0">Data Dosen Openlearning</h1>
+           </div>
+       </div>
+   </div>
+</div>
+   <!-- Ambil konten disini -->
+   <div class="col-12 col-sm-12">
+       <div class="card card-primary card-tabs">
+         <div class="card-header p-0 pt-1">
+           <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+             <li class="nav-item">
+               <a class="nav-link active" id="custom-tabs-one-home-tab" data-bs-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Data Dosen Memiliki OPL</a>
+             </li>
+           </ul>
+         </div>
+         <div class="card-body">
+           <div class="tab-content" id="custom-tabs-one-tabContent">
+             <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+               <div class="card-body table-responsive p-1">
+                <div class="row">
+                    <!-- Form Select-->
+                          <div class="col-md-4 col-12">
+                            <div class="input-group mb-3">
+                                <select class="form-select chosen-select" id="select-prodi" onchange="gotoPage()">
+                                  <option selected>Sort By Prodi</option>
+                                  <option value="{% url 'openlearning_dosen' %}" >Semua Prodi</option>
+                                  {% for data in data_prodi %}
+                                  <option value="{% url 'openlearning_dosen' %}?prodi={{data.id}}">{{data.nama_prodi}}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+                          </div>
+                    <!-- Search Button -->
+                        <div class="col-md-4 col-12">
+                        </div>
+                    <!-- Table -->
+                        <table class="table table-striped py-4" id="table_biasa">
+                          <thead>
+                            <tr>
+                              <th scope="col">No</th>
+                              <th scope="col">Nama Matkul</th>
+                              <th scope="col">Pemilik Course</th>
+                              <th scope="col">Progress</th>
+                              <th scope="col">Team Teaching</th>
+                              {% comment %} <th scope="col">Judul Penelitian</th>
+                              <th scope="col">Tahun</th>
+                              <th scope="col">Penyedia Jurnal</th>
+                              <th scope="col">Akreditasi</th>
+                              <th scope="col">Link</th>  {% endcomment %}
+                            </tr>
+                          </thead>
+                          <tbody>
+                              {% for data in data_openlearning %}
+                              <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>{{data.nama_matkul}}</td>
+                                <td><a href="{% url 'openlearning_dosen' %}?dosen={{data.pemilik_course.id}}" class="text-decoration-none text-dark">{{data.pemilik_course.nama}}</a></td>
+                                <td>{{data.progres|intcomma}}%</td>
+                                <td> {% if data.team_teach %}{% for anggota in data.team_teach %}<a href="{% url 'openlearning_dosen' %}?dosen={{ anggota.team_teaching.id }}" class="text-dark text-decoration-none">{{ anggota.team_teaching.nama }}; </a>{% endfor %}{% else %} - {% endif %}</td>
+                                {% comment %} <td>{{data.judul}}</td>
+                                <td><a href="{% url 'penelitian' %}?tahun={{data.tahun}}" class="text-decoration-none text-dark">{{data.tahun}}</a></td>
+                                <td>{{data.penyedia_jurnal}}</td>
+                                <td><a href="{% url 'penelitian' %}?akreditasi={{data.kategori_index.id}}" class="text-decoration-none text-dark">{{data.kategori_index.nama}}</a></td>
+                                <td><a href="{{data.link_publikasi}}" class="fs-5 text-decoration-none d-flex justify-content-center text-secondary"><i class="fa-solid fa-link"></i></a></td> {% endcomment %}
+                              </tr>
+                              {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <script>
+        function gotoPage() {
+          var selectBox = document.getElementById("select-prodi");
+          var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+          if (selectedValue != "") {
+            window.location.href = selectedValue;
+          }
+        }
+        </script>
+{% endblock content %}

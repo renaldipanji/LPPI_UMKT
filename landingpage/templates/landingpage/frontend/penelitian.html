@@ -1,0 +1,118 @@
+{% extends 'landingpage/base.html' %}
+{% load static %}
+{% block import_plugin %}
+    <link rel="stylesheet" href="{% static 'plugins/chosen/chosen.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'plugins/chosen/prism.css' %}"/>
+    <script src="{% static 'landingpage/assets/js/formatter.js' %}"></script>
+    <script src="{% static 'plugins/chosen/chosen.jquery.min.js' %}"></script>
+    <script src="{% static 'plugins/chosen/init.js' %}"></script>
+    <script src="{% static 'plugins/chosen/prism.js' %}"></script>
+    <style>
+      .chosen-container-single .chosen-single {
+        display: block;
+        width: 100%;
+        text-decoration:none;
+        padding: .375rem 2.25rem 1.75rem .75rem;
+        -moz-padding-start: calc(0.75rem - 3px);
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right .75rem center;
+        background-size: 16px 12px;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        }
+        .chosen-container-single .chosen-single div b{
+          background:none;
+        }
+        .chosen-container-single .chosen-single span{
+          margin-right:0;
+        }
+    </style>
+{% endblock import_plugin %}
+{% load humanize %}
+{% block konten %}
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="about.html">Publication</a></li>
+        <li>Research</li>
+      </ol>
+      <h2>Research Data</h2>
+    </div>
+  </section>
+<!-- End Breadcrumbs -->
+
+<section id="publikasi" class="publikasi">
+  <div class="container overflow-scroll py-5">
+    <div class="row">
+<!-- Form Select-->
+      <div class="col-md-4 col-12">
+        <div class="input-group mb-3">
+            <select class="form-select chosen-select" id="select-prodi" onchange="gotoPage()">
+              <option selected>Sort By Prodi</option>
+              <option value="{% url 'penelitian' %}" >Semua Prodi</option>
+              {% for data in data_prodi %}
+              <option value="{% url 'penelitian' %}?prodi={{data.id}}">{{data.nama_prodi}}</option>
+              {% endfor %}
+            </select>
+        </div>
+      </div>
+<!-- Search Button -->
+    <div class="col-md-4 col-12">
+    </div>
+<!-- Table -->
+    <table class="table table-striped py-4" id="example">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Judul Penelitian</th>
+          <th scope="col">Tahun</th>
+          <th scope="col">Anggota Penelitian</th>
+          <th scope="col">Penyedia Jurnal</th>
+          <th scope="col">Akreditasi</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for data in data_research %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td><a href="{% url 'penelitian' %}?dosen={{data.ketua_peneliti.id}}" class="text-decoration-none text-dark">{{data.ketua_peneliti.nama}}</a></td>
+            <td>{{data.judul}}</td>
+            <td><a href="{% url 'penelitian' %}?tahun={{data.tahun}}" class="text-decoration-none text-dark">{{data.tahun}}</a></td>
+            <td> {% if data.anggota_peneliti %}{% for anggota in data.anggota_peneliti %}<a href="{% url 'penelitian' %}?dosen={{ anggota.anggota_dosen.id }}" class="text-dark">{{ anggota.anggota_dosen.nama }}; </a>{% endfor %}{% else %} - {% endif %}</td>
+            <td>{{data.penyedia_jurnal}}</td>
+            <td><a href="{% url 'penelitian' %}?akreditasi={{data.kategori_index.id}}" class="text-decoration-none text-dark">{{data.kategori_index.nama}}</a></td>
+            <td><a href="{{data.link_publikasi}}" class="fs-5 text-decoration-none d-flex justify-content-center text-secondary"><i class="fa-solid fa-link"></i></a></td>
+          </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+<script>
+  function gotoPage() {
+    var selectBox = document.getElementById("select-prodi");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    if (selectedValue != "") {
+      window.location.href = selectedValue;
+    }
+  }
+  </script>
+  <script>
+    $(window).on("load", function() {
+      $(".chosen-select").chosen({ width: '100%' });
+    });
+    </script>
+{% endblock konten %}
